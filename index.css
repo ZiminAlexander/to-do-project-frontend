@@ -8,6 +8,7 @@ body{
     justify-content: space-between;
     margin: 0;
     height: 100%;
+    
 }
 header, footer{
     display: flex;
@@ -26,6 +27,34 @@ footer{
 
 img{
     height: 25px;
+    margin-left: 5px;
+}
+
+.is-completed{
+    margin: 10px;
+
+    visibility: hidden;
+    transform: scale(2);
+}
+
+.is-completed::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(images/not-complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
+}
+
+.is-completed:checked::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(images/complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
 }
 
 .program-title{
@@ -41,11 +70,7 @@ img{
 .new-task-form{
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-.new-task-area{
-    width: 100%;
+    width: 90%;
 }
 
 .submit-new-task{
@@ -56,12 +81,19 @@ img{
 .task{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 10px;
     padding: 5px;
     border: solid;
     border-radius: 15px;
     background-color: rgb(255, 234, 176);
+    cursor: pointer;
 }
+
+.task:hover{
+    background-color: rgb(265, 244, 186);
+}
+
 
 
 

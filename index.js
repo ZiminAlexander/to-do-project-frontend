@@ -1,10 +1,13 @@
-//Загрузим задачи с сервера
-updateTasksFromServer();
-//Callback для Кнопки "Добавить"
-addOnclickSubmitCallback()
+// //Загрузим задачи с сервера
+// updateTasksFromServer();
+// //Callback для Кнопки "Добавить"
+// addOnclickSubmitCallback();
+// //Callback для отправления задачи кнопкой Enter
+// addOnclickNewTaskAreaCallback();
 
 //Добавляет задачу 
-// {title: 'New Title', isCompleted: false, id: 'b3b42e18-f882-47bd-b6c8-381a2b62bec6', createdAt: 'Sat Dec 03 2022'}
+// {title: 'New Title', isCompleted: false, id: 'b3b42e18-f882-47bd-b6c8-381a2b62bec6'
+//, createdAt: 'Sat Dec 03 2022'}
 function addTackElement (taskElementFromServer){
   const taskTableElement = document.querySelector(".task-table");
   const newTaskElement = createNewElement("div", "task");
@@ -87,4 +90,36 @@ function updateTasksFromServer(){
       addTackElement(allTasks[i]);
     }
   });
+}
+
+//Удалить задачу
+function deleteTask(){
+  fetch(`http://nkbelousov.site:3000/todos/${id}`, 
+  {method: 'DELETE'})
+}
+
+//Обновить задачу 
+function updateTask(){
+  const submitTaskObject = {};
+  submitTaskObject.title = newTaskArea.value;
+  submitTaskObject.isCompleted = false;
+  const submitString = JSON.stringify(submitTaskObject);
+  submitTaskObject.id = ""
+  newTaskArea.value = '';
+  fetch(`http://nkbelousov.site:3000/todos/${id}`, 
+  { headers: {'Content-Type': 'application/json'}, 
+    method: 'PUT', 
+    body: submitString
+    }
+  )
+}
+
+function addOnclickNewTaskAreaCallback(){
+  document.querySelector('.new-task-area').addEventListener(
+    'keydown', (event) => {
+      // Если кнопка не 'Enter' выйти
+      if (event.keyCode !== 13) return
+      event.preventDefault();
+      submitTask();
+    })
 }
