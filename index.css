@@ -31,8 +31,7 @@ img{
 }
 
 .is-completed{
-    margin: 10px;
-
+    margin-left: 10px;
     visibility: hidden;
     transform: scale(2);
 }
@@ -80,7 +79,7 @@ img{
 
 .task{
     display: flex;
-    justify-content: space-between;
+    position: relative;
     align-items: center;
     margin: 10px;
     padding: 5px;
@@ -90,10 +89,53 @@ img{
     cursor: pointer;
 }
 
-.task:hover{
-    background-color: rgb(265, 244, 186);
+.text{
+    flex-grow: 1;
 }
 
+.task:hover{
+    filter: contrast(120%);
+}
+
+.delete-task-button{
+    background-color: red;
+    margin-right: 25px ;
+    margin-left: 10px;
+}
+
+.delete-task-button::before{
+    content: "Удалить";
+    font-size: 0.5em;
+    position: absolute;
+    top: 0;
+    margin-left: 10px;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    height: 100%;
+    text-align: center;
+}
+
+.delete-task-button::after{
+    content: "";   
+    height: 100%;
+    width: 3.66em;
+    position: absolute;
+    top: 0;
+    border-radius: 0 15px 15px 0;
+    border-left: solid;
+    border-right: solid;
+    font-size: 8px;
+    background-color: rgb(242, 107, 107); 
+}
+
+.delete-task-button::after:hover{
+    filter: contrast("120%");
+}
+
+.complete-task{
+    background-color: #c1ffb0;
+    text-decoration: line-through solid red;
+}
 
 
 

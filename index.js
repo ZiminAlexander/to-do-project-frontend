@@ -1,9 +1,10 @@
-// //Загрузим задачи с сервера
-// updateTasksFromServer();
-// //Callback для Кнопки "Добавить"
-// addOnclickSubmitCallback();
-// //Callback для отправления задачи кнопкой Enter
-// addOnclickNewTaskAreaCallback();
+//Загрузим задачи с сервера
+updateTasksFromServer();
+//Callback для Кнопки "Добавить"
+addOnclickSubmitCallback();
+//Callback для отправления задачи кнопкой Enter
+addOnclickNewTaskAreaCallback();
+
 
 //Добавляет задачу 
 // {title: 'New Title', isCompleted: false, id: 'b3b42e18-f882-47bd-b6c8-381a2b62bec6'
@@ -12,22 +13,30 @@ function addTackElement (taskElementFromServer){
   const taskTableElement = document.querySelector(".task-table");
   const newTaskElement = createNewElement("div", "task");
   const newTextElement = createNewElement("span", "text");
+  const newDeleteElement = createNewElement("div", "delete-task-button");
+  const newCheckBoxElement = createNewElement("input", "is-completed");
+  //Сохраняем данные из сервера в задачу
   newTextElement.innerHTML = taskElementFromServer.title;
   newTaskElement.id =  taskElementFromServer.id;
   newTaskElement.dataset.createdTime = taskElementFromServer.createdAt;
-
-  const newCheckBoxElement = createNewElement("input", "is-completed");
+  //Корректируем чекбокс для задачи
   newCheckBoxElement.type = "checkbox";
   if (taskElementFromServer.isCompleted){
     newCheckBoxElement.checked = true;
+    newTaskElement.classList.add("complete-task");
   }
   newCheckBoxElement.disabled = true;
-
-  //Собираем task элемент и добавляем
+  //Задаем кнопке удалить для задачи Callback
+  newDeleteElement.onclick = function(){deleteTask(this.parentElement.id)};
+  //Задаем тексту задачи Callback
+  addOnclickCompleteCallback(newTextElement);
+  //Собираем task элемент и добавляем Callback
   newTaskElement.append(newTextElement);
   newTaskElement.append(newCheckBoxElement);
-  addOnclickCompleteCallback(newTaskElement);
+  newTaskElement.append(newDeleteElement);
+  //Добавляем задачу на экран
   taskTableElement.append(newTaskElement);
+  
 }
 
 //Создает новый HTML элемент
@@ -44,9 +53,12 @@ function createNewElement(tag, classes){
 //Добавить задаче отзыв на нажатие
 function addOnclickCompleteCallback(HTMLelement) {
   HTMLelement.onclick = function() {
-    HTMLelement.style.backgroundColor = "#c1ffb0"; 
-    HTMLelement.style.textDecoration = "line-through solid red";
-    HTMLelement.querySelector("input").checked = true;
+    const parentHTMLelement = HTMLelement.parentElement;
+    parentHTMLelement.classList.toggle("complete-task");
+    if (parentHTMLelement.querySelector("input").checked === true){
+      parentHTMLelement.querySelector("input").checked = false;
+    } else {parentHTMLelement.querySelector("input").checked = true;}
+    updateTask(parentHTMLelement);
   }
 }
 
@@ -73,7 +85,6 @@ function submitTask(){
     body: submitString
     }
   ).then(updateTasksFromServer);
-  
 }
 
 //Обновить задачи
@@ -93,19 +104,20 @@ function updateTasksFromServer(){
 }
 
 //Удалить задачу
-function deleteTask(){
-  fetch(`http://nkbelousov.site:3000/todos/${id}`, 
-  {method: 'DELETE'})
+function deleteTask(id){
+  const fetObj = fetch("http://nkbelousov.site:3000/todos/" + id, 
+      {method: 'DELETE'});
+  console.log(fetObj);
+  // updateTasksFromServer();
 }
 
 //Обновить задачу 
-function updateTask(){
+function updateTask(currentTask){
   const submitTaskObject = {};
-  submitTaskObject.title = newTaskArea.value;
-  submitTaskObject.isCompleted = false;
+  submitTaskObject.title = currentTask.querySelector(".text").textContent;
+  submitTaskObject.isCompleted = currentTask.querySelector(".is-completed").checked;
   const submitString = JSON.stringify(submitTaskObject);
-  submitTaskObject.id = ""
-  newTaskArea.value = '';
+  const id = currentTask.id;
   fetch(`http://nkbelousov.site:3000/todos/${id}`, 
   { headers: {'Content-Type': 'application/json'}, 
     method: 'PUT', 
@@ -114,6 +126,7 @@ function updateTask(){
   )
 }
 
+//Добавить Callback для поля ввода
 function addOnclickNewTaskAreaCallback(){
   document.querySelector('.new-task-area').addEventListener(
     'keydown', (event) => {
