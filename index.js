@@ -7,8 +7,6 @@ addOnclickNewTaskAreaCallback();
 
 
 //Добавляет задачу 
-// {title: 'New Title', isCompleted: false, id: 'b3b42e18-f882-47bd-b6c8-381a2b62bec6'
-//, createdAt: 'Sat Dec 03 2022'}
 function addTackElement (taskElementFromServer){
   const taskTableElement = document.querySelector(".task-table");
   const newTaskElement = createNewElement("div", "task");
@@ -25,11 +23,11 @@ function addTackElement (taskElementFromServer){
     newCheckBoxElement.checked = true;
     newTaskElement.classList.add("complete-task");
   }
-  newCheckBoxElement.disabled = true;
+  // newCheckBoxElement.disabled = true;
   //Задаем кнопке удалить для задачи Callback
   newDeleteElement.onclick = function(){deleteTask(this.parentElement.id)};
   //Задаем тексту задачи Callback
-  addOnclickCompleteCallback(newTextElement);
+  addOnclickCompleteCallback(newCheckBoxElement);
   //Собираем task элемент и добавляем Callback
   newTaskElement.append(newTextElement);
   newTaskElement.append(newCheckBoxElement);
@@ -50,14 +48,11 @@ function createNewElement(tag, classes){
   return newElement;
 }
 
-//Добавить задаче отзыв на нажатие
+//Добавить checkbox отзыв на нажатие
 function addOnclickCompleteCallback(HTMLelement) {
   HTMLelement.onclick = function() {
     const parentHTMLelement = HTMLelement.parentElement;
     parentHTMLelement.classList.toggle("complete-task");
-    if (parentHTMLelement.querySelector("input").checked === true){
-      parentHTMLelement.querySelector("input").checked = false;
-    } else {parentHTMLelement.querySelector("input").checked = true;}
     updateTask(parentHTMLelement);
   }
 }
@@ -106,9 +101,8 @@ function updateTasksFromServer(){
 //Удалить задачу
 function deleteTask(id){
   const fetObj = fetch("http://nkbelousov.site:3000/todos/" + id, 
-      {method: 'DELETE'});
-  console.log(fetObj);
-  // updateTasksFromServer();
+      {method: 'DELETE'})
+      .then(updateTasksFromServer);
 }
 
 //Обновить задачу 

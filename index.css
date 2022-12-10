@@ -2,118 +2,38 @@ html{
     width: 100%;
     height: 100%
 }
+
 body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0;
     height: 100%;
+    background-color: rgb(224, 206, 194);
 }
 
-header, footer{
-    display: flex;
-    background-color: #f4e8dc;
-}
-
-header{
-    align-items: center;
-}
-
-footer{
-    justify-content: space-around;
-    font-size: 8px;
-    padding-top: auto;
-}
-
-img{
-    height: 25px;
-    margin-left: 5px;
-}
-
-.is-completed{
-    margin-left: 10px;
-    visibility: hidden;
-    transform: scale(2);
-}
-
-.is-completed::after{
-    visibility: visible;
-    content:'';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url(images/not-complete.svg) no-repeat 0.1px 0px; 
-    background-size: 1.1em;
-}
-
-.is-completed:checked::after{
-    visibility: visible;
-    content:'';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url(images/complete.svg) no-repeat 0.1px 0px; 
-    background-size: 1.1em;
-}
-
-.program-title{
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 12px;
-}
-
-.submit-new-task{
-    margin-top: 5px;
-    font-size: 10px;
-}
-
-.new-task-form, .task{
-    display: flex;
-    position: relative;
-    align-items: center;
-    margin: 10px;
-    padding: 5px;
-    border: solid;
-    border-radius: 15px;
-    background-color: rgba(255, 237, 186, 0.636);
-}
-
-.inputTextDiv,.text{
-    flex-grow: 1;
-}
-
-.text:hover{
-    color:rgb(18, 147, 31);
-    cursor: pointer;
-}
-
-.submit-new-task,
-.delete-task-button{
-    margin-right: 25px ;
-    margin-left: 10px;
-}
-
-.submit-new-task::before,
-.delete-task-button::before{
-    content: "Удалить";
-    font-size: 0.5em;
+.delete-task-button::before,
+.submit-new-task::before{
+    content: "\00D7";
+    font-size: 15px;
     position: absolute;
     top: 0;
-    margin-left: 10px;
+    margin-left: 6px;
     z-index: 1;
     writing-mode: vertical-rl;
     height: 100%;
     text-align: center;
+    font-weight: bolder;
 }
 
-.submit-new-task::after,
-.delete-task-button::after{
+.delete-task-button::after,
+.submit-new-task::after{
     content: "";   
     height: 100%;
-    width: 3.66em;
+    width: 3.67em;
     position: absolute;
     top: 0;
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 5px 5px 0;
     border-left: solid;
     border-right: solid;
     font-size: 8px;
@@ -122,8 +42,89 @@ img{
 
 .delete-task-button:hover::before,
 .delete-task-button:hover::after{
-    background-color:rgba(262, 170, 170, 0.79);;
+    background-color: rgb(234, 185, 185); 
     cursor: pointer;
+}
+
+.delete-task-button,
+.submit-new-task{
+    margin-right: 25px ;
+    margin-left: 10px;
+}
+
+.footer,
+.header,
+.task-page{
+    display: flex;
+    background-color: #f3dbc3;
+}
+
+.footer{
+    justify-content: space-around;
+    font-size: 8px;
+    padding-top: auto;
+}
+
+.header{
+    align-items: center;
+}
+
+.inputTextDiv,.text{
+    flex-grow: 1;
+}
+
+.is-completed{
+    margin-left: 10px;
+    visibility: hidden;
+}
+
+.is-completed::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%) scale(1.5);
+    width: 15px;
+    height: 15px;
+    background: url(images/not-complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
+}
+
+.is-completed:checked::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%) scale(1.5);
+    width: 15px;
+    height: 15px;
+    background: url(images/complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
+}
+
+.is-completed:hover::after{
+    cursor: pointer;
+    filter: brightness(1.8);
+}
+
+.is-completed:hover:checked::after{
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
+.new-task-area{
+    width: 100%;
+}
+
+.new-task-form, 
+.task{
+    display: flex;
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    border: solid;
+    border-radius: 5px;
+    background-color: rgba(255, 237, 186, 0.349);
 }
 
 .complete-task{
@@ -131,15 +132,49 @@ img{
     text-decoration: line-through solid rgb(252, 180, 180);
 }
 
+.program-title{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12px;
+}
+
+.programm-logotype{
+    height: 25px;
+    margin-left: 5px;
+}
+
+.submit-new-task{
+    margin-top: 5px;
+    font-size: 10px;
+}
+
 .submit-new-task::after{
     background-color: #c1ffb0;
 }
 
-.new-task-area{
-    width: 100%;
+.submit-new-task::before{
+    content: "+";
 }
 
-.submit-new-task::before{
-    content: "Добавить";
-    font-size: 8px;
+.submit-new-task:hover::after,
+.submit-new-task:hover::before{
+    background-color: #dafad1;
+    cursor: pointer;
+}
+
+.text:hover{
+    color:rgb(18, 147, 31);
+    cursor: pointer;
+}
+
+.task-page{
+
+    align-self: center;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.new-task-form{
+    margin-bottom: 25px;
+    margin-top: 5px;
 }

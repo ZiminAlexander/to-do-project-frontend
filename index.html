@@ -9,39 +9,43 @@
   <link href="index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <header>
-    <img src="images/complete.svg">
+  <header class="header">
+    <img src="images/complete.svg" class="programm-logotype">
     <div class="program-title">Программа для того, чтобы делать дела!</div>  
   </header>
-  <div class="task-table">
-    <div class="task">
-      <span class="text">
-      Почистить картошку, убрать кровать, повеситься 
-      </span>
-      <input type="checkbox" disabled class="is-completed">
-      <div type="button" class="delete-task-button"></div>
+  <div class="task-page">
+    <div class="task-table">
+      <div class="task">
+        <span class="text">
+        Почистить картошку, убрать кровать, повеситься 
+        </span>
+        <input type="checkbox" disabled class="is-completed">
+        <div type="button" class="delete-task-button"></div>
+      </div>
+      <div class="task">
+        <span class="text">
+        Прогуляться 
+        </span>
+        <input type="checkbox" disabled class="is-completed">
+        <div type="button" class="delete-task-button"></div>
+      </div>
+      <div class="task">
+        <span class="text">
+        Умыть бомжа 
+        </span>
+        <input type="checkbox" disabled class="is-completed">
+        <div type="button" class="delete-task-button"></div>
+      </div>
+      <div class="new-task-form">
+        <div class="inputTextDiv">
+          <textarea type="text" id="new-task-area" class="new-task-area" placeholder="Новая задача"></textarea>
+        </div>
+          <div type="button" class="submit-new-task"></div>
+      </div>
     </div>
-    <div class="task">
-      <span class="text">
-      Прогуляться 
-      </span>
-      <input type="checkbox" disabled class="is-completed">
-      <div type="button" class="delete-task-button"></div>
-    </div>
-    <div class="task">
-      <span class="text">
-      Умыть бомжа 
-      </span>
-      <input type="checkbox" disabled class="is-completed">
-      <div type="button" class="delete-task-button"></div>
-    </div>
+    
   </div>
-  <div class="new-task-form">
-    <textarea id="new-task-area" class="new-task-area" 
-            rows="2" placeholder="Новая задача"></textarea>
-    <button type="button" class="submit-new-task">Добавить</button>
-  </div>
-  <footer>
+  <footer class="footer">
     <div class="telephone">8 (900) 000-00-00 </div>
     <div class="mail">mail@mail.ru</div>
     <div class="author">Ivan Ivanov</div>
