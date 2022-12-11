@@ -74,7 +74,6 @@ body{
 }
 
 .is-completed{
-    margin-left: 10px;
     visibility: hidden;
 }
 
@@ -82,8 +81,8 @@ body{
     visibility: visible;
     content:'';
     position: absolute;
-    top: 50%; 
-    transform: translateY(-50%) scale(1.5);
+    top: 8px; 
+    transform: scale(1.5);
     width: 15px;
     height: 15px;
     background: url(images/not-complete.svg) no-repeat 0.1px 0px; 
@@ -94,8 +93,8 @@ body{
     visibility: visible;
     content:'';
     position: absolute;
-    top: 50%; 
-    transform: translateY(-50%) scale(1.5);
+    top: 8px; 
+    transform: scale(1.5);
     width: 15px;
     height: 15px;
     background: url(images/complete.svg) no-repeat 0.1px 0px; 
@@ -128,8 +127,8 @@ body{
 }
 
 .complete-task{
-    background-color: #c1ffb0;
-    text-decoration: line-through solid rgb(252, 180, 180);
+    background-color: #d3ebce;
+    text-decoration: line-through solid rgb(236, 92, 92);
 }
 
 .program-title{
@@ -149,7 +148,7 @@ body{
 }
 
 .submit-new-task::after{
-    background-color: #c1ffb0;
+    background-color: #d3ebce;
 }
 
 .submit-new-task::before{
@@ -158,7 +157,7 @@ body{
 
 .submit-new-task:hover::after,
 .submit-new-task:hover::before{
-    background-color: #dafad1;
+    background-color: #e1f3dd;
     cursor: pointer;
 }
 

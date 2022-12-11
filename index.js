@@ -29,8 +29,8 @@ function addTackElement (taskElementFromServer){
   //Задаем тексту задачи Callback
   addOnclickCompleteCallback(newCheckBoxElement);
   //Собираем task элемент и добавляем Callback
-  newTaskElement.append(newTextElement);
   newTaskElement.append(newCheckBoxElement);
+  newTaskElement.append(newTextElement);
   newTaskElement.append(newDeleteElement);
   //Добавляем задачу на экран
   taskTableElement.append(newTaskElement);
