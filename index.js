@@ -1,9 +1,9 @@
-//Загрузим задачи с сервера
-updateTasksFromServer();
-//Callback для Кнопки "Добавить"
-addOnclickSubmitCallback();
-//Callback для отправления задачи кнопкой Enter
-addOnclickNewTaskAreaCallback();
+// //Загрузим задачи с сервера
+// updateTasksFromServer();
+// //Callback для Кнопки "Добавить"
+// addOnclickSubmitCallback();
+// //Callback для отправления задачи кнопкой Enter
+// addOnclickNewTaskAreaCallback();
 
 
 //Добавляет задачу 
@@ -13,6 +13,7 @@ function addTackElement (taskElementFromServer){
   const newTextElement = createNewElement("span", "text");
   const newDeleteElement = createNewElement("div", "delete-task-button");
   const newCheckBoxElement = createNewElement("input", "is-completed");
+  const newTaskDate = createNewElement("div", "task-date");
   //Сохраняем данные из сервера в задачу
   newTextElement.innerHTML = taskElementFromServer.title;
   newTaskElement.id =  taskElementFromServer.id;
@@ -23,7 +24,8 @@ function addTackElement (taskElementFromServer){
     newCheckBoxElement.checked = true;
     newTaskElement.classList.add("complete-task");
   }
-  // newCheckBoxElement.disabled = true;
+  //Устанавливаем дату с сервера
+  newTaskDate.innerHTML = dateFormat(taskElementFromServer.createdAt);
   //Задаем кнопке удалить для задачи Callback
   newDeleteElement.onclick = function(){deleteTask(this.parentElement.id)};
   //Задаем тексту задачи Callback
@@ -31,6 +33,7 @@ function addTackElement (taskElementFromServer){
   //Собираем task элемент и добавляем Callback
   newTaskElement.append(newCheckBoxElement);
   newTaskElement.append(newTextElement);
+  newTaskElement.append(newTaskDate);
   newTaskElement.append(newDeleteElement);
   //Добавляем задачу на экран
   taskTableElement.append(newTaskElement);
@@ -130,3 +133,22 @@ function addOnclickNewTaskAreaCallback(){
       submitTask();
     })
 }
+
+function dateFormat(date){
+  const dateVocabulary = {
+    Jun: "января",
+    Feb: "февраля",
+    Mar: "марта",
+    Apr: "апреля",
+    May: "мая",
+    Jun: "июня",
+    Jul: "июля",
+    Aug: "августа",
+    Sep: "сентября",
+    Oct: "октября",
+    Nov: "ноября",
+    Dec: "декабря",
+  };
+  const splitDate = date.split(' ');
+  return splitDate[2] + " " + dateVocabulary[splitDate[1]] + " " + splitDate[3];
+};

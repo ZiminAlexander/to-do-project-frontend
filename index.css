@@ -12,35 +12,22 @@ body{
     background-color: rgb(224, 206, 194);
 }
 
-.delete-task-button::before,
-.submit-new-task::before{
-    content: "\00D7";
-    font-size: 15px;
-    position: absolute;
-    top: 0;
-    margin-left: 6px;
-    z-index: 1;
-    writing-mode: vertical-rl;
-    height: 100%;
-    text-align: center;
-    font-weight: bolder;
-}
-
 .delete-task-button::after,
 .submit-new-task::after{
-    content: "";   
-    height: 100%;
-    width: 3.67em;
+    content: "\00D7";
     position: absolute;
-    top: 0;
-    border-radius: 0 5px 5px 0;
-    border-left: solid;
-    border-right: solid;
-    font-size: 8px;
+    top: 2px;
+    right: 2px;
+    height: 12px;
+    width: 12px;
     background-color: rgb(230, 164, 164); 
+    border-radius: 50%;
+    border: solid;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder; 
 }
 
-.delete-task-button:hover::before,
 .delete-task-button:hover::after{
     background-color: rgb(234, 185, 185); 
     cursor: pointer;
@@ -48,8 +35,8 @@ body{
 
 .delete-task-button,
 .submit-new-task{
-    margin-right: 25px ;
-    margin-left: 10px;
+    margin-right: 5px ;
+    margin-left: 15px;
 }
 
 .footer,
@@ -142,21 +129,14 @@ body{
     margin-left: 5px;
 }
 
-.submit-new-task{
-    margin-top: 5px;
-    font-size: 10px;
-}
-
 .submit-new-task::after{
+    content: "+";    
     background-color: #d3ebce;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.submit-new-task::before{
-    content: "+";
-}
-
-.submit-new-task:hover::after,
-.submit-new-task:hover::before{
+.submit-new-task:hover::after{
     background-color: #e1f3dd;
     cursor: pointer;
 }
@@ -164,6 +144,10 @@ body{
 .text:hover{
     color:rgb(18, 147, 31);
     cursor: pointer;
+}
+
+.task{
+    padding-bottom: 10px;
 }
 
 .task-page{
@@ -176,4 +160,12 @@ body{
 .new-task-form{
     margin-bottom: 25px;
     margin-top: 5px;
+}
+
+.task-date{
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 6px;
+
 }
