@@ -1,3 +1,5 @@
+/*Основная страница*/
+
 html{
     width: 100%;
     height: 100%
@@ -113,9 +115,16 @@ body{
     background-color: rgba(255, 237, 186, 0.349);
 }
 
-.complete-task{
-    background-color: #d3ebce;
-    text-decoration: line-through solid rgb(236, 92, 92);
+.new-task-area{
+    border-radius: 5px;
+    border: split;
+    resize: none;
+    background-color: rgba(243, 240, 233, 0.349);
+    font-family: normal;
+}
+
+.new-task-area:focus{
+    outline: none;
 }
 
 .program-title{
@@ -170,21 +179,80 @@ body{
     bottom: 2px;
     right: 2px;
     font-size: 6px;
-
 }
 
-.new-task-area{
+.complete-task{
+    background-color: #d3ebce;
+    text-decoration: line-through solid rgb(236, 92, 92);
+}
+
+
+/* Поле корректировки краткого и полного описания*/
+
+.close-edit-button{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    height: 12px;
+    width: 12px;
+    background-color: rgb(230, 164, 164); 
+    border-radius: 50%;
+    border: solid;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder; 
+}
+
+.close-edit-button:hover{
+    background-color: rgb(234, 185, 185); 
+    cursor: pointer;
+}
+
+.edit-table{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #f3dbc3;
+    padding: 10px;
     border-radius: 5px;
-    border: split;
+    border: solid;
+}
+
+.edit-table-for-save-button{
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.edit-window{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(240, 255, 255, 0.558);
+    z-index: 2;
+    /* visibility: hidden; */
+}
+
+.task-edit-full-text-title,
+.task-edit-title{
+    margin-bottom: 2px;
+}
+
+.task-edit-full-text,
+.task-edit-text{
     resize: none;
-    background-color: rgba(243, 240, 233, 0.349);
-    font-family: normal;
 }
 
-.new-task-area:focus{
-    outline: none;
+.save-edit-button{
+    background-color: #d3ebce;
+    border-radius: 1px;
+    border: solid;
+    text-align: center;
+    margin-top: 5px;
 }
 
-/* .new-task-area::-webkit-scrollbar {
-    width: 0;
-} */
+.save-edit-button:hover{
+    filter: brightness(1.1);
+    cursor: pointer;
+}

@@ -1,10 +1,16 @@
 //Загрузим задачи с сервера
 updateTasksFromServer();
-//Callback для Кнопки "Добавить"
-addOnclickSubmitCallback();
-//Callback для отправления задачи кнопкой Enter
-addOnclickNewTaskAreaCallback();
 
+//Добавить Callback для кнопки "+" Submit button
+addOnclickSubmitCallback();
+//Добавить Callback для кнопки Submit Button кнопкой Enter
+addOnclickNewTaskAreaCallback();
+//Добавить Callback для поля Submit New Task Text Area
+addInputNewTaskAreaCallback();
+//Добавить Callback для кнопки Close EditWindow Button
+addCloseEditWindowCallback();
+//Добавить Callback для кнопки Save Edit Button
+addSaveEditButtonCallback();
 
 //Добавляет задачу 
 function addTackElement (taskElementFromServer){
@@ -51,7 +57,7 @@ function createNewElement(tag, classes){
   return newElement;
 }
 
-//Добавить checkbox отзыв на нажатие
+//Callback для checkbox на нажатие
 function addOnclickCompleteCallback(HTMLelement) {
   HTMLelement.onclick = function() {
     const parentHTMLelement = HTMLelement.parentElement;
@@ -60,20 +66,22 @@ function addOnclickCompleteCallback(HTMLelement) {
   }
 }
 
-//Добавить кнопке "Добавить" отзыв на нажатие
+//Callback для кнопки "Добавить" на нажатие
 function addOnclickSubmitCallback() {
   const submitButton = document.querySelector(".submit-new-task");
   submitButton.onclick = submitTask;
 }
 
-//Добавляем автоизменение размера для textarea
-document.querySelector(".new-task-area").addEventListener("input", function() {      
-  if(this.clientHeight < this.scrollHeight){
-    this.style.height = this.scrollHeight + "px";
-  } else if (this.clientHeight > this.scrollHeight){
-    this.style.height = this.scrollHeight + "px";
-  }
-}); 
+//Callback для автоизменения размера для submit-text textarea
+function addInputNewTaskAreaCallback(){
+  document.querySelector(".new-task-area").addEventListener("input", function() {      
+    if(this.clientHeight < this.scrollHeight){
+      this.style.height = this.scrollHeight + "px";
+    } else if (this.clientHeight > this.scrollHeight){
+      this.style.height = this.scrollHeight + "px";
+    }
+  });
+}
 
 //Отправить задачу на сервер
 function submitTask(){
@@ -133,9 +141,10 @@ function updateTask(currentTask){
   )
 }
 
-//Добавить Callback для поля ввода
+//Callback для поля ввода на нажатие "Enter"
 function addOnclickNewTaskAreaCallback(){
-  document.querySelector('.new-task-area').addEventListener(
+  const newTaskAreaElement = document.querySelector('.new-task-area');
+  newTaskAreaElement.addEventListener(
     'keydown', (event) => {
       // Если кнопка не 'Enter' выйти
       if (event.keyCode !== 13) return
@@ -162,3 +171,21 @@ function dateFormat(date){
   const splitDate = date.split(' ');
   return splitDate[2] + " " + dateVocabulary[splitDate[1]] + " " + splitDate[3];
 };
+
+
+//Callback для CloseEditWindow на нажатие
+function addCloseEditWindowCallback(){
+  const closeEditButton = document.querySelector(".close-edit-button");
+  closeEditButton.addEventListener("click", () => {
+    const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")
+    if (resultConfirm) {
+      const editWindow = document.querySelector(".edit-window");
+      editWindow.style.visibility = "hidden";
+    }
+  })
+}
+
+//Callback для SaveEditButton на нажатие
+function addSaveEditButtonCallback(){
+  const saveEditButton = document.querySelector(".save-edit-button");
+}
