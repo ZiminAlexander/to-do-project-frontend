@@ -24,6 +24,7 @@ function addTackElement (taskElementFromServer){
   newTextElement.innerHTML = taskElementFromServer.title;
   newTaskElement.id =  taskElementFromServer.id;
   newTaskElement.dataset.createdTime = taskElementFromServer.createdAt;
+  newTaskElement.dataset.description = "";
   //Корректируем чекбокс для задачи
   newCheckBoxElement.type = "checkbox";
   if (taskElementFromServer.isCompleted){
@@ -32,10 +33,12 @@ function addTackElement (taskElementFromServer){
   }
   //Устанавливаем дату с сервера
   newTaskDate.innerHTML = dateFormat(taskElementFromServer.createdAt);
-  //Задаем кнопке удалить для задачи Callback
+  //Задаем кнопке Удалить задачи Callback
   newDeleteElement.onclick = function(){deleteTask(this.parentElement.id)};
-  //Задаем тексту задачи Callback
-  addOnclickCompleteCallback(newCheckBoxElement);
+  //Задаем checkbox задачи Callback
+  addOnclickIsCompleteCallback(newCheckBoxElement);
+  // Задаем тексту Task-text задачи Callback
+  addOnclickTaskTextCallback(newTextElement);
   //Собираем task элемент и добавляем Callback
   newTaskElement.append(newCheckBoxElement);
   newTaskElement.append(newTextElement);
@@ -58,11 +61,25 @@ function createNewElement(tag, classes){
 }
 
 //Callback для checkbox на нажатие
-function addOnclickCompleteCallback(HTMLelement) {
-  HTMLelement.onclick = function() {
-    const parentHTMLelement = HTMLelement.parentElement;
-    parentHTMLelement.classList.toggle("complete-task");
-    updateTask(parentHTMLelement);
+function addOnclickIsCompleteCallback(checkboxElement) {
+  checkboxElement.onclick = function() {
+    const taskElement = checkboxElement.parentElement;
+    taskElement.classList.toggle("complete-task");
+    updateTask(taskElement);
+  }
+}
+
+//Callback для checkbox на нажатие
+function addOnclickTaskTextCallback(taskTextElement) {
+  taskTextElement.onclick = function() {
+    const taskElement = taskTextElement.parentElement;
+    const editWindow = document.querySelector(".edit-window");
+    const taskEditText = document.querySelector(".task-edit-text");
+    const taskEditFullText = document.querySelector(".task-edit-full-text");
+    editWindow.style.visibility = "visible";
+    taskEditText.value = taskTextElement.textContent;
+    taskEditFullText.value = taskElement.dataset.description;
+    taskElement.classList.add("edited");   
   }
 }
 
@@ -178,14 +195,28 @@ function addCloseEditWindowCallback(){
   const closeEditButton = document.querySelector(".close-edit-button");
   closeEditButton.addEventListener("click", () => {
     const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")
+    const editedTask = document.querySelector(".edited");
     if (resultConfirm) {
       const editWindow = document.querySelector(".edit-window");
       editWindow.style.visibility = "hidden";
     }
+    editedTask.classList.remove("edited");
   })
 }
 
 //Callback для SaveEditButton на нажатие
 function addSaveEditButtonCallback(){
   const saveEditButton = document.querySelector(".save-edit-button");
+  saveEditButton.addEventListener("click", function(){
+    const editWindow = document.querySelector(".edit-window");
+    const editedTask = document.querySelector(".edited");
+    const editedTaskText = editedTask.querySelector(".text");
+    const taskEditText = document.querySelector(".task-edit-text");
+    const taskEditFullText = document.querySelector(".task-edit-full-text");
+    editedTaskText.textContent = taskEditText.value;
+    editedTask.dataset.description = taskEditFullText.value;
+    updateTask(editedTask);
+    editWindow.style.visibility = "hidden";
+    editedTask.classList.remove("edited");
+  })
 }
