@@ -1,9 +1,9 @@
-// //Загрузим задачи с сервера
-// updateTasksFromServer();
-// //Callback для Кнопки "Добавить"
-// addOnclickSubmitCallback();
-// //Callback для отправления задачи кнопкой Enter
-// addOnclickNewTaskAreaCallback();
+//Загрузим задачи с сервера
+updateTasksFromServer();
+//Callback для Кнопки "Добавить"
+addOnclickSubmitCallback();
+//Callback для отправления задачи кнопкой Enter
+addOnclickNewTaskAreaCallback();
 
 
 //Добавляет задачу 
@@ -66,6 +66,15 @@ function addOnclickSubmitCallback() {
   submitButton.onclick = submitTask;
 }
 
+//Добавляем автоизменение размера для textarea
+document.querySelector(".new-task-area").addEventListener("input", function() {      
+  if(this.clientHeight < this.scrollHeight){
+    this.style.height = this.scrollHeight + "px";
+  } else if (this.clientHeight > this.scrollHeight){
+    this.style.height = this.scrollHeight + "px";
+  }
+}); 
+
 //Отправить задачу на сервер
 function submitTask(){
   const newTaskArea = document.querySelector(".new-task-area");
@@ -76,6 +85,7 @@ function submitTask(){
   const submitString = JSON.stringify(submitTaskObject);
   submitTaskObject.id = ""
   newTaskArea.value = '';
+  newTaskArea.style.height = "35px";
    
   fetch('http://nkbelousov.site:3000/todos/', 
   { headers: {'Content-Type': 'application/json'}, 

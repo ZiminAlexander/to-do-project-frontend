@@ -141,6 +141,10 @@ body{
     cursor: pointer;
 }
 
+.text{
+    hyphens: auto;
+}
+
 .text:hover{
     color:rgb(18, 147, 31);
     cursor: pointer;
@@ -151,7 +155,6 @@ body{
 }
 
 .task-page{
-
     align-self: center;
     margin: 20px;
     border-radius: 5px;
@@ -169,3 +172,19 @@ body{
     font-size: 6px;
 
 }
+
+.new-task-area{
+    border-radius: 5px;
+    border: split;
+    resize: none;
+    background-color: rgba(243, 240, 233, 0.349);
+    font-family: normal;
+}
+
+.new-task-area:focus{
+    outline: none;
+}
+
+/* .new-task-area::-webkit-scrollbar {
+    width: 0;
+} */
