@@ -11,6 +11,8 @@ addInputNewTaskAreaCallback();
 addCloseEditWindowCallback();
 //Добавить Callback для кнопки Save Edit Button
 addSaveEditButtonCallback();
+//Добавить Callback для кнопок edit-text-button и edit-full-text-button
+addEditButtonsCallback();
 
 //Добавляет задачу 
 function addTackElement (taskElementFromServer){
@@ -24,7 +26,7 @@ function addTackElement (taskElementFromServer){
   newTextElement.innerHTML = taskElementFromServer.title;
   newTaskElement.id =  taskElementFromServer.id;
   newTaskElement.dataset.createdTime = taskElementFromServer.createdAt;
-  newTaskElement.dataset.description = "";
+  newTaskElement.dataset.description = taskElementFromServer.description;
   //Корректируем чекбокс для задачи
   newCheckBoxElement.type = "checkbox";
   if (taskElementFromServer.isCompleted){
@@ -100,14 +102,16 @@ function addInputNewTaskAreaCallback(){
   });
 }
 
-//Отправить задачу на сервер
+//Отправить задачу на сервер send 
 function submitTask(){
   const newTaskArea = document.querySelector(".new-task-area");
   if (newTaskArea.value === ''){alert("Нельзя добавить пустую задачу"); return;}
   const submitTaskObject = {};
+  let submitString = "";
   submitTaskObject.title = newTaskArea.value;
   submitTaskObject.isCompleted = false;
-  const submitString = JSON.stringify(submitTaskObject);
+  submitTaskObject.description = "";
+  submitString = JSON.stringify(submitTaskObject);
   submitTaskObject.id = ""
   newTaskArea.value = '';
   newTaskArea.style.height = "35px";
@@ -145,11 +149,14 @@ function deleteTask(id){
 
 //Обновить задачу 
 function updateTask(currentTask){
+  const id = currentTask.id;
   const submitTaskObject = {};
+  let submitString = "";
+  const taskDescription = currentTask.dataset.description;
   submitTaskObject.title = currentTask.querySelector(".text").textContent;
   submitTaskObject.isCompleted = currentTask.querySelector(".is-completed").checked;
-  const submitString = JSON.stringify(submitTaskObject);
-  const id = currentTask.id;
+  submitTaskObject.description = taskDescription;
+  submitString = JSON.stringify(submitTaskObject);
   fetch(`http://nkbelousov.site:3000/todos/${id}`, 
   { headers: {'Content-Type': 'application/json'}, 
     method: 'PUT', 
@@ -199,8 +206,9 @@ function addCloseEditWindowCallback(){
     if (resultConfirm) {
       const editWindow = document.querySelector(".edit-window");
       editWindow.style.visibility = "hidden";
-    }
+    } else {return;}
     editedTask.classList.remove("edited");
+    disableEditTextAreas();
   })
 }
 
@@ -213,10 +221,37 @@ function addSaveEditButtonCallback(){
     const editedTaskText = editedTask.querySelector(".text");
     const taskEditText = document.querySelector(".task-edit-text");
     const taskEditFullText = document.querySelector(".task-edit-full-text");
+    //Меняем параметры задачи
     editedTaskText.textContent = taskEditText.value;
     editedTask.dataset.description = taskEditFullText.value;
+    //Делаем поля нередактируемыми
+    disableEditTextAreas();
+    //Отправляем на сервер и закрываем окно
     updateTask(editedTask);
     editWindow.style.visibility = "hidden";
     editedTask.classList.remove("edited");
+
   })
+}
+
+//Callback для edit кнопки
+function editButtonCallback() {
+  const editText = this.parentElement.querySelector("textarea");
+  editText.disabled = false;
+}
+
+//Добавить Callback для кнопок edit-text-button и edit-full-text-button
+function addEditButtonsCallback(){
+  const editTextButton = document.querySelector(".edit-text-button");
+  const editTextFullButton = document.querySelector(".edit-full-text-button");
+  editTextButton.onclick = editButtonCallback;
+  editTextFullButton.onclick = editButtonCallback;
+}
+
+// Сделать поля для редактирования задачи disabled
+function disableEditTextAreas(){
+  const taskEditText = document.querySelector(".task-edit-text");
+  const taskEditFullText = document.querySelector(".task-edit-full-text");
+  taskEditText.disabled = true;
+  taskEditFullText.disabled = true; 
 }

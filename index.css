@@ -212,6 +212,7 @@ body{
     position: absolute;
     top:50%;
     left:50%;
+    width: 50%;
     transform: translateX(-50%) translateY(-50%);
     background-color: #f3dbc3;
     padding: 10px;
@@ -219,10 +220,29 @@ body{
     border: solid;
 }
 
-.edit-table-for-save-button{
+.edit-table-for-buttons{
     position: relative;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-text-button, 
+.edit-full-text-button{
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    background: #f3dbc3 url(images/edit-button.svg) no-repeat;
+    background-size: 15px;
+    background-position: center;
+    border-radius: 5px;
+
+}
+
+.edit-text-button:hover, 
+.edit-full-text-button:hover{
+    filter: brightness(1.1);
+    cursor: pointer;
 }
 
 .edit-window{
@@ -236,12 +256,19 @@ body{
 
 .task-edit-full-text-title,
 .task-edit-title{
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .task-edit-full-text,
 .task-edit-text{
     resize: none;
+    color: rgb(31, 59, 34);
+    background-color: #00000000;
+    width: 90%;
+}
+
+.task-edit-full-text{
+    height: 10em;
 }
 
 .save-edit-button{
@@ -250,9 +277,14 @@ body{
     border: solid;
     text-align: center;
     margin-top: 5px;
+    width: 91%;
 }
 
 .save-edit-button:hover{
     filter: brightness(1.1);
     cursor: pointer;
+}
+
+.disabled{
+    
 }

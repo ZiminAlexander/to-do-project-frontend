@@ -54,13 +54,19 @@
   </footer>
   <div class="edit-window">
     <div class="edit-table">
-      <div class="edit-table-for-save-button">
-        <div class="task-edit-title">Краткое содержание</div>
-        <textarea type="text" class="task-edit-text"></textarea>
-        <div class="task-edit-full-text-title">Описание</div>
-        <textarea type="text" class="task-edit-full-text"></textarea>
-        <div type="button" class="save-edit-button">Сохранить и выйти</div>
-        <div type="button" class="close-edit-button">&#215</div>
+      <div class="edit-table-for-buttons">
+        <div class="title-box">
+          <div class="task-edit-title"><b>Краткое содержание</b></div>
+          <textarea disabled type="text" class="task-edit-text disabled"></textarea>
+          <div type="button" class="edit-text-button"></div>
+        </div>
+        <div class="description-box">
+          <div class="task-edit-full-text-title"><b>Описание</b></div>
+          <textarea disabled type="text" class="task-edit-full-text disabled"></textarea>
+          <div type="button" class="edit-full-text-button"></div>
+        </div>
+          <div type="button" class="save-edit-button">Сохранить и выйти</div>
+          <div type="button" class="close-edit-button">&#215</div>
       </div>
     </div>
   </div>
