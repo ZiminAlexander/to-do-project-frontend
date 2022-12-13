@@ -212,30 +212,30 @@ body{
     position: absolute;
     top:50%;
     left:50%;
-    width: 50%;
     transform: translateX(-50%) translateY(-50%);
     background-color: #f3dbc3;
     padding: 10px;
     border-radius: 5px;
     border: solid;
+    width:50%;
 }
 
 .edit-table-for-buttons{
     position: relative;
     display: flex;
     flex-direction: column;
+
 }
 
 .edit-text-button, 
 .edit-full-text-button{
-    display: inline-block;
-    vertical-align: top;
     width: 20px;
     height: 20px;
     background: #f3dbc3 url(images/edit-button.svg) no-repeat;
     background-size: 15px;
     background-position: center;
     border-radius: 5px;
+    margin-left: 10px;
 
 }
 
@@ -264,7 +264,7 @@ body{
     resize: none;
     color: rgb(31, 59, 34);
     background-color: #00000000;
-    width: 90%;
+    width: 100%
 }
 
 .task-edit-full-text{
@@ -277,7 +277,7 @@ body{
     border: solid;
     text-align: center;
     margin-top: 5px;
-    width: 91%;
+
 }
 
 .save-edit-button:hover{
@@ -285,6 +285,11 @@ body{
     cursor: pointer;
 }
 
-.disabled{
-    
+.title-edit-box,
+.description-edit-box{
+    display: flex;
+}
+
+.text-area-div{
+    flex-grow: 1;
 }
