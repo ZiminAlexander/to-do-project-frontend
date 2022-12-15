@@ -13,9 +13,13 @@ addCloseEditWindowCallback();
 addSaveEditButtonCallback();
 //Добавить Callback для кнопок edit-text-button и edit-full-text-button
 addEditButtonsCallback();
+//Добавить Callback для поля поиска search-area
+addSearchAreaInputCallback();
+//Добавить Callback для кнопки clear-search
+addClearSearchCallback();
 
 //Добавляет задачу 
-function addTackElement (taskElementFromServer){
+function addTaskElement (taskElementFromServer){
   const taskTableElement = document.querySelector(".task-table");
   const newTaskElement = createNewElement("div", "task");
   const newTextElement = createNewElement("span", "text");
@@ -134,8 +138,16 @@ function updateTasksFromServer(){
   fetch('http://nkbelousov.site:3000/todos/')
   .then((response) => response.json())
   .then((allTasks) => {
+    if (allTasks == ""){
+      const newTaskElement = createNewElement("div", "task");
+      const taskTableElement = document.querySelector(".task-table");
+      newTaskElement.textContent = "На данный момент задач нет, добавьте новую задачу";
+      newTaskElement.style.paddingLeft = "10px";
+      taskTableElement.append(newTaskElement);
+      return;
+    }
     for (let i = 0; i < allTasks.length; i++){
-      addTackElement(allTasks[i]);
+      addTaskElement(allTasks[i]);
     }
   });
 }
@@ -255,3 +267,38 @@ function disableEditTextAreas(){
   taskEditText.disabled = true;
   taskEditFullText.disabled = true; 
 }
+
+//Добавить Callback для поля поиска search-area
+function addSearchAreaInputCallback(){
+  const searchArea = document.querySelector(".search-area");
+  searchArea.addEventListener("input", function(){
+    console.log("dsds");
+    if (this.value == ""){
+      updateTasksFromServer();
+      return;
+    }
+    fetch('http://nkbelousov.site:3000/todos?search='+ this.value)
+    .then((response) => response.json())
+    .then((allFindedTasks) => {
+      const allTasks = document.querySelectorAll(".task");
+      for (let currentTask of allTasks){
+        currentTask.classList.add("hidden");
+      }
+      for (let i = 0; i < allFindedTasks.length; i++){
+        const currentTask = document.getElementById(allFindedTasks[i].id);
+        currentTask.classList.remove("hidden");
+      }
+    });
+
+  })
+}
+
+//Добавить Callback для кнопки clear-search
+function addClearSearchCallback(){
+  const clearSearch = document.querySelector(".clear-search");
+  clearSearch.addEventListener("click", function(){
+    this.parentElement.querySelector(".search-area").value = "";
+  })
+}
+
+
