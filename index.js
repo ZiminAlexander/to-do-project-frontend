@@ -1,22 +1,34 @@
-//Загрузим задачи с сервера
-updateTasksFromServer();
+function main(){
+  //Загрузим задачи с сервера
+  updateTasksFromServer();
+  //Добавить Callback для кнопки "+" Submit button
+  const submitButton = document.querySelector(".submit-new-task");
+  submitButton.addEventListener("click", submitTask);
+  //Добавить Callback для кнопки Submit Button кнопкой Enter
+  const newTaskAreaElement = document.querySelector('.new-task-area');
+  newTaskAreaElement.addEventListener("keydown", enterButtonForNewTaskAreaCallback);
+  //Добавить Callback для автоматического изменения поля Submit New Task Text Area
+  newTaskAreaElement.addEventListener("input", autoSizeNewTaskAreaCallback);
+  //Добавить Callback для кнопки Close EditWindow Button
+  const closeEditButton = document.querySelector(".close-edit-button");
+  closeEditButton.addEventListener("click", closeEditWindowCallback);
+  //Добавить Callback для кнопки Save Edit Button
+  const saveEditButton = document.querySelector(".save-edit-button");
+  saveEditButton.addEventListener("click", saveEditButtonCallback);
+  //Добавить Callback для кнопок edit-text-button и edit-full-text-button
+  const editTextButton = document.querySelector(".edit-text-button");
+  const editTextFullButton = document.querySelector(".edit-full-text-button");
+  editTextButton.addEventListener("click", editButtonCallback);
+  editTextFullButton.addEventListener("click", editButtonCallback);
+  //Добавить Callback для поля поиска search-area
+  const searchArea = document.querySelector(".search-area");
+  searchArea.addEventListener("input", searchAreaInputCallback);
+  //Добавить Callback для кнопки clear-search
+  const clearSearch = document.querySelector(".clear-search");
+  clearSearch.addEventListener("click", clearSearchCallback);
+}
 
-//Добавить Callback для кнопки "+" Submit button
-addOnclickSubmitCallback();
-//Добавить Callback для кнопки Submit Button кнопкой Enter
-addOnclickNewTaskAreaCallback();
-//Добавить Callback для поля Submit New Task Text Area
-addInputNewTaskAreaCallback();
-//Добавить Callback для кнопки Close EditWindow Button
-addCloseEditWindowCallback();
-//Добавить Callback для кнопки Save Edit Button
-addSaveEditButtonCallback();
-//Добавить Callback для кнопок edit-text-button и edit-full-text-button
-addEditButtonsCallback();
-//Добавить Callback для поля поиска search-area
-addSearchAreaInputCallback();
-//Добавить Callback для кнопки clear-search
-addClearSearchCallback();
+main();
 
 //Добавляет задачу 
 function addTaskElement (taskElementFromServer){
@@ -40,7 +52,9 @@ function addTaskElement (taskElementFromServer){
   //Устанавливаем дату с сервера
   newTaskDate.innerHTML = dateFormat(taskElementFromServer.createdAt);
   //Задаем кнопке Удалить задачи Callback
-  newDeleteElement.onclick = function(){deleteTask(this.parentElement.id)};
+  newDeleteElement.addEventListener("click", function(){
+    deleteTask(this.parentElement.id)
+  });
   //Задаем checkbox задачи Callback
   addOnclickIsCompleteCallback(newCheckBoxElement);
   // Задаем тексту Task-text задачи Callback
@@ -89,21 +103,13 @@ function addOnclickTaskTextCallback(taskTextElement) {
   }
 }
 
-//Callback для кнопки "Добавить" на нажатие
-function addOnclickSubmitCallback() {
-  const submitButton = document.querySelector(".submit-new-task");
-  submitButton.onclick = submitTask;
-}
-
 //Callback для автоизменения размера для submit-text textarea
-function addInputNewTaskAreaCallback(){
-  document.querySelector(".new-task-area").addEventListener("input", function() {      
+function autoSizeNewTaskAreaCallback(){      
     if(this.clientHeight < this.scrollHeight){
       this.style.height = this.scrollHeight + "px";
     } else if (this.clientHeight > this.scrollHeight){
       this.style.height = this.scrollHeight + "px";
     }
-  });
 }
 
 //Отправить задачу на сервер send 
@@ -138,11 +144,11 @@ function updateTasksFromServer(){
   fetch('http://nkbelousov.site:3000/todos/')
   .then((response) => response.json())
   .then((allTasks) => {
-    if (allTasks == ""){
+    if (allTasks.length === 0){
       const newTaskElement = createNewElement("div", "task");
       const taskTableElement = document.querySelector(".task-table");
       newTaskElement.textContent = "На данный момент задач нет, добавьте новую задачу";
-      newTaskElement.style.paddingLeft = "10px";
+      newTaskElement.classList.add("no-tasks");
       taskTableElement.append(newTaskElement);
       return;
     }
@@ -178,16 +184,13 @@ function updateTask(currentTask){
 }
 
 //Callback для поля ввода на нажатие "Enter"
-function addOnclickNewTaskAreaCallback(){
-  const newTaskAreaElement = document.querySelector('.new-task-area');
-  newTaskAreaElement.addEventListener(
-    'keydown', (event) => {
+function enterButtonForNewTaskAreaCallback(event){
       // Если кнопка не 'Enter' выйти
-      if (event.keyCode !== 13) return
+      if (event.keyCode !== 13) {return;}
       event.preventDefault();
       submitTask();
-    })
 }
+
 
 function dateFormat(date){
   const dateVocabulary = {
@@ -210,9 +213,7 @@ function dateFormat(date){
 
 
 //Callback для CloseEditWindow на нажатие
-function addCloseEditWindowCallback(){
-  const closeEditButton = document.querySelector(".close-edit-button");
-  closeEditButton.addEventListener("click", () => {
+function closeEditWindowCallback(){
     const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")
     const editedTask = document.querySelector(".edited");
     if (resultConfirm) {
@@ -221,13 +222,10 @@ function addCloseEditWindowCallback(){
     } else {return;}
     editedTask.classList.remove("edited");
     disableEditTextAreas();
-  })
 }
 
 //Callback для SaveEditButton на нажатие
-function addSaveEditButtonCallback(){
-  const saveEditButton = document.querySelector(".save-edit-button");
-  saveEditButton.addEventListener("click", function(){
+function saveEditButtonCallback(){
     const editWindow = document.querySelector(".edit-window");
     const editedTask = document.querySelector(".edited");
     const editedTaskText = editedTask.querySelector(".text");
@@ -242,22 +240,12 @@ function addSaveEditButtonCallback(){
     updateTask(editedTask);
     editWindow.style.visibility = "hidden";
     editedTask.classList.remove("edited");
-
-  })
 }
 
 //Callback для edit кнопки
 function editButtonCallback() {
   const editText = this.parentElement.querySelector("textarea");
   editText.disabled = false;
-}
-
-//Добавить Callback для кнопок edit-text-button и edit-full-text-button
-function addEditButtonsCallback(){
-  const editTextButton = document.querySelector(".edit-text-button");
-  const editTextFullButton = document.querySelector(".edit-full-text-button");
-  editTextButton.onclick = editButtonCallback;
-  editTextFullButton.onclick = editButtonCallback;
 }
 
 // Сделать поля для редактирования задачи disabled
@@ -269,36 +257,39 @@ function disableEditTextAreas(){
 }
 
 //Добавить Callback для поля поиска search-area
-function addSearchAreaInputCallback(){
-  const searchArea = document.querySelector(".search-area");
-  searchArea.addEventListener("input", function(){
-    console.log("dsds");
+function searchAreaInputCallback(){
     if (this.value == ""){
-      updateTasksFromServer();
+      hideOrShowAllTasks(false);
       return;
     }
     fetch('http://nkbelousov.site:3000/todos?search='+ this.value)
     .then((response) => response.json())
     .then((allFindedTasks) => {
-      const allTasks = document.querySelectorAll(".task");
-      for (let currentTask of allTasks){
-        currentTask.classList.add("hidden");
-      }
+      hideOrShowAllTasks(true);
       for (let i = 0; i < allFindedTasks.length; i++){
         const currentTask = document.getElementById(allFindedTasks[i].id);
         currentTask.classList.remove("hidden");
       }
     });
+}
 
-  })
+//Функция для того, чтобы скрыть или отобразить все задачи
+function hideOrShowAllTasks(isHide){
+  const allTasks = document.querySelectorAll(".task");
+  for (let currentTask of allTasks){
+    if (isHide) {
+      currentTask.classList.add("hidden");
+    } else {
+      currentTask.classList.remove("hidden");
+    }
+  }
 }
 
 //Добавить Callback для кнопки clear-search
-function addClearSearchCallback(){
-  const clearSearch = document.querySelector(".clear-search");
-  clearSearch.addEventListener("click", function(){
+function clearSearchCallback(){
     this.parentElement.querySelector(".search-area").value = "";
-  })
+    hideOrShowAllTasks(false);
 }
+
 
 
