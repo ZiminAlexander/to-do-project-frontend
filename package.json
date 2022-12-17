@@ -1,0 +1,19 @@
+{
+  "name": "to-do-project-frontend",
+  "version": "1.0.0",
+  "description": "frontend for TODO project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZiminAlexander/to-do-project.git"
+  },
+  "author": "Zimin Alexander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZiminAlexander/to-do-project/issues"
+  },
+  "homepage": "https://github.com/ZiminAlexander/to-do-project#readme"
+}
