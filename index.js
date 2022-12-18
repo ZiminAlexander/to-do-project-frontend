@@ -288,7 +288,7 @@ function hideOrShowAllTasks(isHide){
 //Добавить Callback для кнопки clear-search
 function clearSearchCallback(){
     this.parentElement.querySelector(".search-area").value = "";
-    hideOrShowAllTasks(false);
+    updateTasksFromServer();
 }
 
 
