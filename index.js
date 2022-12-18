@@ -219,21 +219,36 @@ function dateFormat(date){
 };
 
 
-//Callback для CloseEditWindow на нажатие
+//Callback для CloseEditButton на нажатие
 function closeEditWindowCallback(){
-    const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")
-    const editedTask = document.querySelector(".edited");
-    if (resultConfirm) {
-      const editWindow = document.querySelector(".edit-window");
-      editWindow.style.visibility = "hidden";
-    } else {return;}
-    editedTask.classList.remove("edited");
-    disableEditTextAreas();
+  const editedTask = document.querySelector(".edited");
+  const editedTaskText = editedTask.querySelector(".text");
+  const editedTaskFullText = editedTask.dataset.description;
+  const taskEditText = document.querySelector(".task-edit-text");
+  const taskEditFullText = document.querySelector(".task-edit-full-text");
+  
+  if ((editedTaskText.textContent === taskEditText.value) &&
+  (editedTaskFullText === taskEditFullText.value)){
+    closeEditWindow();
+    return;
+  }
+
+  const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?");
+  if (!resultConfirm){return;}
+  closeEditWindow();
+}
+
+// Функция, для закрытия окна редактирования
+function closeEditWindow(){
+  const editedTask = document.querySelector(".edited");
+  const editWindow = document.querySelector(".edit-window");
+  editedTask.classList.remove("edited");
+  editWindow.style.visibility = "hidden";
+  disableEditTextAreas();
 }
 
 //Callback для SaveEditButton на нажатие
 function saveEditButtonCallback(){
-    const editWindow = document.querySelector(".edit-window");
     const editedTask = document.querySelector(".edited");
     const editedTaskText = editedTask.querySelector(".text");
     const taskEditText = document.querySelector(".task-edit-text");
@@ -241,12 +256,9 @@ function saveEditButtonCallback(){
     //Меняем параметры задачи
     editedTaskText.textContent = taskEditText.value;
     editedTask.dataset.description = taskEditFullText.value;
-    //Делаем поля нередактируемыми
-    disableEditTextAreas();
     //Отправляем на сервер и закрываем окно
     updateTask(editedTask);
-    editWindow.style.visibility = "hidden";
-    editedTask.classList.remove("edited");
+    closeEditWindow();
 }
 
 //Callback для edit кнопки
