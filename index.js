@@ -115,7 +115,7 @@ function autoSizeNewTaskAreaCallback(){
 //Отправить задачу на сервер send 
 function submitTask(){
   const newTaskArea = document.querySelector(".new-task-area");
-  if (newTaskArea.value === ''){alert("Нельзя добавить пустую задачу"); return;}
+  if (newTaskArea.value.trim() === ''){alert("Нельзя добавить пустую задачу"); return;}
   const submitTaskObject = {};
   let submitString = "";
   submitTaskObject.title = newTaskArea.value;
