@@ -21,6 +21,7 @@ body{
 .delete-task-button::after,
 .submit-new-task::after, 
 .clear-search::after{
+    visibility: visible;
     content: "\00D7";
     position: absolute;
     top: 2px;
@@ -46,6 +47,7 @@ body{
 .submit-new-task{
     margin-right: 5px ;
     margin-left: 15px;
+    visibility: hidden;
 }
 
 .footer,

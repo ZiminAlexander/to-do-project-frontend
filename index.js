@@ -35,7 +35,7 @@ function addTaskElement (taskElementFromServer){
   const taskTableElement = document.querySelector(".task-table");
   const newTaskElement = createNewElement("div", "task");
   const newTextElement = createNewElement("span", "text");
-  const newDeleteElement = createNewElement("div", "delete-task-button");
+  const newDeleteElement = createNewElement("button", "delete-task-button");
   const newCheckBoxElement = createNewElement("input", "is-completed");
   const newTaskDate = createNewElement("div", "task-date");
   //Сохраняем данные из сервера в задачу
@@ -53,8 +53,10 @@ function addTaskElement (taskElementFromServer){
   newTaskDate.innerHTML = dateFormat(taskElementFromServer.createdAt);
   //Задаем кнопке Удалить задачи Callback
   newDeleteElement.addEventListener("click", function(){
-    deleteTask(this.parentElement.id)
-  });
+      this.disabled = "true";
+      deleteTask(this.parentElement.id)
+    }
+  );
   //Задаем checkbox задачи Callback
   addOnclickIsCompleteCallback(newCheckBoxElement);
   // Задаем тексту Task-text задачи Callback
@@ -115,7 +117,11 @@ function autoSizeNewTaskAreaCallback(){
 //Отправить задачу на сервер send 
 function submitTask(){
   const newTaskArea = document.querySelector(".new-task-area");
-  if (newTaskArea.value === ''){alert("Нельзя добавить пустую задачу"); return;}
+  if (newTaskArea.value.trim() === ''){
+    alert("Нельзя добавить пустую задачу");
+    newTaskArea.value = ''; 
+    return;
+  }
   const submitTaskObject = {};
   let submitString = "";
   submitTaskObject.title = newTaskArea.value;
@@ -160,7 +166,7 @@ function updateTasksFromServer(){
 
 //Удалить задачу
 function deleteTask(id){
-  const fetObj = fetch("http://nkbelousov.site:3000/todos/" + id, 
+  fetch("http://nkbelousov.site:3000/todos/" + id, 
       {method: 'DELETE'})
       .then(updateTasksFromServer);
 }
