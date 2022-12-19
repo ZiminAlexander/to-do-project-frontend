@@ -155,6 +155,11 @@ function updateTasksFromServer(){
     for (let i = 0; i < allTasks.length; i++){
       addTaskElement(allTasks[i]);
     }
+    //Если строка поиска не пуста, отобразить отфильтрованные задачи
+    const searchArea = document.querySelector(".search-area");
+    if (searchArea.value != ""){
+      setSearchFilter(searchArea.value);
+    }
   });
 }
 
@@ -262,15 +267,19 @@ function searchAreaInputCallback(){
       hideOrShowAllTasks(false);
       return;
     }
-    fetch('http://nkbelousov.site:3000/todos?search='+ this.value)
-    .then((response) => response.json())
-    .then((allFindedTasks) => {
-      hideOrShowAllTasks(true);
-      for (let i = 0; i < allFindedTasks.length; i++){
-        const currentTask = document.getElementById(allFindedTasks[i].id);
-        currentTask.classList.remove("hidden");
-      }
-    });
+    setSearchFilter(this.value);
+}
+
+function setSearchFilter(filter){
+  fetch('http://nkbelousov.site:3000/todos?search='+ filter)
+  .then((response) => response.json())
+  .then((allFindedTasks) => {
+    hideOrShowAllTasks(true);
+    for (let i = 0; i < allFindedTasks.length; i++){
+      const currentTask = document.getElementById(allFindedTasks[i].id);
+      currentTask.classList.remove("hidden");
+    }
+  });
 }
 
 //Функция для того, чтобы скрыть или отобразить все задачи
