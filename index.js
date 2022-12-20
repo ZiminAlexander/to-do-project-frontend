@@ -266,12 +266,24 @@ function disableEditTextAreas(){
 //Добавить Callback для поля поиска search-area
 function searchAreaInputCallback(){
     if (this.value == ""){
-      hideOrShowAllTasks(false);
+      updateTasksFromServer();
       return;
     }
-    setSearchFilter(this.value);
+    isStopTyping(this.value);
+    
 }
 
+//Функция для определения, остановилась ли печать в поле поиска
+function isStopTyping(currentValue){
+  setTimeout(() => {
+    const newValue = document.querySelector(".search-area").value;
+    if (currentValue === newValue){
+      setSearchFilter(newValue);
+    }
+  }, 1000);
+}
+
+//Функция для отображения задач, указанных в поиске
 function setSearchFilter(filter){
   fetch('http://nkbelousov.site:3000/todos?search='+ filter)
   .then((response) => response.json())
