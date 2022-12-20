@@ -138,10 +138,7 @@ function submitTask(){
 
 //Обновить задачи
 function updateTasksFromServer(){
-  //Удалим все отображённые задачи;
-  for (const taskElement of document.querySelectorAll(".task")) {
-    taskElement.remove();
-  }
+  
   //Загрузим задачи с сервера
   fetch('http://nkbelousov.site:3000/todos/')
   .then((response) => response.json())
@@ -153,6 +150,10 @@ function updateTasksFromServer(){
       newTaskElement.classList.add("no-tasks");
       taskTableElement.append(newTaskElement);
       return;
+    }
+      //Удалим все отображённые задачи;
+    for (const taskElement of document.querySelectorAll(".task")) {
+      taskElement.remove();
     }
     for (let i = 0; i < allTasks.length; i++){
       addTaskElement(allTasks[i]);
@@ -265,22 +266,20 @@ function disableEditTextAreas(){
 
 //Добавить Callback для поля поиска search-area
 function searchAreaInputCallback(){
-    if (this.value == ""){
-      updateTasksFromServer();
-      return;
-    }
-    isStopTyping(this.value);
-    
-}
-
-//Функция для определения, остановилась ли печать в поле поиска
-function isStopTyping(currentValue){
-  setTimeout(() => {
-    const newValue = document.querySelector(".search-area").value;
-    if (currentValue === newValue){
-      setSearchFilter(newValue);
-    }
+  const startValue = this.value;
+  if (this.dataset.timeoutID) {
+    clearTimeout(this.dataset.timeoutID);
+  }
+  this.dataset.timeoutID = setTimeout(() => {
+    if (startValue === this.value){
+      if (this.value === ""){
+        updateTasksFromServer();
+        return;
+      }
+      setSearchFilter(this.value);
+    } 
   }, 1000);
+
 }
 
 //Функция для отображения задач, указанных в поиске
