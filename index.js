@@ -221,14 +221,7 @@ function dateFormat(date){
 
 //Callback для CloseEditButton на нажатие
 function closeEditWindowCallback(){
-  const editedTask = document.querySelector(".edited");
-  const editedTaskText = editedTask.querySelector(".text");
-  const editedTaskFullText = editedTask.dataset.description;
-  const taskEditText = document.querySelector(".task-edit-text");
-  const taskEditFullText = document.querySelector(".task-edit-full-text");
-  
-  if ((editedTaskText.textContent === taskEditText.value) &&
-  (editedTaskFullText === taskEditFullText.value)){
+  if (!isChangedInEditWindow()){
     closeEditWindow();
     return;
   }
@@ -237,6 +230,21 @@ function closeEditWindowCallback(){
   if (!resultConfirm){return;}
   closeEditWindow();
 }
+
+//Функция для определения, есть ли изменения в EditWindow
+function isChangedInEditWindow(){
+  const editedTask = document.querySelector(".edited");
+  const editedTaskText = editedTask.querySelector(".text");
+  const editedTaskFullText = editedTask.dataset.description;
+  const taskEditText = document.querySelector(".task-edit-text");
+  const taskEditFullText = document.querySelector(".task-edit-full-text");
+  
+  if ((editedTaskText.textContent === taskEditText.value) &&
+  (editedTaskFullText === taskEditFullText.value)){return false;}
+
+  return true;
+}
+
 
 // Функция, для закрытия окна редактирования
 function closeEditWindow(){
@@ -249,6 +257,10 @@ function closeEditWindow(){
 
 //Callback для SaveEditButton на нажатие
 function saveEditButtonCallback(){
+    if (!isChangedInEditWindow()){
+      closeEditWindow();
+      return;
+    }
     const editedTask = document.querySelector(".edited");
     const editedTaskText = editedTask.querySelector(".text");
     const taskEditText = document.querySelector(".task-edit-text");
