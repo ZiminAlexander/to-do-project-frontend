@@ -98,7 +98,7 @@ function addOnclickTaskTextCallback(taskTextElement) {
     const editWindow = document.querySelector(".edit-window");
     const taskEditText = document.querySelector(".task-edit-text");
     const taskEditFullText = document.querySelector(".task-edit-full-text");
-    editWindow.style.visibility = "visible";
+    editWindow.classList.remove("hidden");
     taskEditText.value = taskTextElement.textContent;
     taskEditFullText.value = taskElement.dataset.description;
     taskElement.classList.add("edited");   
@@ -221,14 +221,10 @@ function dateFormat(date){
 
 //Callback для CloseEditButton на нажатие
 function closeEditWindowCallback(){
-  if (!isChangedInEditWindow()){
+  if (!isChangedInEditWindow() || confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")){
     closeEditWindow();
     return;
   }
-
-  const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?");
-  if (!resultConfirm){return;}
-  closeEditWindow();
 }
 
 //Функция для определения, есть ли изменения в EditWindow
@@ -238,11 +234,10 @@ function isChangedInEditWindow(){
   const editedTaskFullText = editedTask.dataset.description;
   const taskEditText = document.querySelector(".task-edit-text");
   const taskEditFullText = document.querySelector(".task-edit-full-text");
-  
-  if ((editedTaskText.textContent === taskEditText.value) &&
-  (editedTaskFullText === taskEditFullText.value)){return false;}
+  const isEditTask = editedTaskText.textContent === taskEditText.value;
+  const isEditDescription = editedTaskFullText === taskEditFullText.value;
 
-  return true;
+  return !((isEditTask) && (isEditDescription))
 }
 
 
@@ -251,7 +246,7 @@ function closeEditWindow(){
   const editedTask = document.querySelector(".edited");
   const editWindow = document.querySelector(".edit-window");
   editedTask.classList.remove("edited");
-  editWindow.style.visibility = "hidden";
+  editWindow.classList.add("hidden");
   disableEditTextAreas();
 }
 
