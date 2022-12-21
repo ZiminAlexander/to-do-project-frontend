@@ -117,7 +117,10 @@ function autoSizeNewTaskAreaCallback(){
 //Отправить задачу на сервер send 
 function submitTask(){
   const newTaskArea = document.querySelector(".new-task-area");
-  if (newTaskArea.value.trim() === ''){alert("Нельзя добавить пустую задачу"); return;}
+  if (newTaskArea.value.trim() === ''){
+    showNotification("Нельзя добавить пустую задачу"); 
+    return;
+  }
   const submitTaskObject = {};
   let submitString = "";
   submitTaskObject.title = newTaskArea.value;
@@ -302,5 +305,17 @@ function clearSearchCallback(){
     updateTasksFromServer();
 }
 
+//Функция для отображения нотификаций
+function showNotification(textOfNotification){
+  const newNotification = createNewElement("div", "notification");
+  const newTextOfNotification = createNewElement("div", "text-of-notification");
+  const newCloseNotificationButton = createNewElement("button", "close-notification");
+  newTextOfNotification.textContent = textOfNotification;
+  newCloseNotificationButton.addEventListener("click", () => newNotification.remove());
 
+  newNotification.append(newTextOfNotification);
+  newNotification.append(newCloseNotificationButton);
+  document.querySelector("body").append(newNotification);
 
+  setTimeout(() => newNotification.remove(), 3000);
+}
