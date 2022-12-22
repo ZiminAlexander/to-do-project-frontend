@@ -138,29 +138,33 @@ function submitTask(){
 
 //Обновить задачи
 function updateTasksFromServer(){
-  //Удалим все отображённые задачи;
-  for (const taskElement of document.querySelectorAll(".task")) {
-    taskElement.remove();
+  let urlForFetch = 'http://nkbelousov.site:3000/todos';
+  const searchFilter = document.querySelector(".search-area").value;
+  if (searchFilter === "") {
+    urlForFetch += '/';
+  } else {
+    urlForFetch += '?search=' + searchFilter;
   }
   //Загрузим задачи с сервера
-  fetch('http://nkbelousov.site:3000/todos/')
+  fetch(urlForFetch)
   .then((response) => response.json())
   .then((allTasks) => {
+    //Удалим все отображённые задачи;
+    for (const taskElement of document.querySelectorAll(".task")) {
+      taskElement.remove();
+    }
+    //Сообщение при отсутствии задач;
     if (allTasks.length === 0){
       const newTaskElement = createNewElement("div", "task");
       const taskTableElement = document.querySelector(".task-table");
-      newTaskElement.textContent = "На данный момент задач нет, добавьте новую задачу";
+      newTaskElement.textContent = "На данный момент задач нет, добавьте новую задачу, или введите другие критерии поиска";
       newTaskElement.classList.add("no-tasks");
       taskTableElement.append(newTaskElement);
       return;
     }
+    //Вывод задач
     for (let i = 0; i < allTasks.length; i++){
       addTaskElement(allTasks[i]);
-    }
-    //Если строка поиска не пуста, отобразить отфильтрованные задачи
-    const searchArea = document.querySelector(".search-area");
-    if (searchArea.value != ""){
-      setSearchFilter(searchArea.value);
     }
   });
 }
@@ -265,35 +269,15 @@ function disableEditTextAreas(){
 
 //Добавить Callback для поля поиска search-area
 function searchAreaInputCallback(){
-    if (this.value == ""){
-      hideOrShowAllTasks(false);
-      return;
-    }
-    setSearchFilter(this.value);
-}
-
-function setSearchFilter(filter){
-  fetch('http://nkbelousov.site:3000/todos?search='+ filter)
-  .then((response) => response.json())
-  .then((allFindedTasks) => {
-    hideOrShowAllTasks(true);
-    for (let i = 0; i < allFindedTasks.length; i++){
-      const currentTask = document.getElementById(allFindedTasks[i].id);
-      currentTask.classList.remove("hidden");
-    }
-  });
-}
-
-//Функция для того, чтобы скрыть или отобразить все задачи
-function hideOrShowAllTasks(isHide){
-  const allTasks = document.querySelectorAll(".task");
-  for (let currentTask of allTasks){
-    if (isHide) {
-      currentTask.classList.add("hidden");
-    } else {
-      currentTask.classList.remove("hidden");
-    }
+  const startValue = this.value;
+  if (this.dataset.timeoutID) {
+    clearTimeout(this.dataset.timeoutID);
   }
+  this.dataset.timeoutID = setTimeout(() => {
+    if (startValue === this.value){
+      updateTasksFromServer();
+    } 
+  }, 600);
 }
 
 //Добавить Callback для кнопки clear-search
