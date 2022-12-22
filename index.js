@@ -98,7 +98,7 @@ function addOnclickTaskTextCallback(taskTextElement) {
     const editWindow = document.querySelector(".edit-window");
     const taskEditText = document.querySelector(".task-edit-text");
     const taskEditFullText = document.querySelector(".task-edit-full-text");
-    editWindow.style.visibility = "visible";
+    editWindow.classList.remove("hidden");
     taskEditText.value = taskTextElement.textContent;
     taskEditFullText.value = taskElement.dataset.description;
     taskElement.classList.add("edited");   
@@ -223,21 +223,43 @@ function dateFormat(date){
 };
 
 
-//Callback для CloseEditWindow на нажатие
+//Callback для CloseEditButton на нажатие
 function closeEditWindowCallback(){
-    const resultConfirm = confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")
-    const editedTask = document.querySelector(".edited");
-    if (resultConfirm) {
-      const editWindow = document.querySelector(".edit-window");
-      editWindow.style.visibility = "hidden";
-    } else {return;}
-    editedTask.classList.remove("edited");
-    disableEditTextAreas();
+  if (!isChangedInEditWindow() || confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")){
+    closeEditWindow();
+    return;
+  }
+}
+
+//Функция для определения, есть ли изменения в EditWindow
+function isChangedInEditWindow(){
+  const editedTask = document.querySelector(".edited");
+  const editedTaskText = editedTask.querySelector(".text");
+  const editedTaskFullText = editedTask.dataset.description;
+  const taskEditText = document.querySelector(".task-edit-text");
+  const taskEditFullText = document.querySelector(".task-edit-full-text");
+  const isEditTask = editedTaskText.textContent === taskEditText.value;
+  const isEditDescription = editedTaskFullText === taskEditFullText.value;
+
+  return !((isEditTask) && (isEditDescription))
+}
+
+
+// Функция, для закрытия окна редактирования
+function closeEditWindow(){
+  const editedTask = document.querySelector(".edited");
+  const editWindow = document.querySelector(".edit-window");
+  editedTask.classList.remove("edited");
+  editWindow.classList.add("hidden");
+  disableEditTextAreas();
 }
 
 //Callback для SaveEditButton на нажатие
 function saveEditButtonCallback(){
-    const editWindow = document.querySelector(".edit-window");
+    if (!isChangedInEditWindow()){
+      closeEditWindow();
+      return;
+    }
     const editedTask = document.querySelector(".edited");
     const editedTaskText = editedTask.querySelector(".text");
     const taskEditText = document.querySelector(".task-edit-text");
@@ -245,12 +267,9 @@ function saveEditButtonCallback(){
     //Меняем параметры задачи
     editedTaskText.textContent = taskEditText.value;
     editedTask.dataset.description = taskEditFullText.value;
-    //Делаем поля нередактируемыми
-    disableEditTextAreas();
     //Отправляем на сервер и закрываем окно
     updateTask(editedTask);
-    editWindow.style.visibility = "hidden";
-    editedTask.classList.remove("edited");
+    closeEditWindow();
 }
 
 //Callback для edit кнопки
