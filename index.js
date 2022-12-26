@@ -315,7 +315,7 @@ function showNotification(textOfNotification){
 
   newNotification.append(newTextOfNotification);
   newNotification.append(newCloseNotificationButton);
-  document.querySelector("body").append(newNotification);
+  document.body.append(newNotification);
 
   setTimeout(() => newNotification.remove(), 3000);
 }
