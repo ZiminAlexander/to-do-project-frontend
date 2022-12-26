@@ -20,7 +20,8 @@ body{
 
 .delete-task-button::after,
 .submit-new-task::after, 
-.clear-search::after{
+.clear-search::after,
+.close-notification::after{
     visibility: visible;
     content: "\00D7";
     position: absolute;
@@ -39,13 +40,15 @@ body{
 }
 
 .delete-task-button:hover::after,
-.clear-search:hover::after{
+.clear-search:hover::after,
+.close-notification:hover::after{
     background-color: rgb(234, 185, 185); 
     cursor: pointer;
 }
 
 .delete-task-button,
-.submit-new-task{
+.submit-new-task,
+.close-notification{
     margin-right: 5px ;
     margin-left: 15px;
     visibility: hidden;
@@ -321,4 +324,23 @@ body{
 
 .text-area-div{
     flex-grow: 1;
+}
+
+/* Поле нотификаций*/
+
+.notification{
+    position: absolute;
+    bottom:40px;
+    right: 20px;
+    background-color: rgb(234, 185, 185);
+    width: 100px;
+    border: 2px solid red;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.text-of-notification{
+    margin-top: 15px;
+    text-align: center;
+    font-size: small;
 }
