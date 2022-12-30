@@ -1,0 +1,37 @@
+.is-completed{
+    visibility: hidden;
+}
+
+.is-completed::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    top: 8px; 
+    transform: scale(1.5);
+    width: 15px;
+    height: 15px;
+    background: url(../../../../../images/not-complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
+}
+
+.is-completed:checked::after{
+    visibility: visible;
+    content:'';
+    position: absolute;
+    top: 8px; 
+    transform: scale(1.5);
+    width: 15px;
+    height: 15px;
+    background: url(../../../../../images/complete.svg) no-repeat 0.1px 0px; 
+    background-size: 1.1em;
+}
+
+.is-completed:hover::after{
+    cursor: pointer;
+    filter: brightness(1.8);
+}
+
+.is-completed:hover:checked::after{
+    cursor: pointer;
+    filter: brightness(0.8);
+}

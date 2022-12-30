@@ -1,0 +1,13 @@
+.save-edit-button{
+    background-color: #d3ebce;
+    border-radius: 1px;
+    border: solid;
+    text-align: center;
+    margin-top: 5px;
+
+}
+
+.save-edit-button:hover{
+    filter: brightness(1.1);
+    cursor: pointer;
+}

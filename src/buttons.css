@@ -1,0 +1,40 @@
+.circle-button{
+    visibility: hidden;
+    margin-right: 5px ;
+}
+
+.circle-button::after{
+    visibility: visible;
+    position: absolute;
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border: solid;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bolder;
+    line-height: 1;
+}
+
+.x-button::after{ 
+    content: "\00D7";
+    background-color: rgb(230, 164, 164); 
+}
+
+.x-button:hover::after{ 
+    background-color: rgb(240, 174, 174); 
+}
+
+.plus-button::after{ 
+    content: "+";    
+    background-color: #d3ebce; 
+}
+
+.plus-button:hover::after{ 
+    background-color: #e1f3dd;
+}
+
+.hidden-after::after{
+    visibility: hidden;
+}

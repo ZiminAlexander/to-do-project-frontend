@@ -1,0 +1,8 @@
+.footer{
+    display: flex;
+    background-color: #f3dbc3;
+    justify-content: space-around;
+    font-size: 8px;
+    margin-top: auto;
+}
+

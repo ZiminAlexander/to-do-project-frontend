@@ -1,0 +1,5 @@
+.clear-search-button::after{
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+}
