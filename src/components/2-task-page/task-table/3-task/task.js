@@ -4,20 +4,21 @@ import { createIsCompleted } from "./1-is-completed/is-completed";
 import { createText } from "./2-text/text";
 import { createTaskDate } from "./3-task-date/task-date";
 import { createDeleteTaskButton } from "./4-delete-task-button/delete-task-button";
+import { talkWithServer } from "../../../../api/talkWithServer";
 import "./task.css";
 
 
 //Обновить задачи
 export function updateTasksFromServer(){
-    let urlForFetch = 'http://nkbelousov.site:3000/todos';
+    let fetchAnswer = {};
     const searchFilter = document.querySelector(".search-area").value;
     if (searchFilter === "") {
-      urlForFetch += '/';
+      fetchAnswer = talkWithServer("LOAD");
     } else {
-      urlForFetch += '?search=' + searchFilter;
+      fetchAnswer = talkWithServer("SEARCH");
     }
     //Загрузим задачи с сервера
-    fetch(urlForFetch)
+    fetchAnswer
     .then((response) => response.json())
     .then((allTasks) => {
       //Удалим все отображённые задачи;
@@ -72,20 +73,7 @@ function addTaskElement (taskElementFromServer){
 
 //Обновить задачу 
 export function updateTask(currentTask){
-  const id = currentTask.id;
-  const submitTaskObject = {};
-  let submitString = "";
-  const taskDescription = currentTask.dataset.description;
-  submitTaskObject.title = currentTask.querySelector(".text").textContent;
-  submitTaskObject.isCompleted = currentTask.querySelector(".is-completed").checked;
-  submitTaskObject.description = taskDescription;
-  submitString = JSON.stringify(submitTaskObject);
-  fetch(`http://nkbelousov.site:3000/todos/${id}`, 
-  { headers: {'Content-Type': 'application/json'}, 
-    method: 'PUT', 
-    body: submitString
-    }
-  )
+  talkWithServer("PUT", currentTask);
 }
 
 
