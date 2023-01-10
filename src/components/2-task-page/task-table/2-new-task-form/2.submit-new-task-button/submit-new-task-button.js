@@ -1,5 +1,7 @@
 import { createNewElement } from "../../../../../helpers/createNewElement";
 import { updateTasksFromServer } from "../../3-task/task";
+import { talkWithServer } from "../../../../../api/talkWithServer";
+import { createFetchObject } from "../../../../../helpers/createFetchObject";
 import "./submit-new-task-button.css";
 
 export function createSubmitNewTaskButton() {
@@ -16,21 +18,15 @@ export function submitTask(){
       showNotification("Нельзя добавить пустую задачу"); 
       return;
     }
-    const submitTaskObject = {};
-    let submitString = "";
-    submitTaskObject.title = newTaskArea.value;
-    submitTaskObject.isCompleted = false;
-    submitTaskObject.description = "";
-    submitString = JSON.stringify(submitTaskObject);
-    submitTaskObject.id = ""
-    newTaskArea.value = '';
-    newTaskArea.style.height = "35px";
-     
-    fetch('http://nkbelousov.site:3000/todos/', 
-    { headers: {'Content-Type': 'application/json'}, 
-      method: 'POST', 
-      body: submitString
+   
+    const currentFetchObject = createFetchObject(); 
+    talkWithServer("POST", currentFetchObject)
+    
+    .then(() => {
+      updateTasksFromServer();
+      newTaskArea.value = '';
+      newTaskArea.style.height = "35px";
       }
-    ).then(updateTasksFromServer);
+    );
   }
   

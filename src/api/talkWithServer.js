@@ -1,7 +1,5 @@
-export function talkWithServer(method, currentTask){
+export function talkWithServer(method, fetchObject){
     const urlOfSite = 'http://nkbelousov.site:3000/todos';
-    const fetchObject = {headers: {'Content-Type': 'application/json'}};
-
     let urlForFetch = urlOfSite;
 
     switch(method) {
@@ -15,28 +13,23 @@ export function talkWithServer(method, currentTask){
             break;
 
         case 'DELETE':
-            const deleteId = currentTask.id;
+            const deleteId = fetchObject.id;
             urlForFetch += `/${deleteId}`;
             fetchObject.method = method;            
             break;
 
         case 'PUT':
-            const id = currentTask.id;
-            const submitTaskObject = {};
-            let submitString = "";
-            const taskDescription = currentTask.dataset.description;
-            urlForFetch += `/${id}`;
-            submitTaskObject.title = currentTask.querySelector(".text").textContent;
-            submitTaskObject.isCompleted = currentTask.querySelector(".is-completed").checked;
-            submitTaskObject.description = taskDescription;
-            submitString = JSON.stringify(submitTaskObject);
+            urlForFetch += `/${fetchObject.id}`;
             fetchObject.method = method;
-            fetchObject.body = submitString;
+            break;
+
+        case 'POST':
+            urlForFetch += '/';
+            fetchObject.method = method;            
             break;
       
         default:
-            alert("Неверный метод запроса на сервер");
-            break;
+            throw new Error("Неверный метод запроса на сервер");
     }
 
     return fetch(urlForFetch, fetchObject);

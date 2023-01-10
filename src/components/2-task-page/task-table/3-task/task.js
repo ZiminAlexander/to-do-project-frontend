@@ -5,6 +5,7 @@ import { createText } from "./2-text/text";
 import { createTaskDate } from "./3-task-date/task-date";
 import { createDeleteTaskButton } from "./4-delete-task-button/delete-task-button";
 import { talkWithServer } from "../../../../api/talkWithServer";
+import { createFetchObject } from "../../../../helpers/createFetchObject";
 import "./task.css";
 
 
@@ -41,6 +42,11 @@ export function updateTasksFromServer(){
     });
   }
 
+export function updateTask(currentTask){
+  const currentFetchObject = createFetchObject (currentTask);
+  talkWithServer("PUT", currentFetchObject);
+}
+
   //Добавляет задачу 
 function addTaskElement (taskElementFromServer){
     const taskTableElement = document.querySelector(".task-table");
@@ -69,11 +75,6 @@ function addTaskElement (taskElementFromServer){
     newTaskElement.append(newDeleteElement);
     //Добавляем задачу на экран
     taskTableElement.append(newTaskElement);
-}
-
-//Обновить задачу 
-export function updateTask(currentTask){
-  talkWithServer("PUT", currentTask);
 }
 
 
