@@ -1,9 +1,0 @@
-.submit-new-task-button{
-    margin-left: 6px;
-}
-
-.submit-new-task-button::after{
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-}

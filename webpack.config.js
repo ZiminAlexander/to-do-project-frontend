@@ -1,4 +1,5 @@
 // webpack.config.js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -32,6 +33,7 @@ module.exports = {
             template: path.resolve(__dirname, './src/index.html'), // шаблон
             filename: 'index.html', // название выходного файла
         }),
+        new CleanWebpackPlugin(),
     ],
     module: {
         rules: [
@@ -43,7 +45,17 @@ module.exports = {
                 test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
                 type: 'asset/inline',
             },
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+            },
         ],
     },
+    resolve: {
+        alias: {
+          Api: path.resolve(__dirname, 'src/api/'),
+          Helpers: path.resolve(__dirname, 'src/helpers/'),
+        },
+      },
 
 };
