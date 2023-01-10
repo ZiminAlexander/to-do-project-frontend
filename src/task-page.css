@@ -1,0 +1,6 @@
+.task-page{
+    display: flex;
+    background-color: var(--table-color);
+    margin: 20px;
+    border-radius: 5px;
+}

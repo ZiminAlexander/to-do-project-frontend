@@ -1,0 +1,10 @@
+import { createNewElement } from "Helpers/createNewElement";
+import { createEditTable } from "./edit-table/edit-table";
+import "./edit-window.css";
+
+export function addEditWindow(){
+    const editWindow = createNewElement("div",["edit-window", "hidden"]);
+    editWindow.append(createEditTable());
+
+    document.body.append(editWindow);
+}
