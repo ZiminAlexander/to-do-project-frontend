@@ -1,6 +1,6 @@
-import { addTaskTable } from "./components/1-task-table/task-table";
-import { addEditWindow } from "./components/2-edit-window/edit-window";
-import { updateTasksFromServer } from "./components/1-task-table/3-task/task";
+import { addTaskTable } from "./components/task-table/task-table";
+import { addEditWindow } from "./components/edit-window/edit-window";
+import { updateTasksFromServer } from "./components/task-table/task/task";
 import "./index.html";
 import "./buttons.css";
 import "./index.css";

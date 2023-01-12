@@ -53,8 +53,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-          Api: path.resolve(__dirname, 'src/api/'),
-          Helpers: path.resolve(__dirname, 'src/helpers/'),
+          Project : path.resolve(__dirname, 'src/'),
         },
       },
 
