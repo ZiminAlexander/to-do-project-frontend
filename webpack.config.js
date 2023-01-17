@@ -26,6 +26,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         clean: true,
         filename: '[name].js',
+        assetModuleFilename: "images/[name][ext]"
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -42,8 +43,8 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-                type: 'asset/inline',
+                test: /\.(png|jpe?g|gif|svg|)$/,
+                type: 'asset/resource',
             },
             {
                 test: /\.html$/,

@@ -47,6 +47,19 @@ export function updateTask(currentTask){
   talkWithServer("PUT", currentFetchObject);
 }
 
+//Callback для поиска задачи
+export function searchAreaInputCallback(){
+  const startValue = this.value;
+  if (this.dataset.timeoutID) {
+    clearTimeout(this.dataset.timeoutID);
+  }
+  this.dataset.timeoutID = setTimeout(() => {
+    if (startValue === this.value){
+      updateTasksFromServer();
+    } 
+  }, 600);
+}
+
   //Добавляет задачу 
 function addTaskElement (taskElementFromServer){
     const taskTableElement = document.querySelector(".task-table");
