@@ -1,0 +1,5 @@
+.edit-table-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}

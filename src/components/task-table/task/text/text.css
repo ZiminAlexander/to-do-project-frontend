@@ -1,0 +1,8 @@
+.text{
+    width: 100%;
+}
+
+.text:hover{
+    color: var(--hover-text-color);
+    cursor: pointer;
+}
