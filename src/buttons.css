@@ -12,8 +12,8 @@
     visibility: visible;
     position: absolute;
     cursor: pointer;
-    height: 12px;
-    width: 12px;
+    height: 1em;
+    width: 1em;
     border-radius: 50%;
     border: var(--border-style);
     text-align: center;
