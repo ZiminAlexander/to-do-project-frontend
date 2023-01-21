@@ -14,3 +14,18 @@
 .hidden{
     visibility: hidden;
 }
+
+.task-table.loading::before{
+    content: "";
+    height: 2px;
+    display: flex;
+    width: 0%;
+    background: linear-gradient(to right,rgb(253, 98, 51),rgb(34, 234, 34));
+    animation: loading-frame 1s ease-in-out forwards;
+}
+
+@keyframes loading-frame {
+    to {
+    width:100%;
+    }
+  }
