@@ -39,6 +39,14 @@ export function updateTasksFromServer(){
       for (let i = 0; i < allTasks.length; i++){
         addTaskElement(allTasks[i]);
       }
+    })
+    .catch((error) => {
+      const newTaskElement = createNewElement("div", ["form", "task"]);
+        const taskTableElement = document.querySelector(".task-table");
+        newTaskElement.textContent = "Нет соединения с сервером, пожалуйста, обратитесь к администратору.";
+        newTaskElement.classList.add("no-tasks");
+        taskTableElement.append(newTaskElement);
+        return;
     });
   }
 
