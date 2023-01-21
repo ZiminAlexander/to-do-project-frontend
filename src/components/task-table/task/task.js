@@ -7,10 +7,13 @@ import { createDeleteTaskButton } from "./delete-task-button/delete-task-button"
 import { talkWithServer } from "Project/api/talkWithServer";
 import { createFetchObject } from "Project/helpers/createFetchObject";
 import "./task.css";
+import { createLoadingWindow } from "Project/helpers/createLoadingWindow";
 
 
 //Обновить задачи
 export function updateTasksFromServer(){
+    
+    //createLoadingWindow("on");
     let fetchAnswer = {};
     const searchFilter = document.querySelector(".search-area").value;
     if (searchFilter === "") {
@@ -40,7 +43,7 @@ export function updateTasksFromServer(){
       addNoTaskElement("Нет соединения с сервером, пожалуйста, обратитесь к администратору.");
       return;
     });
-  }
+}
 
 export function updateTask(currentTask){
   const currentFetchObject = createFetchObject (currentTask);
