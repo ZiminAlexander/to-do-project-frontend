@@ -28,17 +28,17 @@ export function updateTasksFromServer(){
       }
       //Сообщение при отсутствии задач;
       if (allTasks.length === 0){
-        const newTaskElement = createNewElement("div", ["form", "task"]);
-        const taskTableElement = document.querySelector(".task-table");
-        newTaskElement.textContent = "На данный момент задач нет, добавьте новую задачу, или введите другие критерии поиска";
-        newTaskElement.classList.add("no-tasks");
-        taskTableElement.append(newTaskElement);
+        addNoTaskElement("На данный момент задач нет, добавьте новую задачу, или введите другие критерии поиска.");
         return;
       }
       //Вывод задач
       for (let i = 0; i < allTasks.length; i++){
         addTaskElement(allTasks[i]);
       }
+    })
+    .catch((error) => {
+      addNoTaskElement("Нет соединения с сервером, пожалуйста, обратитесь к администратору.");
+      return;
     });
   }
 
@@ -90,5 +90,10 @@ function addTaskElement (taskElementFromServer){
     taskTableElement.append(newTaskElement);
 }
 
-
+function addNoTaskElement(message){
+  const newNoTaskElement = createNewElement("div", ["form", "task", "no-tasks"]);
+  const taskTableElement = document.querySelector(".task-table");
+  newNoTaskElement.textContent = message;
+  taskTableElement.append(newNoTaskElement);
+}
 
