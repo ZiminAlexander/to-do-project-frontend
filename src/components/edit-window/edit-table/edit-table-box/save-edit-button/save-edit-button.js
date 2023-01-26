@@ -3,6 +3,7 @@ import { createNewElement } from "Project/helpers/createNewElement";
 import { isChangedInEditWindow } from "../close-edit-button/close-edit-button";
 import { closeEditWindow } from "../close-edit-button/close-edit-button";
 import { updateTask } from "../../../../task-table/task/task";
+import { addSpinner } from "Project/helpers/addSpinner";
 
 export function createSaveEditButton(){
     const saveEditButton = createNewElement("button", "save-edit-button");
@@ -22,10 +23,15 @@ function saveEditButtonCallback(){
     const editedTaskText = editedTask.querySelector(".text");
     const taskEditText = document.querySelector(".task-edit-text");
     const taskEditFullText = document.querySelector(".task-edit-full-text");
+    const saveEditButton = document.querySelector(".save-edit-button");
     //Меняем параметры задачи
     editedTaskText.textContent = taskEditText.value;
     editedTask.dataset.description = taskEditFullText.value;
     //Отправляем на сервер и закрываем окно
-    updateTask(editedTask);
-    closeEditWindow();
+    addSpinner("on", saveEditButton);
+    updateTask(editedTask)
+    .then(() => {
+      addSpinner("off", saveEditButton);
+      closeEditWindow();
+    })
 }

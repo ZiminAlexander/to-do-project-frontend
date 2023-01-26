@@ -3,10 +3,13 @@ import "./loading-window.css";
 
 export function createLoadingWindow(switcher){
     try{  
+        const taskTable = document.querySelector(".task-table");
+
         if (switcher === "on"){
             const loadingWindow = createNewElement("div","loading-window");
-            const taskTable = document.querySelector(".task-table");
-            loadingWindow.innerHTML = "Задачи обновляются, подождите, пожалуйста";
+            const loadingMessage = createNewElement("div","loading-message");
+            loadingMessage.innerHTML = "Задачи обновляются, подождите, пожалуйста";
+            loadingWindow.append(loadingMessage);
             taskTable.append(loadingWindow);
             taskTable.classList.add("loading");
 
