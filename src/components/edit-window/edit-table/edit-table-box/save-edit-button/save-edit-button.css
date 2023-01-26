@@ -4,7 +4,7 @@
     border: solid;
     text-align: center;
     margin-top: 5px;
-
+    display: relative;
 }
 
 .save-edit-button:hover{

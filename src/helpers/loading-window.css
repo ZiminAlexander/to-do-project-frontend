@@ -1,9 +1,31 @@
 .loading-window{
     position: absolute;
+    display: table; 
     z-index: 1;
-    top: 45%;
+    top: 5px;
     background-color: var(--table-color);
+    opacity: 0.9;
     width: 100%;
     height: 100%;
+}
+
+.loading-message{
+    display: table-cell;
+    vertical-align: middle;
     text-align: center;
+}
+
+.task-table.loading::before{
+    content: "";
+    height: 2px;
+    display: flex;
+    width: 0%;
+    background: linear-gradient(to right,rgb(253, 98, 51),rgb(34, 234, 34));
+    animation: loading-frame 1s ease-in-out forwards;
+}
+
+@keyframes loading-frame {
+    to {
+    width:100%;
+    }
 }
