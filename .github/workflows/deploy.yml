@@ -15,7 +15,7 @@ jobs:
       - name: install modules
         run: npm install
       - name: build project
-        run: cross-env NODE_ENV=production webpack
+        run: npm build
       - name: Deploy
         uses: burnett01/rsync-deployments@5.1
         with:
