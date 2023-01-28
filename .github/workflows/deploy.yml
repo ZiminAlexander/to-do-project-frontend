@@ -19,7 +19,7 @@ jobs:
       - name: Deploy
         uses: burnett01/rsync-deployments@5.1
         with:
-          switches: -avzr
+          switches: -avzr --delete
           path: ./dist
           remote_path: /var/www/html/todo-frontend/
           remote_host: ${{ secrets.HOST }}
