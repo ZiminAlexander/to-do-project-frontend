@@ -1,5 +1,8 @@
 name: CI/CD
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - master
 jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
