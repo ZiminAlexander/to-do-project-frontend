@@ -7,10 +7,12 @@ import { createDeleteTaskButton } from "./delete-task-button/delete-task-button"
 import { talkWithServer } from "Project/api/talkWithServer";
 import { createFetchObject } from "Project/helpers/createFetchObject";
 import "./task.css";
+import { createLoadingWindow } from "Project/helpers/createLoadingWindow";
 
 
 //Обновить задачи
 export function updateTasksFromServer(){
+    createLoadingWindow("on");
     let fetchAnswer = {};
     const searchFilter = document.querySelector(".search-area").value;
     if (searchFilter === "") {
@@ -23,28 +25,35 @@ export function updateTasksFromServer(){
     .then((response) => response.json())
     .then((allTasks) => {
       //Удалим все отображённые задачи;
+      if (document.querySelector(".edited")) {
+        createLoadingWindow("off");
+        return;
+      }
       for (const taskElement of document.querySelectorAll(".task")) {
         taskElement.remove();
       }
       //Сообщение при отсутствии задач;
       if (allTasks.length === 0){
         addNoTaskElement("На данный момент задач нет, добавьте новую задачу, или введите другие критерии поиска.");
+        createLoadingWindow("off");
         return;
       }
       //Вывод задач
       for (let i = 0; i < allTasks.length; i++){
         addTaskElement(allTasks[i]);
       }
+      createLoadingWindow("off");
     })
     .catch((error) => {
       addNoTaskElement("Нет соединения с сервером, пожалуйста, обратитесь к администратору.");
+      createLoadingWindow("off");
       return;
     });
-  }
+}
 
 export function updateTask(currentTask){
   const currentFetchObject = createFetchObject (currentTask);
-  talkWithServer("PUT", currentFetchObject);
+  return talkWithServer("PUT", currentFetchObject);
 }
 
 //Callback для поиска задачи
@@ -96,4 +105,5 @@ function addNoTaskElement(message){
   newNoTaskElement.textContent = message;
   taskTableElement.append(newNoTaskElement);
 }
+
 
