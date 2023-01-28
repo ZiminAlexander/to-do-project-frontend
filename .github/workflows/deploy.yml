@@ -2,7 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - feature/todo-28/deploy
+      - master
 jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
