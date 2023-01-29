@@ -1,3 +1,4 @@
+import "./task.css";
 import { createNewElement } from "Project/helpers/createNewElement";
 import { dateFormat } from "Project/helpers/dateFormat";
 import { createIsCompleted } from "./is-completed/is-completed";
@@ -6,8 +7,9 @@ import { createTaskDate } from "./task-date/task-date";
 import { createDeleteTaskButton } from "./delete-task-button/delete-task-button";
 import { talkWithServer } from "Project/api/talkWithServer";
 import { createFetchObject } from "Project/helpers/createFetchObject";
-import "./task.css";
 import { createLoadingWindow } from "Project/helpers/createLoadingWindow";
+import {showNotification} from "Project/components/notifications/notifications";
+
 
 
 //Обновить задачи
@@ -59,6 +61,10 @@ export function updateTask(currentTask){
 //Callback для поиска задачи
 export function searchAreaInputCallback(){
   const startValue = this.value;
+  if (startValue.length > 200){
+    showNotification("Строка поиска не должна включать более 200 символов");
+    return;
+  }
   if (this.dataset.timeoutID) {
     clearTimeout(this.dataset.timeoutID);
   }
