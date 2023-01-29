@@ -1,18 +1,9 @@
-export function dateFormat(date){
-    const dateVocabulary = {
-      Jun: "января",
-      Feb: "февраля",
-      Mar: "марта",
-      Apr: "апреля",
-      May: "мая",
-      Jun: "июня",
-      Jul: "июля",
-      Aug: "августа",
-      Sep: "сентября",
-      Oct: "октября",
-      Nov: "ноября",
-      Dec: "декабря",
-    };
-    const splitDate = date.split(' ');
-    return splitDate[2] + " " + dateVocabulary[splitDate[1]] + " " + splitDate[3];
+import {monthVocabulary} from "./monthVocabulary";
+
+export function dateFormat(dateString){
+    const dateObject = new Date(dateString);
+    const numberOfMonth = dateObject.getMonth();
+    const dayOfMonth = dateObject.getDay();
+    const year = dateObject.getFullYear();
+    return dayOfMonth + " " + monthVocabulary[numberOfMonth] + " " + year + " г.";
   };
