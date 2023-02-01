@@ -1,5 +1,6 @@
 .text{
     width: 100%;
+    font-size: var(--font-size);
 }
 
 .text:hover{

@@ -8,7 +8,7 @@ import "./submit-new-task-button.css";
 
 export function createSubmitNewTaskButton() {
     const submitNewTaskButton = createNewElement("button", 
-        ["submit-new-task-button", "plus-button", "circle-button"]);
+        ["submit-new-task-button", "add-button", "circle-button"]);
     submitNewTaskButton.addEventListener("click", submitTask);
     return submitNewTaskButton;
 }

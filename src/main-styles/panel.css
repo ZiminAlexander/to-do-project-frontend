@@ -1,0 +1,5 @@
+.panel{
+    background: var(--table-color);
+    border: var(--border-style);
+    border-radius: var(--border-radius);
+}

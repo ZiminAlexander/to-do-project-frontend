@@ -2,10 +2,6 @@
     padding-left: 10px;
 }
 
-.task{
-    padding-bottom: 10px;
-}
-
 .form.complete-task{
     background-color: var(--complete-color);
     text-decoration: line-through solid rgb(236, 92, 92);

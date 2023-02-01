@@ -4,16 +4,17 @@ html{
 
     /* Размеры */
     --border-radius: 5px;
-    --border-style: 2px solid;
+    --border-style: 1px solid rgba(0, 0, 0, 0.25);
+    --font-size: 16px;
+    --small-button-size: 28px;
 }
 
 body{
     /* Цвета */
-    --body-color: rgb(224, 206, 194);
+    --body-color: #dddddd;
     --form-color: rgba(255, 237, 186);
-    --table-color: #f3dbc3;
-    --complete-color: #d3ebce;
-    --border-color: black;
+    --table-color: #ffffff;
+    --complete-color: #c7f3bf;
     --text-color: black;
     --hover-text-color: #777777;
     --input-area-color: rgba(243, 240, 233, 0.349);

@@ -2,3 +2,10 @@
     right: 2px;
     top: 2px;
 }
+
+.delete-task-button{
+    right: 2px;
+    top: 2px;
+    height: var(--small-button-size);
+    margin-bottom: 10px;
+}

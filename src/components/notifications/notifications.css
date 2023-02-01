@@ -1,11 +1,8 @@
 .notification{
     position: absolute;
-    bottom:40px;
+    bottom: 40px;
     right: 20px;
-    background-color: rgb(234, 185, 185);
     width: 100px;
-    border: 2px solid red;
-    border-radius: 5px;
     padding: 5px;
 }
 

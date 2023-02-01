@@ -78,7 +78,7 @@ export function searchAreaInputCallback(){
   //Добавляет задачу 
 function addTaskElement (taskElementFromServer){
     const taskTableElement = document.querySelector(".task-table");
-    const newTaskElement = createNewElement("div", ["task", "form"]);
+    const newTaskElement = createNewElement("div", ["task", "form", "panel"]);
     const newCheckBoxElement = createIsCompleted();
     const newTextElement = createText();
     const newDeleteElement = createDeleteTaskButton();
@@ -106,7 +106,7 @@ function addTaskElement (taskElementFromServer){
 }
 
 function addNoTaskElement(message){
-  const newNoTaskElement = createNewElement("div", ["form", "task", "no-tasks"]);
+  const newNoTaskElement = createNewElement("div", ["form", "task", "no-tasks", "panel"]);
   const taskTableElement = document.querySelector(".task-table");
   newNoTaskElement.textContent = message;
   taskTableElement.append(newNoTaskElement);

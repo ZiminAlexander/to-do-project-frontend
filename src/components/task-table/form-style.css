@@ -3,8 +3,4 @@
     position: relative;
     margin: 10px;
     padding: 5px;
-    border: var(--border-style);
-    border-radius: var(--border-radius);
-    border-color: var(--border-color);
-    background-color: var(--form-color);
 }

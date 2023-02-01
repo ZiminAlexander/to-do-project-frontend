@@ -3,14 +3,5 @@
 }
 
 .new-task-area{
-    border-radius: var(--border-radius);
-    border: solid 1px;
     resize: none;
-    background-color: var(--input-area-color);
-    font-family: normal;
-    width: 100%;
-}
-
-.new-task-area:focus{
-    outline: 0.8px solid;
 }
