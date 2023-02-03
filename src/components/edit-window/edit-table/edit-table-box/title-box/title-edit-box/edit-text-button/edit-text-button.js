@@ -1,7 +1,7 @@
 import { createNewElement } from "Project/helpers/createNewElement";
 
 export function createEditTextButton(){
-    const editTextButton = createNewElement("button", "edit-button");
+    const editTextButton = createNewElement("button", ["edit-button", "small-button"]);
     editTextButton.addEventListener("click", editButtonCallback);
 
     return editTextButton;

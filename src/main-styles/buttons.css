@@ -1,62 +1,81 @@
-.circle-button{
-    visibility: hidden;
-    margin-right: 5px ;
-    margin-left: 20px ;
-}
-
-.circle-button::after{
-    visibility: visible;
-    position: absolute;
-    cursor: pointer;
-    height: 1em;
-    width: 1em;
-    border-radius: 50%;
-    border: var(--border-style);
-    text-align: center;
-    font-size: 12px;
-    font-weight: bolder;
-    line-height: 1;
-}
-
-.x-button::after{ 
-    content: "\00D7";
-    background-color: rgb(230, 164, 164);
-}
-
-.x-button:hover::after{ 
-    filter: brightness(1.2);
-}
-
-.add-button::after{ 
-    content: "";    
+.big-button{
     background-color: #2F80ED;
-    width: var(--small-button-size);
-    height: var(--small-button-size);
-    background: url(Project/images/add.svg) no-repeat;
-    background-size: var(--small-button-size);
-    background-position: center;
     border: var(--border-style);
+    border-radius: 1px;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    padding: 16px;
 }
 
-.add-button:hover::after{ 
-    filter: brightness(1.2);
+.big-button:hover{
+    background-color: #56CCF2;
+    cursor: pointer;
 }
 
-.remove-button::after{ 
-    content: "";    
+.big-button:active{
+    background-color: #2D9CDB;
+}
+
+.small-button{
+    width: 28px;
+    height: 28px;
+    border: var(--border-style);
+    border-radius: var(--border-radius);
+    background-size: 28px;
+    background-position: center;
+    background-color: #ffffff;
+    color: #ffffff;
+}
+
+.small-button:hover{
+    cursor: pointer;
+}
+
+.small-button:active{
+    cursor: pointer;
+}
+
+.red-button{ 
     background-color: #FF5C00;
-    width: var(--small-button-size);
-    height: var(--small-button-size);
-    background: url(Project/images/remove.svg) no-repeat;
-    background-size: var(--small-button-size);
-    background-position: center;
-    border: var(--border-style);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
 }
 
-.remove-button:hover::after{ 
+.red-button:hover{ 
     filter: brightness(1.2);
 }
 
-.hidden-after::after{
-    visibility: hidden;
+.red-button:active{ 
+    filter: brightness(0.8);
+}
+
+.add-button{ 
+    background-image: url(Project/images/add.svg); 
+    background-repeat: no-repeat;
+    background-size: 28px;
+    border: 50%;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+
+.add-button:hover{ 
+    filter: brightness(1.2);
+}
+
+.remove-button{   
+    background-image: url(Project/images/remove.svg); 
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.remove-button:hover{
+    filter: brightness(1.2);
+}
+
+.remove-button:active{
+    filter: brightness(0.8);
 }

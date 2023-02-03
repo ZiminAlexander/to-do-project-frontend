@@ -3,11 +3,8 @@
 }
 
 .form.complete-task{
-    background-color: var(--complete-color);
+    background-color: #c7f3bf;
     text-decoration: line-through solid rgb(236, 92, 92);
 }
 
-.hidden{
-    visibility: hidden;
-}
 

@@ -1,5 +1,6 @@
 .input-text-div{
-    width: 100%;
+    flex-grow: 1;
+    margin-right: 65px;
 }
 
 .new-task-area{

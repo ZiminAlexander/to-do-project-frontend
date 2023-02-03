@@ -1,12 +1,9 @@
-.circle-button.clear-search-button::after{
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    width: var(--small-button-size);
-    height: var(--small-button-size);
-    font-size: var(--small-button-size);
-}
-
-.circle-button.clear-search-button{
-    margin-left: 15px;
+.clear-search-button{
+    position: absolute;
+    font-size: 30px;
+    right: 9px;
+    top: 3px;
+    transform: translateY(50%);
+    padding: 0;
+    line-height: 28px;
 }

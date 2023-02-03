@@ -1,20 +1,15 @@
-.edit-button{
-    width: var(--small-button-size);
-    height: var(--small-button-size);
+.small-button.edit-button{
     background: var(--table-color) url(Project/images/edit-button.svg) no-repeat;
     background-size: 24px;
-    background-position: center;
-    border: var(--border-style);
-    border-radius: var(--border-radius);
     margin-left: 30px;
+    background-color: #ffffff;
 }
 
 .edit-button:hover{
     background-color: #dddddd;
-    cursor: pointer;
 }
 
 .edit-button:active{
     background-color: #aaaaaa;
-    cursor: pointer;
+
 }

@@ -1,29 +1,25 @@
 html{
     width: 100%;
     height: 100%;
+}
+
+body{
 
     /* Размеры */
     --border-radius: 5px;
     --border-style: 1px solid rgba(0, 0, 0, 0.25);
-    --font-size: 16px;
-    --small-button-size: 28px;
-}
-
-body{
-    /* Цвета */
-    --body-color: #dddddd;
-    --form-color: rgba(255, 237, 186);
-    --table-color: #ffffff;
-    --complete-color: #c7f3bf;
-    --text-color: black;
-    --hover-text-color: #777777;
-    --input-area-color: rgba(243, 240, 233, 0.349);
 
     display: flex;
     flex-direction: column;
     margin: 0;
     height: 100%;
-    background-color: var(--body-color);
-    color: var(--text-color);
+    background-color: #dddddd;
     min-width: 250px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 16px;
+}
+
+.hidden{
+    visibility: hidden;
 }
