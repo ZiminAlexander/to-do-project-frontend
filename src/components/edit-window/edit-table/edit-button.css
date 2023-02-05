@@ -1,8 +1,9 @@
 .small-button.edit-button{
-    background: var(--table-color) url(Project/images/edit-button.svg) no-repeat;
-    background-size: 24px;
+    background-image: url(Project/images/edit-button.svg);
+    background-repeat: no-repeat;
+    background-size: 22px;
     margin-left: 30px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
 }
 
 .edit-button:hover{
