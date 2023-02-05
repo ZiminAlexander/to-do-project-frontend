@@ -3,7 +3,7 @@ import { createNewElement } from "Project/helpers/createNewElement";
 
 //Функция для отображения нотификаций
 export function showNotification(textOfNotification){
-    const newNotification = createNewElement("div", "notification");
+    const newNotification = createNewElement("div", ["notification", "panel"]);
     const newTextOfNotification = createNewElement("div", "text-of-notification");
     const newCloseNotificationButton = createNewElement("button", ["circle-button", "x-button", "close-notification-button"]);
     newTextOfNotification.textContent = textOfNotification;

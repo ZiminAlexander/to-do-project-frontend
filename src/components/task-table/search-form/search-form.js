@@ -5,7 +5,7 @@ import { searchAreaInputCallback } from "../task/task.js";
 
 export function createSearchForm(){
 
-    const searchForm = createNewElement("div", ["form", "search-form"]);
+    const searchForm = createNewElement("div", ["form", "search-form", "panel"]);
     const searchArea = createSearchArea(searchAreaInputCallback);
     const clearSearchButton = createClearSearchButton();
     

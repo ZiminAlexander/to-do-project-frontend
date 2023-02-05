@@ -1,0 +1,81 @@
+.big-button{
+    background-color: #2F80ED;
+    border: var(--border-style);
+    border-radius: 1px;
+    text-align: center;
+    font-weight: 400;
+    color: white;
+    padding: 16px;
+}
+
+.big-button:hover{
+    background-color: #56CCF2;
+    cursor: pointer;
+}
+
+.big-button:active{
+    background-color: #2D9CDB;
+}
+
+.small-button{
+    width: 28px;
+    height: 28px;
+    border: var(--border-style);
+    border-radius: var(--border-radius);
+    background-size: 28px;
+    background-position: center;
+    background-color: #ffffff;
+    color: #ffffff;
+}
+
+.small-button:hover{
+    cursor: pointer;
+}
+
+.small-button:active{
+    cursor: pointer;
+}
+
+.red-button{ 
+    background-color: #FF5C00;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+
+.red-button:hover{ 
+    filter: brightness(1.2);
+}
+
+.red-button:active{ 
+    filter: brightness(0.8);
+}
+
+.add-button{ 
+    background-image: url(Project/images/add.svg); 
+    background-repeat: no-repeat;
+    background-size: 28px;
+    border: 50%;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+
+.add-button:hover{ 
+    filter: brightness(1.2);
+}
+
+.remove-button{   
+    background-image: url(Project/images/remove.svg); 
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.remove-button:hover{
+    filter: brightness(1.2);
+}
+
+.remove-button:active{
+    filter: brightness(0.8);
+}

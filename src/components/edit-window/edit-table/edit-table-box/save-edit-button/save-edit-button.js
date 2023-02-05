@@ -6,7 +6,7 @@ import { updateTask } from "../../../../task-table/task/task";
 import { addSpinner } from "Project/helpers/addSpinner";
 
 export function createSaveEditButton(){
-    const saveEditButton = createNewElement("button", "save-edit-button");
+    const saveEditButton = createNewElement("button", ["save-edit-button", "big-button"]);
     saveEditButton.innerHTML = "Сохранить и выйти";
     saveEditButton.addEventListener("click", saveEditButtonCallback);
 

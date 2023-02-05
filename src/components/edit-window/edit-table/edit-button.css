@@ -1,0 +1,16 @@
+.small-button.edit-button{
+    background-image: url(Project/images/edit-button.svg);
+    background-repeat: no-repeat;
+    background-size: 22px;
+    margin-left: 30px;
+    /* background-color: #ffffff; */
+}
+
+.edit-button:hover{
+    background-color: #dddddd;
+}
+
+.edit-button:active{
+    background-color: #aaaaaa;
+
+}

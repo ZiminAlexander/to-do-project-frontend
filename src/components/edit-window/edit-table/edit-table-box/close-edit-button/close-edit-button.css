@@ -1,4 +1,9 @@
-.close-edit-button::after{
+.small-button.close-edit-button{
+    position: absolute;
     top: -5px;
     right: -5px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    line-height: 16px;
 }

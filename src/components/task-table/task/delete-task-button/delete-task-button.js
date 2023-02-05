@@ -5,7 +5,7 @@ import { addSpinner } from "Project/helpers/addSpinner";
 import "./delete-task-button.css";
 
 export function createDeleteTaskButton() {
-    const newDeleteElement = createNewElement("button", ["circle-button", "x-button", "delete-task-button"]);
+    const newDeleteElement = createNewElement("button", ["small-button", "remove-button", "delete-task-button"]);
     newDeleteElement.addEventListener("click", function(){
         addSpinner("on",this)
         this.disabled = "true";

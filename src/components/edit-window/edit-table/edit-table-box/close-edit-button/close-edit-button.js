@@ -2,7 +2,8 @@ import "./close-edit-button.css";
 import { createNewElement } from "Project/helpers/createNewElement";
 
 export function createCloseEditButton(){
-    const closeEditButton = createNewElement("button", ["circle-button", "x-button", "close-edit-button", "hidden-after"]);
+    const closeEditButton = createNewElement("button", ["small-button", "red-button", "close-edit-button"]);
+    closeEditButton.textContent = "×";
     closeEditButton.addEventListener("click", closeEditWindowCallback);
     
     return closeEditButton;
@@ -34,8 +35,6 @@ export function isChangedInEditWindow(){
 export function closeEditWindow(){
     const editedTask = document.querySelector(".edited");
     const editWindow = document.querySelector(".edit-window");
-    const closeEditButton = editWindow.querySelector(".close-edit-button");
-    closeEditButton.classList.add("hidden-after");
     editedTask.classList.remove("edited");
     editWindow.classList.add("hidden");
 

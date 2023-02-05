@@ -5,7 +5,7 @@ import "./new-task-form.css";
 
 export function createNewTaskForm(){
 
-    const newTaskForm = createNewElement("div", ["form", "new-task-form"]);
+    const newTaskForm = createNewElement("div", ["form", "new-task-form", "panel"]);
     const newTaskArea = createNewTaskArea();
     const submitNewTaskButton = createSubmitNewTaskButton();
     

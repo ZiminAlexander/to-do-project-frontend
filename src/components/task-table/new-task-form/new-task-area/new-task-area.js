@@ -4,7 +4,7 @@ import "./new-task-area.css";
 
 export function createNewTaskArea (){
     const inputTextDiv = createNewElement("div", "input-text-div");
-    const newTaskArea = createNewElement("textarea", "new-task-area");
+    const newTaskArea = createNewElement("textarea", ["new-task-area", "text-input"]);
     newTaskArea.placeholder = "Новая задача";
     newTaskArea.addEventListener("keydown", enterButtonForNewTaskAreaCallback);
     newTaskArea.addEventListener("input", autoSizeNewTaskAreaCallback);

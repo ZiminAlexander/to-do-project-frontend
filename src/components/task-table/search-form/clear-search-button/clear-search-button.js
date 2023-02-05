@@ -4,7 +4,8 @@ import "./clear-search-button.css";
 
 export function createClearSearchButton() {
     const clearSearchButton = createNewElement("button", 
-        ["clear-search-button", "x-button", "circle-button"]);
+        ["clear-search-button", "small-button", "red-button"]);
+    clearSearchButton.textContent = "×";
     clearSearchButton.addEventListener("click", clearSearchCallback);
     
     return clearSearchButton;
