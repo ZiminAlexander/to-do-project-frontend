@@ -1,5 +1,6 @@
 import "./close-edit-button.css";
 import { createNewElement } from "Project/helpers/createNewElement";
+import { showNotification } from "Project/components/notifications/notifications";
 
 export function createCloseEditButton(){
     const closeEditButton = createNewElement("button", ["small-button", "red-button", "close-edit-button"]);
@@ -11,10 +12,11 @@ export function createCloseEditButton(){
 
 //Callback для CloseEditButton на нажатие
 function closeEditWindowCallback(){
-    if (!isChangedInEditWindow() || confirm("Внесённые изменения будут удалены. Вы точно хотите выйти?")){
+    if (!isChangedInEditWindow()){
       closeEditWindow();
       return;
     }
+    showNotification("Внесённые изменения будут удалены. Вы точно хотите выйти?","confirm", closeEditWindow);
 }
 
 //Функция для определения, есть ли изменения в EditWindow
