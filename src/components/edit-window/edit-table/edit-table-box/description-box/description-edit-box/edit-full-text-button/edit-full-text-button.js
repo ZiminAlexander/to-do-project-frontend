@@ -9,7 +9,10 @@ export function createEditFullTextButton(){
 
 //Callback для edit кнопки
 function editButtonCallback() {
-    const editText = this.parentElement.querySelector("textarea");
-    editText.disabled = false;
-  }
+    const editText = this.parentElement.querySelector(".task-edit-full-text");
+    const fullText = this.parentElement.querySelector(".task-full-text");
+    fullText.innerHTML = editText.value;
+    editText.classList.toggle("no-display");
+    fullText.classList.toggle("no-display");
+}
   

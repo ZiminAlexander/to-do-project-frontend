@@ -4,6 +4,11 @@
 
 .task-edit-full-text{
     resize: none;
-    height: 10em;
+    height: 200px;
+    margin-bottom: 10px;
 }
 
+.task-full-text{
+    height: 200px;
+    margin-bottom: 10px;
+}
