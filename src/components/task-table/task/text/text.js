@@ -13,12 +13,12 @@ function textOnclickCallback() {
         const taskElement = this.parentElement;
         const taskTextElement = taskElement.querySelector(".text");
         const editWindow = document.querySelector(".edit-window");
-        const closeEditButton = editWindow.querySelector(".close-edit-button");
         const taskEditText = document.querySelector(".task-edit-text");
+        const taskFullText = document.querySelector(".task-full-text");
         const taskEditFullText = document.querySelector(".task-edit-full-text");
         editWindow.classList.remove("hidden");
-        closeEditButton.classList.remove("hidden-after");
         taskEditText.value = taskTextElement.textContent;
+        taskFullText.innerHTML = taskElement.dataset.description;
         taskEditFullText.value = taskElement.dataset.description;
         taskElement.classList.add("edited");   
 }

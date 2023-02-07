@@ -9,5 +9,5 @@ export function createEditTextButton(){
 
 function editButtonCallback() {
     const editText = this.parentElement.querySelector("textarea");
-    editText.disabled = false;
-  }
+    editText.disabled = !editText.disabled;     
+}

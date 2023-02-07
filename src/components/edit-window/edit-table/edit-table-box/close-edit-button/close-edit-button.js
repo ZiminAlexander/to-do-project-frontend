@@ -46,6 +46,8 @@ export function closeEditWindow(){
 function disableEditTextAreas(){
     const taskEditText = document.querySelector(".task-edit-text");
     const taskEditFullText = document.querySelector(".task-edit-full-text");
+    const taskFullText = document.querySelector(".task-full-text");
     taskEditText.disabled = true;
-    taskEditFullText.disabled = true; 
+    taskEditFullText.classList.add("no-display");
+    taskFullText.classList.remove("no-display"); 
 }
