@@ -3,7 +3,8 @@
     background-repeat: no-repeat;
     background-size: 22px;
     margin-left: 30px;
-    /* background-color: #ffffff; */
+    background-color: #ffffff;
+    flex-shrink: 0;
 }
 
 .edit-button:hover{

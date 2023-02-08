@@ -1,8 +1,8 @@
 .edit-table{
     position: absolute;
-    top:50%;
-    left:50%;
-    transform: translateX(-50%) translateY(-50%);
+    top:10%;
+    left:10%;
     padding: 10px;
     width:80%;
+    margin-top: 10px;
 }
