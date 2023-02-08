@@ -17,19 +17,19 @@
 
 .small-button.close-notification-button{
     position: absolute;
-    width: 14px;
-    height: 14px;
+    width: 1em;
+    height: 1em;
     padding: 0;
-    line-height: 12px;
-    font-size: 14px;
-    right: 2px;
-    top: 2px;
+    line-height: 1em;
+    font-size: 1em;
+    right: 0.2em;
+    top: 0.2em;
 }
 
 .big-button.answer-button{
     padding: 2px;
     width: 50px;
-    font-size: small;
+    font-size: 0.6em;
 }
 
 .answer-box{
