@@ -8,6 +8,8 @@
     width: 100%;
     font-family: inherit;
     font-size: inherit;
+    word-break: break-all;
+    overflow: auto;
 }
 
 .text-input::placeholder{
