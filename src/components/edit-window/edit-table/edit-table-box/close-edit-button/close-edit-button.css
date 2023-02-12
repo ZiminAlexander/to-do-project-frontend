@@ -1,9 +1,10 @@
 .small-button.close-edit-button{
+    font-size: smaller;
     position: absolute;
     top: -5px;
     right: -5px;
-    width: 16px;
-    height: 16px;
+    width: 1em;
+    height: 1em;
     padding: 0;
-    line-height: 16px;
+    line-height: 1em;
 }

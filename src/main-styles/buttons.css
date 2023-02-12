@@ -18,11 +18,12 @@
 }
 
 .small-button{
-    width: 28px;
-    height: 28px;
+    font-size: inherit;
+    width: 1em;
+    height: 1em;
     border: var(--border-style);
     border-radius: var(--border-radius);
-    background-size: 28px;
+    background-size: 1em;
     background-position: center;
     background-color: #ffffff;
     color: #ffffff;
@@ -39,8 +40,6 @@
 .red-button{ 
     background-color: #FF5C00;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
 }
 
 .red-button:hover{ 
@@ -54,11 +53,8 @@
 .add-button{ 
     background-image: url(Project/images/add.svg); 
     background-repeat: no-repeat;
-    background-size: 28px;
     border: 50%;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
 }
 
 .add-button:hover{ 

@@ -1,5 +1,6 @@
 .is-completed{
     visibility: hidden;
+    font-size: inherit;
 }
 
 .is-completed::after{
@@ -8,10 +9,10 @@
     position: absolute;
     top: 8px; 
     transform: scale(1.5);
-    width: 15px;
-    height: 15px;
+    width: 1em;
+    height: 1em;
     background: url(Project/images/not-complete.svg) no-repeat 0.1px 0px; 
-    background-size: 1.1em;
+    background-size: 1em;
 }
 
 .is-completed:checked::after{
@@ -20,10 +21,10 @@
     position: absolute;
     top: 8px; 
     transform: scale(1.5);
-    width: 15px;
-    height: 15px;
+    width: 1em;
+    height: 1em;
     background: url(Project/images/complete.svg) no-repeat 0.1px 0px; 
-    background-size: 1.1em;
+    background-size: 1em;
 }
 
 .is-completed:hover::after{
