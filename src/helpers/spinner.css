@@ -1,36 +1,36 @@
 .loading-spinner::before{
-  content: "";
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  visibility: visible;
-  background-image: url("Project/images/spinner.svg");
-  background-repeat: no-repeat;
-  background-size: 20px;
-  animation: 1s spin infinite linear;
-  z-index: 1;
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    visibility: visible;
+    background-image: url("Project/images/spinner.svg");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    animation: 1s spin infinite linear;
+    z-index: 1;
 }
 
 .submit-new-task-button.loading-spinner::before{
-  top: 18px;
-  right: 3px;
+    top: 18px;
+    right: 3px;
 }
 
 .delete-task-button.loading-spinner::before{
-  top: 0px;
-  right: 0px;
+    top: 0px;
+    right: 0px;
 }
 
 .save-edit-button.loading-spinner::before{
-bottom: 5px;
-right: 20px;
+  bottom: 5px;
+  right: 20px;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
 }
