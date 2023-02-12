@@ -1,4 +1,5 @@
 import { createNewElement } from "Project/helpers/createNewElement";
+import { addEditWindow } from "../../../edit-window/edit-window";
 import "./text.css";
 
 export function createText() {
@@ -12,11 +13,10 @@ export function createText() {
 function textOnclickCallback() {
         const taskElement = this.parentElement;
         const taskTextElement = taskElement.querySelector(".text");
-        const editWindow = document.querySelector(".edit-window");
+        addEditWindow();
         const taskEditText = document.querySelector(".task-edit-text");
         const taskFullText = document.querySelector(".task-full-text");
         const taskEditFullText = document.querySelector(".task-edit-full-text");
-        editWindow.classList.remove("hidden");
         taskEditText.value = taskTextElement.textContent;
         taskFullText.innerHTML = taskElement.dataset.description;
         taskEditFullText.value = taskElement.dataset.description;
