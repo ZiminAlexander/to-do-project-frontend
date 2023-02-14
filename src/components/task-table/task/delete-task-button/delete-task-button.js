@@ -5,18 +5,19 @@ import { addSpinner } from "Project/helpers/addSpinner";
 import "./delete-task-button.css";
 
 export function createDeleteTaskButton() {
-    const newDeleteElement = createNewElement("button", ["small-button", "remove-button", "delete-task-button"]);
-    newDeleteElement.addEventListener("click", function(){
-        addSpinner("on",this)
-        this.disabled = "true";
-        talkWithServer("DELETE", this.parentElement)
-        .then(() => {
-            addSpinner("off",this);
-            updateTasksFromServer();
-        });
-    })
+  const newDeleteElement = createNewElement("button", [
+    "small-button",
+    "remove-button",
+    "delete-task-button",
+  ]);
+  newDeleteElement.addEventListener("click", function () {
+    addSpinner("on", this);
+    this.disabled = "true";
+    talkWithServer("DELETE", this.parentElement).then(() => {
+      addSpinner("off", this);
+      updateTasksFromServer();
+    });
+  });
 
-    return newDeleteElement;
+  return newDeleteElement;
 }
-
-
