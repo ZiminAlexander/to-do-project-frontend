@@ -1,9 +1,13 @@
 .footer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     font-size: smaller;
     margin-top: auto;
-    padding: 5px;
     background-color: white;
+}
+
+.mail{
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
