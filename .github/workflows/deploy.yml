@@ -18,7 +18,7 @@ jobs:
       - name: install modules
         run: npm install
       - name: check files
-        run: npm run fixErrors
+        run: npm run eslint
       - name: build project
         run: npm run build
       - name: Deploy
