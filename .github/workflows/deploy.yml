@@ -2,8 +2,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - feature/todo-38/eslint
-      
+      - master
 jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
