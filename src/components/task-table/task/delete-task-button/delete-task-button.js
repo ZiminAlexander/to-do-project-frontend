@@ -9,8 +9,11 @@ export function createDeleteTaskButton() {
     const newDeleteElement = createNewElement("button", ["small-button", "remove-button", "delete-task-button"]);
     newDeleteElement.addEventListener("click", function(){
         const currentDeleteButton = this;
-        showNotification("Задача будет удалена без возможности восстановления. Вы точно хотите удалить задачу?",
-        "confirm", () => {deleteTask(currentDeleteButton);});
+        showNotification(
+            "Задача будет удалена без возможности восстановления. Вы точно хотите удалить задачу?",
+            "confirm",
+            () => {deleteTask(currentDeleteButton);}
+        );
     })
     return newDeleteElement;
 }
