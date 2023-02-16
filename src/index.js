@@ -9,9 +9,8 @@ import "./main-styles/task-page.css";
 import "./main-styles/panel.css";
 import "./main-styles/text-input.css";
 
-//Собираем страницу 
+//Собираем страницу
 
 addTaskTable();
 
 updateTasksFromServer();
-
