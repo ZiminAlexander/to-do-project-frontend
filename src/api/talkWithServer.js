@@ -1,5 +1,5 @@
 export function talkWithServer(method, fetchObject) {
-  const urlOfSite = "http://nkbelousov.site:3000/todos";
+  const urlOfSite = process.env.START_URL;
   let urlForFetch = urlOfSite;
 
   switch (method) {
