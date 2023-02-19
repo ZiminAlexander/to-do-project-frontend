@@ -5,9 +5,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
-
 const devMode = mode === 'development';
-
 const target = devMode ? "web" : "browserslist";
 const devtool = devMode ? 'source-map' : undefined;
 
@@ -36,7 +34,12 @@ module.exports = {
             filename: 'index.html', // название выходного файла
         }),
         new CleanWebpackPlugin(),
-        new Dotenv(),
+        new Dotenv({
+            ignoreStub: true,
+        }),
+        new webpack.DefinePlugin({
+            'process.env.START_URL': JSON.stringify(process.env.START_URL),
+          }),
     ],
     module: {
         rules: [
