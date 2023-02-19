@@ -1,4 +1,5 @@
 // webpack.config.js
+const Dotenv = require('dotenv-webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -35,6 +36,7 @@ module.exports = {
             filename: 'index.html', // название выходного файла
         }),
         new CleanWebpackPlugin(),
+        new Dotenv(),
     ],
     module: {
         rules: [

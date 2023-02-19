@@ -18,8 +18,11 @@ jobs:
         run: npm run eslint
       - name: build project
         run: npm run build
+<<<<<<< HEAD
         env: 
           START_URL: "http://nkbelousov.site:3000/todos"
+=======
+>>>>>>> url вынесен локально в env
       - name: Deploy
         uses: burnett01/rsync-deployments@5.1
         with:
