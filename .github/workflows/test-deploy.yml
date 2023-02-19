@@ -19,7 +19,7 @@ jobs:
       - name: build project
         run: npm run build
         env: 
-          START_URL: ${{ secrets.START_URL }}
+          START_URL: "http://nkbelousov.site:3000/todos"
       - name: Deploy
         uses: burnett01/rsync-deployments@5.1
         with:
