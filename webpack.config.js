@@ -3,7 +3,6 @@ const Dotenv = require("dotenv-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const webpack = require('webpack');
 
 const mode = process.env.NODE_ENV || "development";
 const devMode = mode === "development";
@@ -33,18 +32,27 @@ module.exports = {
       title: "webpack Boilerplate",
       template: path.resolve(__dirname, "./src/index.ejs"), // шаблон
       filename: "index.html", // название выходного файла
-      date: new Date().toString(),
+      date:
+        "Обновлено " +
+        new Date().toLocaleString("ru", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          timeZone: "Europe/Moscow",
+        }) +
+        " в " +
+        new Date().toLocaleString("ru", {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          timeZone: "Europe/Moscow",
+        }),
     }),
     new CleanWebpackPlugin(),
     new Dotenv({
       ignoreStub: true,
       systemvars: true,
     }),
-    // new webpack.DefinePlugin({
-    //     'process.env':{
-    //         'START_URL': JSON.stringify(process.env.START_URL)
-    //     }
-    //   }),
   ],
   module: {
     rules: [
