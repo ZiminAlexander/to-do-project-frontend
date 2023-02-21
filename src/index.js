@@ -1,6 +1,5 @@
 import { addTaskTable } from "./components/task-table/task-table";
 import { updateTasksFromServer } from "./components/task-table/task/task";
-import "./index.html";
 import "./main-styles/buttons.css";
 import "./main-styles/index.css";
 import "./main-styles/footer.css";
