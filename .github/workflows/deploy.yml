@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    workflow_dispatch:
+      - '**'
 jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
@@ -21,6 +23,8 @@ jobs:
         run: npm run eslint
       - name: build project
         run: npm run build
+        env: 
+          START_URL: ${{ secrets.START_URL }}
       - name: Deploy
         uses: burnett01/rsync-deployments@5.1
         with:
