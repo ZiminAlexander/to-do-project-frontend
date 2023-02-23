@@ -5,30 +5,30 @@ import { createIsCompleted } from "./is-completed/is-completed";
 import { createText } from "./text/text";
 import { createTaskDate } from "./task-date/task-date";
 import { createDeleteTaskButton } from "./delete-task-button/delete-task-button";
-import { talkWithServer } from "Project/api/talkWithServer";
-import { createFetchObject } from "Project/helpers/createFetchObject";
+import { createApiObject } from "Project/helpers/createApiObject";
 import { createLoadingWindow } from "Project/helpers/createLoadingWindow";
 import { showNotification } from "Project/components/notifications/notifications";
+import { api } from "Project/api/api";
 
 //Обновить задачи
 export function updateTasksFromServer() {
   createLoadingWindow("on");
-  let fetchAnswer = {};
+  let apiAnswer = {};
   const searchFilter = document.querySelector(".search-area").value;
   if (searchFilter === "") {
-    fetchAnswer = talkWithServer("LOAD");
+    apiAnswer = api.load();
   } else {
-    fetchAnswer = talkWithServer("SEARCH");
+    apiAnswer = api.search(searchFilter);
   }
   //Загрузим задачи с сервера
-  fetchAnswer
-    .then((response) => response.json())
-    .then((allTasks) => {
-      //Удалим все отображённые задачи;
+  apiAnswer
+    .then((apiAnswer) => {
+      const allTasks = apiAnswer.data;
       if (document.querySelector(".edited")) {
         createLoadingWindow("off");
         return;
       }
+      //Удалим все отображённые задачи;
       for (const taskElement of document.querySelectorAll(".task")) {
         taskElement.remove();
       }
@@ -56,8 +56,8 @@ export function updateTasksFromServer() {
 }
 
 export function updateTask(currentTask) {
-  const currentFetchObject = createFetchObject(currentTask);
-  return talkWithServer("PUT", currentFetchObject);
+  const currentApiObject = createApiObject(currentTask);
+  return api.update(currentApiObject);
 }
 
 //Callback для поиска задачи

@@ -1,10 +1,11 @@
 import { createNewElement } from "Project/helpers/createNewElement";
 import { updateTasksFromServer } from "../../task/task";
-import { talkWithServer } from "Project/api/talkWithServer";
 import { showNotification } from "../../../notifications/notifications";
-import { createFetchObject } from "Project/helpers/createFetchObject";
+import { createApiObject } from "Project/helpers/createApiObject";
 import { addSpinner } from "../../../../helpers/addSpinner";
+import { api } from "Project/api/api";
 import "./submit-new-task-button.css";
+
 
 export function createSubmitNewTaskButton() {
   const submitNewTaskButton = createNewElement("button", [
@@ -27,11 +28,11 @@ export function submitTask() {
   }
   const submitNewTaskButton = document.querySelector(".submit-new-task-button");
   addSpinner("on", submitNewTaskButton);
-  const currentFetchObject = createFetchObject();
+  const currentApiObject = createApiObject();
   newTaskArea.value = "";
   newTaskArea.style.height = "35px";
 
-  talkWithServer("POST", currentFetchObject).then(() => {
+  api.submit(currentApiObject).then(() => {
     addSpinner("off", submitNewTaskButton);
     updateTasksFromServer();
   });
