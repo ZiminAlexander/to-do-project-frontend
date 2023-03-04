@@ -7,9 +7,12 @@ import "./form-style.css";
 export function addTaskTable() {
   const taskPage = document.querySelector(".task-page");
   const taskTable = createNewElement("div", "task-table");
+  const taskField = createNewElement("div", "task-field");
   const searchForm = createSearchForm();
   const newTaskForm = createNewTaskForm();
   taskTable.append(searchForm);
   taskTable.append(newTaskForm);
   taskPage.append(taskTable);
+  taskPage.append(taskField);
+  
 }
