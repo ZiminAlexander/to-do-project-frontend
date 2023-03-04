@@ -5,6 +5,7 @@
     word-break: break-all;
     margin-bottom: 0.2em;
     margin-left: 0.7em;
+    white-space: pre;
 }
 
 .text:hover{
