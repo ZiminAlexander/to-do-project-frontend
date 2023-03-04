@@ -1,28 +1,32 @@
 import axios from "axios";
 
-const api = axios.create({
+const axiosObject = axios.create({
     baseURL: process.env.START_URL,
     headers: { "Content-Type": "application/json" },
+    withCredentials: true,
 });
 
-api.load = function(){
-    return this.get();
+const api = {};
+api.tasks = {};
+
+api.tasks.load = () => {
+    return axiosObject.get("todos");
   };
 
-api.search = function(searchFilter){
-  return this.get("?search=" + searchFilter);
+api.tasks.search = (searchFilter) => {
+  return axiosObject.get("todos", { params: { search: searchFilter } });
 };
 
-api.remove = function(deleteID){
-    return this.delete(deleteID);
+api.tasks.remove = (id) => {
+    return axiosObject.delete("todos" + id);
 };
 
-api.update = function(fetchObject){
-    return this.put(fetchObject.id, fetchObject.body);
+api.tasks.update = (taskData) => {
+    return axiosObject.put("todos/" + taskData.id, taskData.data);
 };
 
-api.submit = function(fetchObject){;
-    return this.post("",fetchObject.body);
+api.tasks.submit = function(taskData){;
+    return axiosObject.post("todos", taskData.data);
 };
 
 export {api};

@@ -27,7 +27,7 @@ export function createDeleteTaskButton() {
 function deleteTask(deleteButton) {
   addSpinner("on", deleteButton);
   deleteButton.disabled = "true";
-  api.remove(deleteButton.parentElement.id).then(() => {
+  api.tasks.remove(deleteButton.parentElement.id).then(() => {
     addSpinner("off", deleteButton);
     updateTasksFromServer();
   });

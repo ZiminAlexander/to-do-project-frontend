@@ -1,7 +1,7 @@
 import { createNewElement } from "Project/helpers/createNewElement";
 import { updateTasksFromServer } from "../../task/task";
 import { showNotification } from "../../../notifications/notifications";
-import { createApiObject } from "Project/helpers/createApiObject";
+import { collectTaskData } from "Project/helpers/collectTaskData";
 import { addSpinner } from "../../../../helpers/addSpinner";
 import { api } from "Project/api/api";
 import "./submit-new-task-button.css";
@@ -28,11 +28,11 @@ export function submitTask() {
   }
   const submitNewTaskButton = document.querySelector(".submit-new-task-button");
   addSpinner("on", submitNewTaskButton);
-  const currentApiObject = createApiObject();
+  const currentTaskData = collectTaskData();
   newTaskArea.value = "";
   newTaskArea.style.height = "35px";
 
-  api.submit(currentApiObject).then(() => {
+  api.tasks.submit(currentTaskData).then(() => {
     addSpinner("off", submitNewTaskButton);
     updateTasksFromServer();
   });

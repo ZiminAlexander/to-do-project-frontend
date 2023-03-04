@@ -5,7 +5,7 @@ import { createIsCompleted } from "./is-completed/is-completed";
 import { createText } from "./text/text";
 import { createTaskDate } from "./task-date/task-date";
 import { createDeleteTaskButton } from "./delete-task-button/delete-task-button";
-import { createApiObject } from "Project/helpers/createApiObject";
+import { collectTaskData } from "Project/helpers/collectTaskData";
 import { createLoadingWindow } from "Project/helpers/createLoadingWindow";
 import { showNotification } from "Project/components/notifications/notifications";
 import { api } from "Project/api/api";
@@ -16,9 +16,9 @@ export function updateTasksFromServer() {
   let apiAnswer = {};
   const searchFilter = document.querySelector(".search-area").value;
   if (searchFilter === "") {
-    apiAnswer = api.load();
+    apiAnswer = api.tasks.load();
   } else {
-    apiAnswer = api.search(searchFilter);
+    apiAnswer = api.tasks.search(searchFilter);
   }
   //Загрузим задачи с сервера
   apiAnswer
@@ -56,8 +56,8 @@ export function updateTasksFromServer() {
 }
 
 export function updateTask(currentTask) {
-  const currentApiObject = createApiObject(currentTask);
-  return api.update(currentApiObject);
+  const currentTaskData = collectTaskData(currentTask);
+  return api.tasks.update(currentTaskData);
 }
 
 //Callback для поиска задачи
