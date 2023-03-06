@@ -1,6 +1,13 @@
 .task-page{
     display: flex;
+    flex-direction: column;
+    position: relative;
     background-color: white;
     margin: 20px;
     border-radius: 5px;
+    overflow: hidden;
+}
+
+.task-field{
+    overflow: auto;
 }
