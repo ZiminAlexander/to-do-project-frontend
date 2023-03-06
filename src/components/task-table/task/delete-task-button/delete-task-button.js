@@ -1,9 +1,9 @@
 import { createNewElement } from "Project/helpers/createNewElement";
 import { updateTasksFromServer } from "../task";
-import { talkWithServer } from "Project/api/talkWithServer";
 import { addSpinner } from "Project/helpers/addSpinner";
 import { showNotification } from "Project/components/notifications/notifications";
 import "./delete-task-button.css";
+import { api } from "Project/api/api";
 
 export function createDeleteTaskButton() {
   const newDeleteElement = createNewElement("button", [
@@ -27,7 +27,7 @@ export function createDeleteTaskButton() {
 function deleteTask(deleteButton) {
   addSpinner("on", deleteButton);
   deleteButton.disabled = "true";
-  talkWithServer("DELETE", deleteButton.parentElement).then(() => {
+  api.tasks.remove(deleteButton.parentElement.id).then(() => {
     addSpinner("off", deleteButton);
     updateTasksFromServer();
   });

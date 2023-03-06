@@ -1,9 +1,9 @@
-import "./save-edit-button.css";
 import { createNewElement } from "Project/helpers/createNewElement";
 import { isChangedInEditWindow } from "../close-edit-button/close-edit-button";
 import { closeEditWindow } from "../close-edit-button/close-edit-button";
 import { updateTask } from "../../../../task-table/task/task";
 import { addSpinner } from "Project/helpers/addSpinner";
+import "./save-edit-button.css";
 
 export function createSaveEditButton() {
   const saveEditButton = createNewElement("button", [
