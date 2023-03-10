@@ -65,5 +65,11 @@ export function showNotification(textOfNotification, type, someCallback) {
     newNotification.append(newCloseNotificationButton);
     notificationWindow.append(newNotification);
     document.body.append(notificationWindow);
+  } else if (type === "login") {
+    const notificationWindow = createNewElement("div", "login-window");
+    newNotification.classList.add("login");
+    newNotification.append(newTextOfNotification);
+    notificationWindow.append(newNotification); 
+    document.body.append(notificationWindow);
   }
 }
