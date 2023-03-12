@@ -22,7 +22,7 @@ function closeEditWindowCallback() {
   }
   showNotification(
     "Внесённые изменения будут удалены. Вы точно хотите выйти?",
-    "confirm",
+    "center-confirm",
     closeEditWindow
   );
 }

@@ -2,7 +2,7 @@ import "./notifications.css";
 import { createNewElement } from "Project/helpers/createNewElement";
 
 //Функция для отображения нотификаций
-export function showNotification(textOfNotification, type, someCallback) {
+export function showNotification(textOfNotification, position, someCallback) {
   const newNotification = createNewElement("div", [
     "notification",
     "panel",
@@ -17,7 +17,7 @@ export function showNotification(textOfNotification, type, someCallback) {
   newTextOfNotification.textContent = textOfNotification;
   newCloseNotificationButton.textContent = "×";
 
-  if (!type) {
+  if (position === "right-bottom") {
     newCloseNotificationButton.addEventListener(
       "click",
       function notificationCallback() {
@@ -29,7 +29,7 @@ export function showNotification(textOfNotification, type, someCallback) {
     document.body.append(newNotification);
 
     setTimeout(() => newNotification.remove(), 3000);
-  } else if (type === "confirm") {
+  } else if (position === "center-confirm") {
     const notificationWindow = createNewElement("div", "notification-window");
     const answerDiv = createNewElement("div", "answer-box");
     const yesButton = createNewElement("button", [
@@ -64,6 +64,12 @@ export function showNotification(textOfNotification, type, someCallback) {
     newNotification.append(answerDiv);
     newNotification.append(newCloseNotificationButton);
     notificationWindow.append(newNotification);
+    document.body.append(notificationWindow);
+  } else if (position === "center") {
+    const notificationWindow = createNewElement("div", ["notification-window", "no-opacity-window"]);
+    newNotification.classList.add("center");
+    newNotification.append(newTextOfNotification);
+    notificationWindow.append(newNotification); 
     document.body.append(notificationWindow);
   }
 }

@@ -64,7 +64,7 @@ export function updateTask(currentTask) {
 export function searchAreaInputCallback() {
   const startValue = this.value;
   if (startValue.length > 200) {
-    showNotification("Строка поиска не должна включать более 200 символов");
+    showNotification("Строка поиска не должна включать более 200 символов", "right-bottom");
     return;
   }
   if (this.dataset.timeoutID) {

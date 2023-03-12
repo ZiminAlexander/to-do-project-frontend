@@ -8,6 +8,7 @@ const axiosObject = axios.create({
 
 const api = {};
 api.tasks = {};
+api.users = {};
 
 api.tasks.load = () => {
     return axiosObject.get("todos");
@@ -25,8 +26,21 @@ api.tasks.update = (taskData) => {
     return axiosObject.put("todos/" + taskData.id, taskData.data);
 };
 
-api.tasks.submit = function(taskData){;
+api.tasks.submit = (taskData) => {
     return axiosObject.post("todos", taskData.data);
 };
+
+api.users.login = (login, currentPassword) => {
+    const loginObject = {
+        name: login, 
+        password: currentPassword
+    }
+    return axiosObject.post("users/login/", loginObject);
+};
+
+api.users.isLogged = () => {
+    return axiosObject.get("users/self/");
+};
+
 
 export {api};

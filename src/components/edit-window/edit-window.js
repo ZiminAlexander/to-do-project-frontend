@@ -4,11 +4,13 @@ import { closeEditWindow } from "./edit-table/edit-table-box/close-edit-button/c
 import "./edit-window.css";
 
 export function addEditWindow() {
+
   const existedEditWindow = document.querySelector(".edit-window");
   if (existedEditWindow) {
     closeEditWindow();
   }
-  const editWindow = createNewElement("div", "edit-window");
+
+  const editWindow = createNewElement("div", ["edit-window", "window"]);
   editWindow.append(createEditTable());
 
   document.body.append(editWindow);
