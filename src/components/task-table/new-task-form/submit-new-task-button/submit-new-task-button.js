@@ -22,7 +22,7 @@ export function submitTask() {
   const newTaskArea = document.querySelector(".new-task-area");
 
   if (newTaskArea.value.trim() === "") {
-    showNotification("Нельзя добавить пустую задачу");
+    showNotification("Нельзя добавить пустую задачу", "right-bottom");
     newTaskArea.value = "";
     return;
   }

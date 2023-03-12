@@ -35,8 +35,7 @@ api.users.login = (login, currentPassword) => {
         name: login, 
         password: currentPassword
     }
-    const loginString = JSON.stringify(loginObject);
-    return axiosObject.post("users/login/", loginString);
+    return axiosObject.post("users/login/", loginObject);
 };
 
 api.users.isLogged = () => {

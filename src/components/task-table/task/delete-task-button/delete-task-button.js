@@ -15,7 +15,7 @@ export function createDeleteTaskButton() {
     const currentDeleteButton = this;
     showNotification(
       "Задача будет удалена без возможности восстановления. Вы точно хотите удалить задачу?",
-      "confirm",
+      "center-confirm",
       () => {
         deleteTask(currentDeleteButton);
       }

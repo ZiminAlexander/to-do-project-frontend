@@ -7,7 +7,7 @@ export function addLoginWindow(){
     then(() => {return;}).
     catch((error) => {
         try{
-            if (error.response.data.error === "Такого пользователя нет") {
+            if ((error.request.status === 404) || (error.request.status === 400)) {
                 const loginWindow = createNewElement("div",["login-window", "window"]);
                 const loginTable =  createNewElement("div",["panel", "login-table"]);
                 const loginBox =  createNewElement("div",["panel", "login-box"]);
@@ -32,10 +32,10 @@ export function addLoginWindow(){
                 loginWindow.append(loginTable);
                 document.body.append(loginWindow);
             } else {
-                showNotification("Проблемы с сервером, обратитесь к администратору","login");
+                showNotification("Проблемы с сервером, обратитесь к администратору","center");
             }
         } catch {
-            showNotification("Проблемы с сервером, обратитесь к администратору","login");
+            showNotification("Проблемы с сервером, обратитесь к администратору","center");
         }
     });
 }
@@ -47,11 +47,11 @@ function loginButtonCallback(){
     api.users.login(login, password)
     .then(() => {
         const loginWindow = document.querySelector(".login-window");
-        showNotification("Успешный вход");
+        showNotification("Успешный вход","right-bottom");
         loginWindow.remove();
     })
     .catch(() => {
-        showNotification("Неправильный логин или пароль");
+        showNotification("Неправильный логин или пароль","right-bottom");
     });
 }
 

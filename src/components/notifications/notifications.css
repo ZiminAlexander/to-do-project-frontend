@@ -52,9 +52,13 @@
     right: 50%;
 }
 
-.notification.login{
+.notification.center{
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     height: min-content;
+}
+
+.no-opacity-window{
+    background-color: rgba(240, 255, 255);
 }
