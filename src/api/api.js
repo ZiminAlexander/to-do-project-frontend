@@ -19,7 +19,7 @@ api.tasks.search = (searchFilter) => {
 };
 
 api.tasks.remove = (id) => {
-    return axiosObject.delete("todos" + id);
+    return axiosObject.delete("todos/" + id);
 };
 
 api.tasks.update = (taskData) => {
