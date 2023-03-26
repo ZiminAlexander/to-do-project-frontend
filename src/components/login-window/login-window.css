@@ -1,7 +1,6 @@
 .login-window{
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background-color: #FFCFCF;
@@ -15,12 +14,12 @@
     margin-top: 3%;
     width: 925px;
     height: 1050px;
-    background: #E5E5E5;
+    background-color: var(--gray-forms-color);
     border-radius: 30px;
 }
 
 .login-text{
-    padding-top: 58px;
+    padding-top: 60px;
     padding-bottom: 30px;
     width: 100%;
     font-family: 'Roboto';
@@ -29,7 +28,7 @@
     font-size: 70px;
     line-height: 82px;
     text-align: center;
-    color: #242424;
+    color: var(--black-text);
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -65,7 +64,7 @@
     width: 689px;
     height: 30px;
     box-sizing: border-box;
-    background: #F6F6F6;
+    background-color: #F6F6F6;
     border: 1px solid #C2CADC;
     border-radius: 30px;
     height: 78px; 
@@ -74,29 +73,29 @@
     font-weight: 400;
     font-size: 26px;
     line-height: 19px;
-    color: #242424;
+    color: var(--black-text);
     letter-spacing: 0.005em;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     flex-grow: 1;
 }
 
 .login-text-input:focus{
-    outline: 2px solid #005FF9;
-    background: #EBF2FE;
+    outline: 2px solid  #005FF9;
+    background-color: #EBF2FE;
 }
 
 .login-text-input::placeholder{
-    color:#A1A9BC;
+    color: var(--disabled-text-color);
 }
 
 .login-text-input.error-login{
-    outline: 1px solid #FF1100;
+    outline: 1px solid var(--error-red);
 }
 
 .login-text-input.error-login~.left-icon::after{
     position: absolute;
     content: "Неправильный логин";
-    color: #FF1100;
+    color: var(--error-red);
     font-size: 14px;
     top: 70px;
     width: 150px;
@@ -106,10 +105,8 @@
     content: "Неправильный пароль";
 }
 
-.login-text-input:disabled,
-.login-text-input:disabled::placeholder{
-    color: #A1A9BC;
-    background-color: #F6F6F6;
+.login-text-input:disabled{
+    color: var(--disabled-text-color);
 }
 .password-input-box{
     margin-top: 60px;
@@ -142,7 +139,7 @@
     width: 114px;
     height: 40px;
     background: #0040BD;
-    border: 1px solid #000000;
+    border: 1px solid black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     font-family: 'Metal';
@@ -151,5 +148,14 @@
     font-size: 16px;
     line-height: 30px;
     text-align: center;
-    color: #FFFFFF;
+    color: white;
+}
+
+.login-button:hover{
+    background-color: #5F82FF;
+    transition-duration: 500ms;
+}
+
+.login-button:active{
+    background-color: #001A77;
 }

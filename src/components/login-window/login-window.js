@@ -26,15 +26,7 @@ function LoginWindow(props){
     const [password, setPassword] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
     const [isErrorLogin, setIsErrorLogin] = useState(false);
-    function enterButtonForLogin(event) {
-        // Если кнопка не 'Enter' выйти
-        if (event.keyCode !== 13) {
-          return;
-        }
-        event.preventDefault();
-        loginButtonCallback();
-    }
-    function loginButtonCallback(){
+    const loginButtonCallback = () => {
         api.users.login(login, password)
         .then(() => {
             const loginWindow = props.loginWindow;
@@ -46,7 +38,14 @@ function LoginWindow(props){
             showNotification("Неправильный логин или пароль","right-bottom");
         });
     }
-
+    const enterButtonForLogin = (event) => {
+        // Если кнопка не 'Enter' выйти
+        if (event.keyCode !== 13) {
+          return;
+        }
+        event.preventDefault();
+        loginButtonCallback();
+    }
     return(
         <div className="login-window window"
         >
