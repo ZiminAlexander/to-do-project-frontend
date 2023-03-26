@@ -1,4 +1,6 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 import { api } from "Project/api/api";
 import { showNotification } from "Project/components/notifications/notifications.js";
 import "./login-window.css";
@@ -8,29 +10,8 @@ export function addLoginWindow(){
     catch((error) => {
         try{
             if ((error.request.status === 404) || (error.request.status === 400)) {
-                const loginWindow = createNewElement("div",["login-window", "window"]);
-                const loginTable =  createNewElement("div",["panel", "login-table"]);
-                const loginBox =  createNewElement("div",["panel", "login-box"]);
-                const inputBox =  createNewElement("div",["panel", "input-box"]);
-                const loginText =  createNewElement("div",["login-text"]);
-                const loginInput =  createNewElement("input",["login-input","text-input"]);
-                const passwordInput =  createNewElement("input",["password-input","text-input"]);
-                const loginButton =  createNewElement("button",["big-button", "login-button"]);
-                loginButton.addEventListener("click", loginButtonCallback);
-                loginText.textContent = "Чтобы продолжить введите логин и пароль";
-                loginInput.placeholder = "Введите логин";
-                passwordInput.placeholder = "Введите пароль";
-                passwordInput.addEventListener("keydown", enterButtonForLogin);
-                passwordInput.type = "password";
-                loginButton.textContent = "Войти";
-                inputBox.append(loginInput);
-                inputBox.append(passwordInput);
-                loginBox.append(loginText);
-                loginBox.append(inputBox);
-                loginBox.append(loginButton);
-                loginTable.append(loginBox);
-                loginWindow.append(loginTable);
-                document.body.append(loginWindow);
+                const root = ReactDOM.createRoot(document.getElementById("root"));
+                root.render(<LoginWindow loginWindow={root}/>);
             } else {
                 showNotification("Проблемы с сервером, обратитесь к администратору","center");
             }
@@ -40,26 +21,67 @@ export function addLoginWindow(){
     });
 }
 
-function loginButtonCallback(){
-    const login = document.querySelector(".login-input").value;
-    const password = document.querySelector(".password-input").value;
-
-    api.users.login(login, password)
-    .then(() => {
-        const loginWindow = document.querySelector(".login-window");
-        showNotification("Успешный вход","right-bottom");
-        loginWindow.remove();
-    })
-    .catch(() => {
-        showNotification("Неправильный логин или пароль","right-bottom");
-    });
-}
-
-function enterButtonForLogin(event) {
-    // Если кнопка не 'Enter' выйти
-    if (event.keyCode !== 13) {
-      return;
+function LoginWindow(props){
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("");
+    const [isHiddenPassword, setIsHiddenPassword] = useState(true);
+    const [isErrorLogin, setIsErrorLogin] = useState(false);
+    const loginButtonCallback = () => {
+        api.users.login(login, password)
+        .then(() => {
+            const loginWindow = props.loginWindow;
+            showNotification("Успешный вход","right-bottom");
+            loginWindow.unmount();
+        })
+        .catch(() => {
+            setIsErrorLogin(true);
+            showNotification("Неправильный логин или пароль","right-bottom");
+        });
     }
-    event.preventDefault();
-    loginButtonCallback();
-  }
+    const enterButtonForLogin = (event) => {
+        // Если кнопка не 'Enter' выйти
+        if (event.keyCode !== 13) {
+          return;
+        }
+        event.preventDefault();
+        loginButtonCallback();
+    }
+    return(
+        <div className="login-window window"
+        >
+            <div className="login-table">
+                <div className='login-text'>
+                    Авторизация
+                </div>
+                <div className="login-input-box login-box">
+                    <input className={"login-input login-text-input" + (isErrorLogin ? " error-login" : "")} 
+                        placeholder='Введите логин'
+                        type="text"
+                        onInput={(event) => setLogin(event.target.value)}
+                    />
+                    <div className='login-icon left-icon'/>
+                    <div className='login-empty right-icon'/>
+                </div>
+                <div className='password-input-box login-box'>
+                    <input className={"password-input login-text-input" + (isErrorLogin ? " error-login" : "")}
+                        placeholder='Введите пароль'
+                        type= {isHiddenPassword ? "password" : "text"}
+                        onKeyDown={enterButtonForLogin}
+                        onInput={(event) => setPassword(event.target.value)}
+                    />
+                    <div className='password-icon-lock left-icon'/>
+                    <div className='password-icon-view right-icon'
+                        onMouseDown={() => setIsHiddenPassword(false)}
+                        onMouseLeave={() => setIsHiddenPassword(true)} 
+                    />
+                </div>
+                <button className='login-button'
+                    onClick={loginButtonCallback}
+                >
+                    Войти
+                </button>                 
+            </div> 
+
+        </div>
+    );
+}

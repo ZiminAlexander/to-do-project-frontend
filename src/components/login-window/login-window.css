@@ -1,52 +1,161 @@
 .login-window{
     position: absolute;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(240, 255, 255);
+    background-color: #FFCFCF;
     z-index: 2;
 }
 
 .login-table{
-    position: absolute;
-    top:10%;
-    left:10%;
-    padding: 10px;
-    width:70%;
-}
-
-.login-box{
     position: relative;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.input-box{
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    margin: 5px;
-    width: 95%;
-}
-
-.text-input.password-input, .text-input.login-input{
-    width: unset;
-    flex-grow: 1;
-}
-
-.password-input{
-    margin-top: 10px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    width: 925px;
+    height: 1050px;
+    background-color: var(--gray-forms-color);
+    border-radius: 30px;
 }
 
 .login-text{
-    padding: 10px;
+    padding-top: 60px;
+    padding-bottom: 30px;
+    width: 100%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 70px;
+    line-height: 82px;
     text-align: center;
-    margin: 5px;
+    color: var(--black-text);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.login-box{
+    display: flex;
+    position: relative;
+    margin-left: 78px;
+    margin-right: 78px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.left-icon{
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    width: 39px;
+    height: 39px;
+}
+
+.login-icon{
+    background-image: url("Project/images/login-icons/login-icon.svg");
+}
+
+.login-text-input:disabled~.left-icon{
+    opacity: 0.6;
+}
+
+
+.login-text-input{
+    padding-left: 60px ;
+    gap: 10px;
+    width: 689px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #F6F6F6;
+    border: 1px solid #C2CADC;
+    border-radius: 30px;
+    height: 78px; 
+    font-family: 'Roboto';
+    font-style: 'Regular';
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 19px;
+    color: var(--black-text);
+    letter-spacing: 0.005em;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    flex-grow: 1;
+}
+
+.login-text-input:focus{
+    outline: 2px solid  #005FF9;
+    background-color: #EBF2FE;
+}
+
+.login-text-input::placeholder{
+    color: var(--disabled-text-color);
+}
+
+.login-text-input.error-login{
+    outline: 1px solid var(--error-red);
+}
+
+.login-text-input.error-login~.left-icon::after{
+    position: absolute;
+    content: "Неправильный логин";
+    color: var(--error-red);
+    font-size: 14px;
+    top: 70px;
+    width: 150px;
+}
+
+.login-text-input.error-login~.password-icon-lock::after{
+    content: "Неправильный пароль";
+}
+
+.login-text-input:disabled{
+    color: var(--disabled-text-color);
+}
+.password-input-box{
+    margin-top: 60px;
+}
+
+.password-icon-lock{
+    background-image: url("Project/images/login-icons/lock-icon.svg");
+}
+
+.right-icon{
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    width: 39px;
+    height: 39px;
+}
+
+.login-text-input.error-login~.right-icon{
+    background-image: url("Project/images/login-icons/error-login.svg");
+}
+
+.password-icon-view{
+    background-image: url("Project/images/login-icons/view-icon.svg");
 }
 
 .login-button{
-    margin: 5px;
-    width: 95%;
-    
+    margin-top: 30px;
+    margin-left: 733px;
+    box-sizing: border-box;
+    width: 114px;
+    height: 40px;
+    background: #0040BD;
+    border: 1px solid black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    font-family: 'Metal';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+}
+
+.login-button:hover{
+    background-color: #5F82FF;
+    transition-duration: 500ms;
+}
+
+.login-button:active{
+    background-color: #001A77;
 }
