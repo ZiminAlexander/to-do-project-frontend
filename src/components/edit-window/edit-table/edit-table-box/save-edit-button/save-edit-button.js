@@ -1,39 +1,27 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { isChangedInEditWindow } from "../close-edit-button/close-edit-button";
-import { closeEditWindow } from "../close-edit-button/close-edit-button";
-import { updateTask } from "../../../../task-table/task/task";
+import React from "react";
 import { addSpinner } from "Project/helpers/addSpinner";
 import "./save-edit-button.css";
 
-export function createSaveEditButton() {
-  const saveEditButton = createNewElement("button", [
-    "save-edit-button",
-    "big-button",
-  ]);
-  saveEditButton.innerHTML = "Сохранить и выйти";
-  saveEditButton.addEventListener("click", saveEditButtonCallback);
+export function SaveEditButton(props) {
 
-  return saveEditButton;
-}
-
-//Callback для SaveEditButton на нажатие
-function saveEditButtonCallback() {
-  if (!isChangedInEditWindow()) {
-    closeEditWindow();
-    return;
-  }
-  const editedTask = document.querySelector(".edited");
-  const editedTaskText = editedTask.querySelector(".text");
-  const taskEditText = document.querySelector(".task-edit-text");
-  const taskEditFullText = document.querySelector(".task-edit-full-text");
-  const saveEditButton = document.querySelector(".save-edit-button");
-  //Меняем параметры задачи
-  editedTaskText.textContent = taskEditText.value;
-  editedTask.dataset.description = taskEditFullText.value;
-  //Отправляем на сервер и закрываем окно
-  addSpinner("on", saveEditButton);
-  updateTask(editedTask).then(() => {
-    addSpinner("off", saveEditButton);
-    closeEditWindow();
-  });
+  return(
+    <button className="save-edit-button big-button"
+      onClick={(event) => {
+        const saveEditButton = event.target;
+        if (!props.isChangeTask()) {
+            props.exitEditWindow();
+            return;
+        }
+        addSpinner("on", saveEditButton);
+        props.updateTask().then(() => {
+          addSpinner("off", saveEditButton);
+          props.exitEditWindow();
+          props.updateTasksFromServer();
+          })
+        }
+      }
+    >
+      Сохранить и выйти
+    </button>
+  );
 }

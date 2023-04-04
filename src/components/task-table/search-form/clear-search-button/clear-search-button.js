@@ -1,21 +1,18 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { updateTasksFromServer } from "../../task/task";
+import React from "react";
 import "./clear-search-button.css";
 
-export function createClearSearchButton() {
-  const clearSearchButton = createNewElement("button", [
-    "clear-search-button",
-    "small-button",
-    "red-button",
-  ]);
-  clearSearchButton.textContent = "×";
-  clearSearchButton.addEventListener("click", clearSearchCallback);
+export function ClearSearchButton(props) {
 
-  return clearSearchButton;
-}
+  return(
+    <button className="clear-search-button small-button red-button"
+      //Очистить поле поиска 
+      onClick={(event) => {
+          props.setSearchFilter("");
+          props.updateTasksFromServer("");
+          event.target.parentElement.firstChild.value="";
+        }
+      }
+    >×</button>
+  );
 
-//Добавить Callback для кнопки clear-search
-function clearSearchCallback() {
-  this.parentElement.querySelector(".search-area").value = "";
-  updateTasksFromServer();
 }

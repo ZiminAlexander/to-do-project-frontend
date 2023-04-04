@@ -1,15 +1,16 @@
-import { createNewElement } from "Project/helpers/createNewElement.js";
-import { createSearchArea } from "./search-area/search-area.js";
-import { createClearSearchButton } from "./clear-search-button/clear-search-button.js";
-import { searchAreaInputCallback } from "../task/task.js";
+import React from "react";
+import { SearchArea } from "./search-area/search-area";
+import { ClearSearchButton } from "./clear-search-button/clear-search-button";
 
-export function createSearchForm() {
-  const searchForm = createNewElement("div", ["form", "search-form", "panel"]);
-  const searchArea = createSearchArea(searchAreaInputCallback);
-  const clearSearchButton = createClearSearchButton();
+export function SearchForm(props) {
+  
+  return (
+    <div className="form search-form panel">
+      <SearchArea updateTasksFromServer={props.updateTasksFromServer}
+          setSearchFilter={props.setSearchFilter} />
+      <ClearSearchButton updateTasksFromServer={props.updateTasksFromServer}
+          setSearchFilter={props.setSearchFilter}/>
+    </div>
+  );
 
-  searchForm.append(searchArea);
-  searchForm.append(clearSearchButton);
-
-  return searchForm;
 }

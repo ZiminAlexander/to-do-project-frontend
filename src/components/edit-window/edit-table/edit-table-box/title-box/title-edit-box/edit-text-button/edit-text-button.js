@@ -1,16 +1,14 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
 
-export function createEditTextButton() {
-  const editTextButton = createNewElement("button", [
-    "edit-button",
-    "small-button",
-  ]);
-  editTextButton.addEventListener("click", editButtonCallback);
+export function EditTextButton() {
 
-  return editTextButton;
-}
+  return(
+    <button className="edit-button small-button" 
+      onClick={(event) => {
+        const editText = event.target.parentElement.firstChild.firstChild;
+        editText.disabled = !editText.disabled;
+      }}
+    />
+  );
 
-function editButtonCallback() {
-  const editText = this.parentElement.querySelector("textarea");
-  editText.disabled = !editText.disabled;
 }

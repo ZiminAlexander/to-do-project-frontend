@@ -1,12 +1,17 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createFullTextAreaDiv } from "./full-text-area-div/full-text-area-div";
-import { createEditFullTextButton } from "./edit-full-text-button/edit-full-text-button";
+import React from "react";
+import { FullTextAreaDiv } from "./full-text-area-div/full-text-area-div";
+import { EditFullTextButton } from "./edit-full-text-button/edit-full-text-button";
 import "./description-edit-box.css";
 
-export function createDescriptionEditBox() {
-  const descriptionEditBox = createNewElement("div", "description-edit-box");
-  descriptionEditBox.append(createFullTextAreaDiv());
-  descriptionEditBox.append(createEditFullTextButton());
+export function DescriptionEditBox(props) {
 
-  return descriptionEditBox;
+  return(
+    <div className="description-edit-box">
+      <FullTextAreaDiv editedTask={props.editedTask}
+         setDescription={props.setDescription}
+      />
+      <EditFullTextButton />
+    </div>
+  );
+
 }

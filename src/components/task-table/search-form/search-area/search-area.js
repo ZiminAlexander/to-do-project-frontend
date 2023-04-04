@@ -1,11 +1,34 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React, { useState } from "react";
 import "./search-area.css";
 
-export function createSearchArea(searchCallback) {
-  const searchArea = createNewElement("input", ["search-area", "text-input"]);
-  searchArea.type = "text";
-  searchArea.placeholder = "Поиск задачи";
-  searchArea.addEventListener("input", searchCallback);
+export function SearchArea(props) {
+  const [timeoutID, setTimeoutID] = useState(null);
+  //Callback для поиска задачи
+  const searchAreaInputCallback = function(event) {
+    const searchElement = event.target;
+    const startValue = searchElement.value;
+    if (startValue.length > 200) {
+      showNotification("Строка поиска не должна включать более 200 символов", "right-bottom");
+      return;
+    }
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+    }
+    setTimeoutID( setTimeout(() => {
+      if (startValue === searchElement.value) {
+        props.setSearchFilter(startValue);
+        props.updateTasksFromServer(startValue);
+      }
+    }, 600))
+  }    
 
-  return searchArea;
+  return(
+    <input className="search-area text-input" 
+      type="text"
+      placeholder="Поиск задачи"
+      onChange={searchAreaInputCallback}
+    />
+
+  );
+
 }

@@ -32,21 +32,6 @@ module.exports = {
       title: "webpack Boilerplate",
       template: path.resolve(__dirname, "./src/index.ejs"), // шаблон
       filename: "index.html", // название выходного файла
-      date:
-        "Обновлено " +
-        new Date().toLocaleString("ru", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-          timeZone: "Europe/Moscow",
-        }) +
-        " в " +
-        new Date().toLocaleString("ru", {
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-          timeZone: "Europe/Moscow",
-        }),
     }),
     new CleanWebpackPlugin(),
     new Dotenv({

@@ -15,9 +15,6 @@ body{
     --disabled-text-color: #A1A9BC;
     --error-red: #FF1100;
 
-
-    display: flex;
-    flex-direction: column;
     margin: 0;
     height: 100%;
     background-color: #dddddd;
@@ -33,5 +30,11 @@ body{
 
 .no-display{
     display: none;
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 

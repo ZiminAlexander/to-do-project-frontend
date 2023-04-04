@@ -1,12 +1,17 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createTextAreaDiv } from "./text-area-div/text-area-div";
-import { createEditTextButton } from "./edit-text-button/edit-text-button";
+import React from "react";
+import { TextAreaDiv } from "./text-area-div/text-area-div";
+import { EditTextButton } from "./edit-text-button/edit-text-button";
 import "./title-edit-box.css";
 
-export function createTitleEditBox() {
-  const titleEditBox = createNewElement("div", "title-edit-box");
-  titleEditBox.append(createTextAreaDiv());
-  titleEditBox.append(createEditTextButton());
+export function TitleEditBox(props) {
 
-  return titleEditBox;
+  return(
+    <div className="title-edit-box">
+      <TextAreaDiv editedTask={props.editedTask}
+        setTitle={props.setTitle}
+      />
+      <EditTextButton />
+    </div>
+  );
+
 }

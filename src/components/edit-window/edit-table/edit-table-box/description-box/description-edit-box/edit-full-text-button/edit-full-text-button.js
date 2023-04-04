@@ -1,20 +1,17 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
 
-export function createEditFullTextButton() {
-  const editFullTextButton = createNewElement("button", [
-    "edit-button",
-    "small-button",
-  ]);
-  editFullTextButton.addEventListener("click", editButtonCallback);
+export function EditFullTextButton() {
 
-  return editFullTextButton;
-}
+  return(
+    <button className="edit-button small-button" 
+      onClick={(event) => {
+        const editText = event.target.parentElement.firstChild.firstChild;
+        const fullText = event.target.parentElement.firstChild.lastChild;
+        fullText.innerHTML = editText.value;
+        editText.classList.toggle("no-display");
+        fullText.classList.toggle("no-display");
+      }}
+    />
+  );
 
-//Callback для edit кнопки
-function editButtonCallback() {
-  const editText = this.parentElement.querySelector(".task-edit-full-text");
-  const fullText = this.parentElement.querySelector(".task-full-text");
-  fullText.innerHTML = editText.value;
-  editText.classList.toggle("no-display");
-  fullText.classList.toggle("no-display");
 }

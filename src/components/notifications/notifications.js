@@ -64,12 +64,12 @@ export function showNotification(textOfNotification, position, someCallback) {
     newNotification.append(answerDiv);
     newNotification.append(newCloseNotificationButton);
     notificationWindow.append(newNotification);
-    document.body.append(notificationWindow);
+    document.getElementById("root").append(notificationWindow);
   } else if (position === "center") {
     const notificationWindow = createNewElement("div", ["notification-window", "no-opacity-window"]);
     newNotification.classList.add("center");
     newNotification.append(newTextOfNotification);
     notificationWindow.append(newNotification); 
-    document.body.append(notificationWindow);
+    document.getElementById("root").append(notificationWindow);
   }
 }

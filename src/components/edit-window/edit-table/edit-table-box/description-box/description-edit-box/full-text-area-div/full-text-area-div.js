@@ -1,20 +1,23 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
 import "./full-text-area-div.css";
 
-export function createFullTextAreaDiv() {
-  const fullTextAreaDiv = createNewElement("div", "full-text-area-div");
-  const taskEditFullText = createNewElement("textarea", [
-    "task-edit-full-text",
-    "text-input",
-  ]);
-  const taskFullText = createNewElement("div", [
-    "task-full-text",
-    "text-input",
-  ]);
-  taskEditFullText.classList.add("no-display");
+export function FullTextAreaDiv(props) {
 
-  fullTextAreaDiv.append(taskEditFullText);
-  fullTextAreaDiv.append(taskFullText);
+  return(
+    <div className="full-text-area-div">
+      <textarea className="task-edit-full-text text-input no-display"
+        onChange={(event) => {
+          const newDescription = event.target.value;
+          props.setDescription(newDescription);
+        }}
+      >
+        {props.editedTask.description}
+      </textarea>
+      <div className="task-full-text text-input"
+        dangerouslySetInnerHTML={{__html: props.editedTask.description}}
+      >
+      </div>
+    </div>
+  );
 
-  return fullTextAreaDiv;
 }

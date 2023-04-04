@@ -1,27 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import { useState } from 'react';
 import { api } from "Project/api/api";
 import { showNotification } from "Project/components/notifications/notifications.js";
 import "./login-window.css";
-export function addLoginWindow(){
-    api.users.isLogged().
-    then(() => {return;}).
-    catch((error) => {
-        try{
-            if ((error.request.status === 404) || (error.request.status === 400)) {
-                const root = ReactDOM.createRoot(document.getElementById("root"));
-                root.render(<LoginWindow loginWindow={root}/>);
-            } else {
-                showNotification("Проблемы с сервером, обратитесь к администратору","center");
-            }
-        } catch {
-            showNotification("Проблемы с сервером, обратитесь к администратору","center");
-        }
-    });
-}
-
-function LoginWindow(props){
+export function LoginWindow(props){
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
@@ -29,9 +11,8 @@ function LoginWindow(props){
     const loginButtonCallback = () => {
         api.users.login(login, password)
         .then(() => {
-            const loginWindow = props.loginWindow;
+            props.setIsNeedLogin(false);
             showNotification("Успешный вход","right-bottom");
-            loginWindow.unmount();
         })
         .catch(() => {
             setIsErrorLogin(true);
