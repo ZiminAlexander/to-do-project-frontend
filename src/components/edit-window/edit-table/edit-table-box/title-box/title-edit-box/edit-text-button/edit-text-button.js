@@ -1,14 +1,19 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-export function EditTextButton() {
+export function EditTextButton({setIsEditEnable, isEditEnable}) {
 
   return(
-    <button className="edit-button small-button" 
-      onClick={(event) => {
-        const editText = event.target.parentElement.firstChild.firstChild;
-        editText.disabled = !editText.disabled;
+    <button className={"edit-button small-button"}
+      onClick={() => {
+        setIsEditEnable(!isEditEnable);
       }}
     />
   );
 
+}
+
+EditTextButton.propTypes = {
+  setIsEditEnable: PropTypes.func.isRequired,
+  isEditEnable: PropTypes.bool.isRequired,
 }

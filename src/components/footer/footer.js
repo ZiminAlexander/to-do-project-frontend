@@ -2,6 +2,7 @@ import "Project/components/footer/footer.css"
 import React from 'react';
 
 export function Footer(){
+    
     return(
         <footer className="footer">
             <div className="information">
@@ -20,22 +21,7 @@ export function Footer(){
                 </div>
             </div>
             <div className="updated"> 
-                {
-                    "Обновлено " +
-                    new Date().toLocaleString("ru", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                        timeZone: "Europe/Moscow",
-                    }) +
-                    " в " +
-                    new Date().toLocaleString("ru", {
-                        hour: "numeric",
-                        minute: "numeric",
-                        second: "numeric",
-                        timeZone: "Europe/Moscow",
-                    })
-                } 
+                {CREATE_DATE} 
             </div>
         </footer>
     );

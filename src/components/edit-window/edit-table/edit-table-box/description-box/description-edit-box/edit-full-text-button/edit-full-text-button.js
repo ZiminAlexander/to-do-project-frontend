@@ -1,17 +1,19 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-export function EditFullTextButton() {
+export function EditFullTextButton({setIsEditEnable, isEditEnable}) {
 
   return(
     <button className="edit-button small-button" 
-      onClick={(event) => {
-        const editText = event.target.parentElement.firstChild.firstChild;
-        const fullText = event.target.parentElement.firstChild.lastChild;
-        fullText.innerHTML = editText.value;
-        editText.classList.toggle("no-display");
-        fullText.classList.toggle("no-display");
+      onClick={() => {
+        setIsEditEnable(!isEditEnable);
       }}
     />
   );
 
+}
+
+EditFullTextButton.propTypes = {
+  setIsEditEnable: PropTypes.func.isRequired, 
+  isEditEnable: PropTypes.bool.isRequired, 
 }

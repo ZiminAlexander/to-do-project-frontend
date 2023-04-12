@@ -1,18 +1,23 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./text.css";
 
-export function Text(props) {
+export function Text({title, currentTaskID, setEditTaskID}) {
 
   return (
     <div className="text"
-      onClick={(event) => {
-        const taskTextElement = event.target;
-        const taskElement = taskTextElement.parentElement;
-        props.setEditTaskID(taskElement.id);
+      onClick={() => {
+        setEditTaskID(currentTaskID);
       }}
     >
-      {props.title}
+      {title}
     </div>
   );
 
+}
+
+Text.propTypes = {
+  title: PropTypes.string.isRequired,
+  currentTaskID: PropTypes.string.isRequired,
+  setEditTaskID: PropTypes.func.isRequired,
 }

@@ -7,6 +7,7 @@ import { EditWindow } from "../edit-window/edit-window";
 import { api } from "Project/api/api";
 import "./task-page.css";
 import "./form-style.css";
+import "./spinner.css";
 
 
 export function TaskPage() {
@@ -18,7 +19,16 @@ export function TaskPage() {
   const getEditedTask = (editTaskID) => {
     for (let i = 0; i < allTasks.length; i++){
       if (allTasks[i].id === editTaskID){
-        return Object.create(allTasks[i]);
+        const editedTask = allTasks[i];
+        return (
+          {
+            id: editedTask.id, 
+            data: {
+              title: editedTask.title,
+              isCompleted: editedTask.isCompleted, 
+              description: editedTask.description}
+          }
+        );
       }
     }
   }
@@ -29,6 +39,7 @@ export function TaskPage() {
       currentSearchFilter = searchFilter;
     }
     let apiAnswer = {};
+    let apiTasksArray = [];
     if (currentSearchFilter === "") {
       apiAnswer = api.tasks.load();
     } else {
@@ -42,11 +53,20 @@ export function TaskPage() {
           setAllTasks("NoTasks");
           setIsLoading(false);
         } else {
-          setAllTasks(apiTasks.data);
+          apiTasksArray = apiTasks.data;
+          apiTasksArray.sort((a, b) => {
+            if ((a.createdAt) > (b.createdAt)) {
+              return 1;
+            } else {
+              return -1;
+            }
+          })
+          setAllTasks(apiTasksArray);
           setIsLoading(false);
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         setAllTasks("ServerError");
         setIsLoading(false);
       });
@@ -60,7 +80,7 @@ export function TaskPage() {
         <SearchForm updateTasksFromServer={updateTasksFromServer}
           setSearchFilter={setSearchFilter}
         />
-        <NewTaskForm updateTasksFromServer={updateTasksFromServer}/>
+      <NewTaskForm updateTasksFromServer={updateTasksFromServer} />
       </div>
       <div className="task-field">
         {allTasks !== null ? 

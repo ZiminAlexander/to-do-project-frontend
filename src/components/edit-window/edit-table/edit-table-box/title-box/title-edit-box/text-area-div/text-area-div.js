@@ -1,20 +1,27 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./text-area-div.css";
 
-export function TextAreaDiv(props) {
+export function TextAreaDiv({editTitle, setTitle, isEditEnable}) {
 
   return(
     <div className="text-area-div">
       <textarea className="task-edit-text disabled text-input" 
-        disabled={true}
+        disabled={!isEditEnable}
         onChange={(event) => {
           const newTitle = event.target.value;
-          props.setTitle(newTitle);
+          setTitle(newTitle);
         }}
+        defaultValue={editTitle}
       >
-        {props.editedTask.title}
       </textarea> 
     </div>
   );
   
+}
+
+TextAreaDiv.propTypes = {
+  editTitle: PropTypes.string.isRequired,
+  setTitle: PropTypes.func.isRequired,
+  isEditEnable: PropTypes.bool.isRequired,
 }

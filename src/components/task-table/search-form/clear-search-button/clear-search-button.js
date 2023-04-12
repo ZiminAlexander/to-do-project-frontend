@@ -1,18 +1,26 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./clear-search-button.css";
 
-export function ClearSearchButton(props) {
+export function ClearSearchButton({setSearchFilter, updateTasksFromServer, setIsClear}) {
 
   return(
     <button className="clear-search-button small-button red-button"
       //Очистить поле поиска 
-      onClick={(event) => {
-          props.setSearchFilter("");
-          props.updateTasksFromServer("");
-          event.target.parentElement.firstChild.value="";
+      onClick={() => {
+          setSearchFilter("");
+          updateTasksFromServer("");
+          setIsClear(true);
+          setTimeout(() => {setIsClear(false);}, 0);
         }
       }
     >×</button>
   );
 
+}
+
+ClearSearchButton.propTypes = {
+  setSearchFilter: PropTypes.func.isRequired, 
+  updateTasksFromServer: PropTypes.func.isRequired,  
+  setIsClear: PropTypes.func.isRequired,  
 }

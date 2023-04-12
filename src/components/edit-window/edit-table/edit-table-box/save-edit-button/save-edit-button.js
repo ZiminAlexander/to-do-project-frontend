@@ -1,27 +1,34 @@
-import React from "react";
-import { addSpinner } from "Project/helpers/addSpinner";
+import React, {useState} from "react";
+import PropTypes from 'prop-types';
 import "./save-edit-button.css";
 
-export function SaveEditButton(props) {
+export function SaveEditButton({exitEditWindow, isChangeTask, updateTasksFromServer, updateTask}) {
+  const [isLoadingSave, setIsLoadingSave] = useState(false);
 
   return(
-    <button className="save-edit-button big-button"
-      onClick={(event) => {
-        const saveEditButton = event.target;
-        if (!props.isChangeTask()) {
-            props.exitEditWindow();
-            return;
-        }
-        addSpinner("on", saveEditButton);
-        props.updateTask().then(() => {
-          addSpinner("off", saveEditButton);
-          props.exitEditWindow();
-          props.updateTasksFromServer();
-          })
+    <button className={"save-edit-button big-button" + (isLoadingSave ? " loading-spinner" : "")}
+      onClick={() => {
+          if (!isChangeTask()) {
+              exitEditWindow();
+              return;
+          }
+          setIsLoadingSave(true);
+          updateTask().then(() => {
+              setIsLoadingSave(false);
+              exitEditWindow();
+              updateTasksFromServer();
+            })
         }
       }
     >
       Сохранить и выйти
     </button>
   );
+}
+
+SaveEditButton.propTypes = {
+  exitEditWindow: PropTypes.func.isRequired, 
+  isChangeTask: PropTypes.func.isRequired, 
+  updateTasksFromServer: PropTypes.func.isRequired,
+  updateTask: PropTypes.func.isRequired,
 }

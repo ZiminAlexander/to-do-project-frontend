@@ -1,9 +1,24 @@
-// webpack.config.js
 const Dotenv = require("dotenv-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 
+const createDate =
+  "Обновлено " +
+  new Date().toLocaleString("ru", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "Europe/Moscow",
+  }) +
+  " в " +
+  new Date().toLocaleString("ru", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Europe/Moscow",
+  });
 const mode = process.env.NODE_ENV || "development";
 const devMode = mode === "development";
 const target = devMode ? "web" : "browserslist";
@@ -32,6 +47,9 @@ module.exports = {
       title: "webpack Boilerplate",
       template: path.resolve(__dirname, "./src/index.ejs"), // шаблон
       filename: "index.html", // название выходного файла
+    }),
+    new webpack.DefinePlugin({
+      CREATE_DATE: JSON.stringify(createDate),
     }),
     new CleanWebpackPlugin(),
     new Dotenv({

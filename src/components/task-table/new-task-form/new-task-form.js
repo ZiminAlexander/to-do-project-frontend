@@ -1,40 +1,45 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import { NewTaskArea } from "./new-task-area/new-task-area";
 import { SubmitNewTaskButton } from "./submit-new-task-button/submit-new-task-button";
-import { showNotification } from "../../notifications/notifications";
-import { addSpinner } from "Project/helpers/addSpinner";
+import { NotificationContext } from "Project/index.js";
 import { api } from "Project/api/api";
 import "./new-task-form.css";
 
-export function NewTaskForm(props) {
+export function NewTaskForm({updateTasksFromServer}) {
 
   const [newTask, setNewTask] = useState("");
   const [newTaskArea, setNewTaskArea] = useState(null);
+  const [isLoadingNewTask, setIsLoadingNewTask] = useState(false);
 
+  const {setIsShowNotification, setNotificationOptions} = React.useContext(NotificationContext);
+  
   //Отправить задачу на сервер 
   const submitTask = function() {
     if ((newTask.trim() === "") || (!newTaskArea)) {
-      showNotification("Нельзя добавить пустую задачу", "right-bottom");
+      setNotificationOptions({textOfNotification: "Нельзя добавить пустую задачу", 
+        position: "right-bottom"}
+      ) 
+      setIsShowNotification(true);
       return;
     }
-    const submitNewTaskButton = newTaskArea.parentElement.parentElement.lastChild;
-    //Формируем объект для отправки на сервер
-    const taskData = {};
-    taskData.data = {};
-    taskData.data.title = newTask;
-    taskData.data.isCompleted = false;
-    taskData.data.description = "";
-    //Восстанавливаем размеры вводимого окна
-    newTaskArea.value = "";
-    newTaskArea.style.height = "35px";
     //Добавляем индикатор загрузки на кнопку +
-    addSpinner("on", submitNewTaskButton);
+    setIsLoadingNewTask(true);
+    //Формируем объект для отправки на сервер
+    const taskData = {data: {
+        title: newTask,
+        isCompleted: false,
+        description: "",
+      }
+    }
     //Отправляем задачу на сервер
     api.tasks.submit(taskData).then(() => {
-      addSpinner("off", submitNewTaskButton);
+      setIsLoadingNewTask(false);
       setNewTask("");
-      props.updateTasksFromServer();
+      updateTasksFromServer();
     });
+    //Удаляем задачу из state
+    setNewTask("");
   }
 
   return (
@@ -42,9 +47,16 @@ export function NewTaskForm(props) {
       <NewTaskArea setNewTask={setNewTask}
         submitTask={submitTask}
         setNewTaskArea={setNewTaskArea}
+        isLoadingNewTask={isLoadingNewTask}
     />
-      <SubmitNewTaskButton submitTask={submitTask} />
+      <SubmitNewTaskButton submitTask={submitTask}
+        isLoadingNewTask={isLoadingNewTask}
+      />
     </div>
   );
 
+}
+
+NewTaskForm.propTypes = {
+  updateTasksFromServer: PropTypes.func.isRequired,
 }

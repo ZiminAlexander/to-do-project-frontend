@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 import "./new-task-area.css";
 
-export function NewTaskArea(props) {
+export function NewTaskArea({setNewTask, submitTask, setNewTaskArea, isLoadingNewTask}) {
 
   //Callback для поля ввода на нажатие "Enter"
   const enterButtonForNewTaskAreaCallback = function(event) {
@@ -10,29 +11,26 @@ export function NewTaskArea(props) {
       return;
     }
     event.preventDefault();
-    props.submitTask(event);
-  }
-
-  //Callback для автоизменения размера для submit-text textarea
-  const autoSizeNewTaskAreaCallback = function(event) {
-    const textareaElement = event.target;
-    if (textareaElement.clientHeight < textareaElement.scrollHeight) {
-      textareaElement.style.height = textareaElement.scrollHeight + "px";
-    } else if (textareaElement.clientHeight > textareaElement.scrollHeight) {
-      textareaElement.style.height = textareaElement.scrollHeight + "px";
-    }
+    submitTask(event);
   }
 
   return (
     <div className="input-text-div">
       <textarea className="textarea new-task-area text-input" 
         onKeyDown={enterButtonForNewTaskAreaCallback}
-        onInput={autoSizeNewTaskAreaCallback}
         placeholder="Новая задача"
-        onChange={(event) => {props.setNewTask(event.target.value)}}
-        onClick={(event) => {props.setNewTaskArea(event.target)}}
+        onChange={(event) => {setNewTask(event.target.value)}}
+        onClick={(event) => {setNewTaskArea(event.target)}}
+        value={isLoadingNewTask? "" : undefined}
       />
     </div>
   );
 
+}
+
+NewTaskArea.propTypes = {
+  setNewTask: PropTypes.func.isRequired, 
+  submitTask: PropTypes.func.isRequired, 
+  setNewTaskArea: PropTypes.func.isRequired, 
+  isLoadingNewTask: PropTypes.bool.isRequired,
 }

@@ -1,22 +1,30 @@
-import React from 'react';
-import { useState } from 'react';
-import { api } from "Project/api/api";
-import { showNotification } from "Project/components/notifications/notifications.js";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import  { api } from "Project/api/api";
+import { NotificationContext } from "Project/index.js";
 import "./login-window.css";
-export function LoginWindow(props){
+
+export function LoginWindow({setIsNeedLogin}){
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
     const [isErrorLogin, setIsErrorLogin] = useState(false);
+    const {setIsShowNotification, setNotificationOptions} = React.useContext(NotificationContext);
     const loginButtonCallback = () => {
         api.users.login(login, password)
         .then(() => {
-            props.setIsNeedLogin(false);
-            showNotification("Успешный вход","right-bottom");
+            setIsNeedLogin(false);
+            setNotificationOptions({textOfNotification: "Успешный вход", 
+                position: "right-bottom",
+            }) 
+            setIsShowNotification(true);
         })
         .catch(() => {
             setIsErrorLogin(true);
-            showNotification("Неправильный логин или пароль","right-bottom");
+            setNotificationOptions({textOfNotification: "Неправильный логин или пароль", 
+                position: "right-bottom",
+            }) 
+            setIsShowNotification(true);
         });
     }
     const enterButtonForLogin = (event) => {
@@ -65,4 +73,8 @@ export function LoginWindow(props){
 
         </div>
     );
+}
+
+LoginWindow.propTypes = {
+    setIsNeedLogin: PropTypes.func.isRequired
 }
