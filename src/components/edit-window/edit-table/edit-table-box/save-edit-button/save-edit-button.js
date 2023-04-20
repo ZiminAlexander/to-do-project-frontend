@@ -1,25 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import "./save-edit-button.css";
 
-export function SaveEditButton({exitEditWindow, isChangeTask, updateTasksFromServer, updateTask}) {
-  const [isLoadingSave, setIsLoadingSave] = useState(false);
+export const SaveEditButton = ({saveEditButtonCallBack, isLoadingSave}) => {
 
   return(
     <button className={"save-edit-button big-button" + (isLoadingSave ? " loading-spinner" : "")}
-      onClick={() => {
-          if (!isChangeTask()) {
-              exitEditWindow();
-              return;
-          }
-          setIsLoadingSave(true);
-          updateTask().then(() => {
-              setIsLoadingSave(false);
-              exitEditWindow();
-              updateTasksFromServer();
-            })
-        }
-      }
+      onClick={saveEditButtonCallBack}
     >
       Сохранить и выйти
     </button>
@@ -27,8 +14,6 @@ export function SaveEditButton({exitEditWindow, isChangeTask, updateTasksFromSer
 }
 
 SaveEditButton.propTypes = {
-  exitEditWindow: PropTypes.func.isRequired, 
-  isChangeTask: PropTypes.func.isRequired, 
-  updateTasksFromServer: PropTypes.func.isRequired,
-  updateTask: PropTypes.func.isRequired,
+  saveEditButtonCallBack: PropTypes.func.isRequired, 
+  isLoadingSave: PropTypes.bool.isRequired,
 }

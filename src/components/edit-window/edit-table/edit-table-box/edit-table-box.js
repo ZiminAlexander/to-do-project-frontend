@@ -5,23 +5,20 @@ import { DescriptionBox } from "./description-box/description-box";
 import { SaveEditButton } from "./save-edit-button/save-edit-button";
 import { CloseEditButton } from "./close-edit-button/close-edit-button";
 import { api } from "Project/api/api";
+import { NotificationContext } from "Project/index.js";
 import "./edit-table-box.css";
 
-export function EditTableBox({editedTask, setEditTaskID, updateTasksFromServer}) {
+export const EditTableBox = ({editedTask, setEditTaskID, updateTasksFromServer}) => {
 
   const editTitle = editedTask.data.title;
   const editDescription = editedTask.data.description;
   const [newTitle, setNewTitle] = useState(editTitle);
   const [newDescription, setNewDescription] = useState(editDescription);
-
-  const getNewDescription = () => {
-    return newDescription;
-  }
+  const [isLoadingSave, setIsLoadingSave] = useState(false);
+  const setNotificationOptions = React.useContext(NotificationContext);
 
   const isChangeTask = () => {
-    const oldTitle = editTitle;
-    const oldDescription = editDescription;
-    if ((newTitle !== oldTitle) || (newDescription !== oldDescription)){
+    if ((newTitle !== editTitle) || (newDescription !== editDescription)){
       return true;
     } else {
       return false;
@@ -34,27 +31,44 @@ export function EditTableBox({editedTask, setEditTaskID, updateTasksFromServer})
     return api.tasks.update(editedTask);
   }
 
-  const exitEditWindow = () => {
-    setEditTaskID("");
+  const saveEditButtonCallBack = () => {
+    if (!isChangeTask()) {
+      setEditTaskID("");
+      return;
+    }
+    setIsLoadingSave(true);
+    updateTask().then(() => {
+      setIsLoadingSave(false);
+      setEditTaskID("");
+      updateTasksFromServer();
+    })
+  }
+
+  const closeEditButtonCallback = () => {
+    if (!isChangeTask()) {
+      setEditTaskID("");
+      return;
+    }
+    setNotificationOptions({
+      textOfNotification: "Внесённые изменения будут удалены. Вы точно хотите выйти?", 
+      position: "center-confirm",
+      yesCallback: () => {setEditTaskID("")},
+      noCallback: () => {return;},
+    }) 
   }
 
   return(
     <div className="edit-table-box">
-      <TitleBox editTitle={editTitle}
-        setTitle={setNewTitle}
+      <TitleBox newTitle={newTitle}
+        setNewTitle={setNewTitle}
       />
-      <DescriptionBox editDescription={editDescription}
-        setDescription={setNewDescription}
-        getNewDescription={getNewDescription}
+      <DescriptionBox newDescription={newDescription}
+        setNewDescription={setNewDescription}
       />
-      <SaveEditButton exitEditWindow={exitEditWindow}
-        isChangeTask={isChangeTask}
-        updateTask={updateTask}
-        updateTasksFromServer={updateTasksFromServer}
+      <SaveEditButton saveEditButtonCallBack={saveEditButtonCallBack}
+        isLoadingSave={isLoadingSave}
       />
-      <CloseEditButton exitEditWindow={exitEditWindow}
-        isChangeTask={isChangeTask}
-      />
+      <CloseEditButton closeEditButtonCallback={closeEditButtonCallback} />
     </div>
   );
 

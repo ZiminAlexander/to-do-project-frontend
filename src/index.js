@@ -12,7 +12,7 @@ import "./main-styles/task-page.css";
 import "./main-styles/panel.css";
 import "./main-styles/text-input.css";
 
-export const NotificationContext = React.createContext("without provider");
+export const NotificationContext = React.createContext();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -22,8 +22,7 @@ root.render(<App />)
 function App(){
 
     const [isNeedLogin, setIsNeedLogin] = useState(false);
-    const [notificationOptions, setNotificationOptions] = useState({});
-    const [isShowNotification, setIsShowNotification] = useState(false);
+    const [notificationOptions, setNotificationOptions] = useState(null);
 
     useEffect(() => {
         api.users.isLogged().
@@ -34,7 +33,6 @@ function App(){
                     setNotificationOptions({textOfNotification: "Проблемы с сервером, обратитесь к администратору", 
                         position: "center"}
                     ) 
-                    setIsShowNotification(true);
                 } else {
                   setIsNeedLogin(true);
                 }
@@ -42,36 +40,31 @@ function App(){
                 setNotificationOptions({textOfNotification: "Проблемы с сервером, обратитесь к администратору", 
                     position: "center"}
                 ) 
-                setIsShowNotification(true);
             }
         });
       }, []);
+
     return(
         <Fragment>
             <Header />
             <NotificationContext.Provider 
-                value={{setIsShowNotification: setIsShowNotification, 
-                setNotificationOptions: setNotificationOptions}
-                }
+                value={setNotificationOptions}
             >
                 <TaskPage />
             </NotificationContext.Provider>
             <Footer />
             {isNeedLogin ?
                 <NotificationContext.Provider 
-                    value={{setIsShowNotification: setIsShowNotification, 
-                        setNotificationOptions: setNotificationOptions}
-                    }
+                    value={setNotificationOptions}
                 >
                     <LoginWindow setIsNeedLogin={setIsNeedLogin}/>
                 </NotificationContext.Provider>
             : null
             }
-            {isShowNotification ? 
-             <Notification
-                setIsShowNotification={setIsShowNotification}
-                notificationOptions={notificationOptions}/>
-            : null
+            {(notificationOptions) && 
+             <Notification notificationOptions={notificationOptions} 
+                setNotificationOptions={setNotificationOptions}
+             />
             }
         </Fragment>
     );

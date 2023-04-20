@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { api } from "Project/api/api.js"
 import "./is-completed.css";
 
-export function IsCompletedCheckbox({isCompleted, getEditedTask, updateTasksFromServer, currentTaskID}) {
+export const IsCompletedCheckbox = ({isCompleted, getEditedTask, updateTasksFromServer, currentTaskID}) => {
   const updateTask = (currentTaskID) => {
     const editedTask = getEditedTask(currentTaskID);
     editedTask.data.isCompleted = !editedTask.data.isCompleted;
@@ -13,9 +13,7 @@ export function IsCompletedCheckbox({isCompleted, getEditedTask, updateTasksFrom
     <input className="is-completed"
       onClick={() => {
         updateTask(currentTaskID)
-        .then( () => 
-        {updateTasksFromServer()}
-        )
+        .then(updateTasksFromServer)
       }}
       type="checkbox"
       defaultChecked={isCompleted}

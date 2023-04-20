@@ -1,6 +1,6 @@
 import { monthVocabulary } from "./monthVocabulary";
 
-export function dateFormat(dateString) {
+export const dateFormat = (dateString) => {
   const dateObject = new Date(dateString);
   const numberOfMonth = dateObject.getMonth();
   const dayOfMonth = dateObject.getDate();

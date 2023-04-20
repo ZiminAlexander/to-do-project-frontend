@@ -4,12 +4,12 @@ import  { api } from "Project/api/api";
 import { NotificationContext } from "Project/index.js";
 import "./login-window.css";
 
-export function LoginWindow({setIsNeedLogin}){
+export const LoginWindow = ({setIsNeedLogin}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
     const [isErrorLogin, setIsErrorLogin] = useState(false);
-    const {setIsShowNotification, setNotificationOptions} = React.useContext(NotificationContext);
+    const setNotificationOptions = React.useContext(NotificationContext);
     const loginButtonCallback = () => {
         api.users.login(login, password)
         .then(() => {
@@ -17,14 +17,12 @@ export function LoginWindow({setIsNeedLogin}){
             setNotificationOptions({textOfNotification: "Успешный вход", 
                 position: "right-bottom",
             }) 
-            setIsShowNotification(true);
         })
         .catch(() => {
             setIsErrorLogin(true);
             setNotificationOptions({textOfNotification: "Неправильный логин или пароль", 
                 position: "right-bottom",
             }) 
-            setIsShowNotification(true);
         });
     }
     const enterButtonForLogin = (event) => {

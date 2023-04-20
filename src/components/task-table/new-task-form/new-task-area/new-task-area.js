@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./new-task-area.css";
 
-export function NewTaskArea({setNewTask, submitTask, setNewTaskArea, isLoadingNewTask}) {
+export const NewTaskArea = ({setNewTask, submitTask, setNewTaskArea, isLoadingNewTask}) => {
 
   //Callback для поля ввода на нажатие "Enter"
-  const enterButtonForNewTaskAreaCallback = function(event) {
+  const enterButtonForNewTaskAreaCallback = (event) => {
     // Если кнопка не 'Enter' выйти
     if (event.keyCode !== 13) {
       return;

@@ -1,7 +1,7 @@
 import "Project/components/header/header.css"
 import React from 'react';
 
-export function Header(){
+export const Header = () => {
     return(
         <header className="header">
             <img src="images/complete.svg" 

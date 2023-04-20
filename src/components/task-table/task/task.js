@@ -9,11 +9,11 @@ import { NotificationContext } from "Project/index.js";
 import { api } from "Project/api/api";
 import "./task.css";
 
-export function Tasks({allTasks, getEditedTask, setEditTaskID, updateTasksFromServer}){
+export const Tasks = ({allTasks, getEditedTask, setEditTaskID, updateTasksFromServer}) => {
 
   const [deleteTaskID, setDeleteTaskID] = useState("");
   const [isLoadingDelete, setIsLoadingDelete] = useState(null);
-  const {setIsShowNotification, setNotificationOptions} = React.useContext(NotificationContext);
+  const setNotificationOptions = React.useContext(NotificationContext);
   const createTasksArray = (currentTask, i) => {
 
     const isCompleted = currentTask.isCompleted;
@@ -60,25 +60,24 @@ export function Tasks({allTasks, getEditedTask, setEditTaskID, updateTasksFromSe
           setDeleteTaskID("");
         },
       }) 
-      setIsShowNotification(true);
     }
   }, [deleteTaskID])
 
-  let TasksArray = [];
+  let tasksArray = [];
   if (allTasks === "ServerError") {
-    TasksArray = 
+    tasksArray = 
       <div className="task form panel"> 
         Нет соединения с сервером, пожалуйста, обратитесь к администратору.
       </div>
   } else if (allTasks === "NoTasks") {
-    TasksArray = 
+    tasksArray = 
       <div className="task form panel"> 
         На данный момент задач нет, добавьте новую задачу, или введите другие критерии поиска.
       </div>
-  } else TasksArray = allTasks.map(createTasksArray)
+  } else tasksArray = allTasks.map(createTasksArray)
   
 
-  return(TasksArray);
+  return(tasksArray);
 
 }
 

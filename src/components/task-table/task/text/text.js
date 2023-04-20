@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./text.css";
 
-export function Text({title, currentTaskID, setEditTaskID}) {
+export const Text = ({title, currentTaskID, setEditTaskID}) => {
 
   return (
     <div className="text"

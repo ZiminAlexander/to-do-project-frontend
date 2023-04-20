@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./delete-task-button.css";
 
-export function DeleteTaskButton({currentTaskID, setDeleteTaskID, isLoadingDelete}) {
+export const DeleteTaskButton = ({currentTaskID, setDeleteTaskID, isLoadingDelete}) => {
 
   return (
     <button className={"small-button remove-button delete-task-button" + (isLoadingDelete? " loading-spinner" : "")}

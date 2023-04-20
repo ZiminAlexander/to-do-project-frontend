@@ -1,15 +1,17 @@
 import React, { Fragment, useEffect } from "react";
+import PropTypes from 'prop-types';
 import "./notification.css";
 
-export function Notification({setIsShowNotification, notificationOptions}) {
+export const Notification = ({notificationOptions, setNotificationOptions}) => {
 
   const textOfNotification = notificationOptions.textOfNotification;
   const position = notificationOptions.position;
   
-  useEffect(() => {if (position === "right-bottom"){
-    setTimeout(() => setIsShowNotification(false), 3000);
+  useEffect(() => {
+    if (position === "right-bottom"){
+    setTimeout(() => setNotificationOptions(null), 3000);
     }
-  }, [])
+  }, [position])
   
   const NotificationContent =     
     <div className={"notification panel" + 
@@ -23,9 +25,8 @@ export function Notification({setIsShowNotification, notificationOptions}) {
       { (position !== "center") ?
           <button className="small-button red-button close-notification-button"
             onClick={() => {
-              setIsShowNotification(false);
+              setNotificationOptions(null);
               notificationOptions.noCallback();
-              return;
               }
             }
           > 
@@ -38,18 +39,16 @@ export function Notification({setIsShowNotification, notificationOptions}) {
         <div className="answer-box">
           <button className="big-button answer-button"
             onClick={() => {
-              setIsShowNotification(false);
+              setNotificationOptions(null);
               notificationOptions.yesCallback();
-              return;
             }}
           >
             Да
           </button>
           <button className="big-button answer-button"
             onClick={() => {
-              setIsShowNotification(false);
+              setNotificationOptions(null);
               notificationOptions.noCallback();
-              return;
             }}
           >
             Нет
@@ -87,4 +86,13 @@ export function Notification({setIsShowNotification, notificationOptions}) {
   );
 
 }
-  
+
+Notification.propTypes = {
+  notificationOptions: PropTypes.shape({
+    textOfNotification: PropTypes.string.isRequired,
+    position: PropTypes.string.isRequired,
+    yesCallback: PropTypes.func,
+    noCallback: PropTypes.func,
+  }).isRequired, 
+  setNotificationOptions: PropTypes.func.isRequired,
+}

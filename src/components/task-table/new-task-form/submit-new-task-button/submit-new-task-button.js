@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./submit-new-task-button.css";
 
-export function SubmitNewTaskButton({submitTask, isLoadingNewTask}) {
+export const SubmitNewTaskButton = ({submitTask, isLoadingNewTask}) => {
 
   return (
     <button className={"submit-new-task-button add-button small-button" + (isLoadingNewTask? " loading-spinner" : "")}

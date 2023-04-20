@@ -6,21 +6,19 @@ import { NotificationContext } from "Project/index.js";
 import { api } from "Project/api/api";
 import "./new-task-form.css";
 
-export function NewTaskForm({updateTasksFromServer}) {
+export const NewTaskForm = ({updateTasksFromServer}) => {
 
   const [newTask, setNewTask] = useState("");
   const [newTaskArea, setNewTaskArea] = useState(null);
   const [isLoadingNewTask, setIsLoadingNewTask] = useState(false);
-
-  const {setIsShowNotification, setNotificationOptions} = React.useContext(NotificationContext);
+  const setNotificationOptions = React.useContext(NotificationContext);
   
   //Отправить задачу на сервер 
-  const submitTask = function() {
+  const submitTask = () => {
     if ((newTask.trim() === "") || (!newTaskArea)) {
       setNotificationOptions({textOfNotification: "Нельзя добавить пустую задачу", 
         position: "right-bottom"}
       ) 
-      setIsShowNotification(true);
       return;
     }
     //Добавляем индикатор загрузки на кнопку +

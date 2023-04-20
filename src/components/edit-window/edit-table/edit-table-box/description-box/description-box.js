@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { TaskEditFullTextTitle } from "./task-edit-full-text-title/task-edit-full-text-title";
 import { DescriptionEditBox } from "./description-edit-box/description-edit-box";
 
-export function DescriptionBox({editDescription, setDescription, getNewDescription}) {
+export const DescriptionBox = ({newDescription, setNewDescription}) => {
 
   return(
     <div className="description-box">
       <TaskEditFullTextTitle />
-      <DescriptionEditBox editDescription={editDescription}
-        setDescription={setDescription}
-        getNewDescription={getNewDescription}
+      <DescriptionEditBox newDescription={newDescription}
+        setNewDescription={setNewDescription}
       />
     </div>
   );
@@ -18,7 +17,6 @@ export function DescriptionBox({editDescription, setDescription, getNewDescripti
 }
 
 DescriptionBox.propTypes = {
-  editDescription: PropTypes.string.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  getNewDescription: PropTypes.func.isRequired,
+  newDescription: PropTypes.string.isRequired,
+  setNewDescription: PropTypes.func.isRequired,
 }

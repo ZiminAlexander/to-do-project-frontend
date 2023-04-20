@@ -1,7 +1,7 @@
 import "Project/components/footer/footer.css"
 import React from 'react';
 
-export function Footer(){
+export const Footer = () => {
     
     return(
         <footer className="footer">
@@ -17,7 +17,7 @@ export function Footer(){
                     </a>
                 </div>
                 <div className="author">
-                    Zimin Alexander, Belousov Nikita
+                    Belousova Pauline, Kudryavtsev Nikita, Belousov Nikita, Zimin Alexander
                 </div>
             </div>
             <div className="updated"> 

@@ -1,7 +1,7 @@
 import React from "react";
 import "./loading-window.css";
 
-export function LoadingWindow() {
+export const LoadingWindow = () => {
 
     return(
       <div className="loading-window">

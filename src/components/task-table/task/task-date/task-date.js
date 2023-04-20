@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./task-date.css";
 
-export function TaskDate({createdDate}) {
+export const TaskDate = ({createdDate}) => {
   
   return(
     <div className="task-date">

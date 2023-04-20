@@ -1,7 +1,7 @@
 import React from "react";
 import "./task-edit-title.css";
 
-export function TaskEditTitle() {
+export const TaskEditTitle = () => {
 
   return(
     <div className="task-edit-title">

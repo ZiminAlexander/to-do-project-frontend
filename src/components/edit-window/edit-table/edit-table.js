@@ -4,7 +4,7 @@ import { EditTableBox } from "./edit-table-box/edit-table-box";
 import "./edit-table.css";
 import "./edit-button.css";
 
-export function EditTable({editedTask, setEditTaskID, updateTasksFromServer}) {
+export const EditTable = ({editedTask, setEditTaskID, updateTasksFromServer}) => {
   
   return (
     <div className="edit-table panel">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { EditTable } from "./edit-table/edit-table";
 import "./edit-window.css";
 
-export function EditWindow({editedTask, setEditTaskID, updateTasksFromServer}) {
+export const EditWindow = ({editedTask, setEditTaskID, updateTasksFromServer}) => {
   return(
     <div className="edit-window window">
       <EditTable editedTask={editedTask}
