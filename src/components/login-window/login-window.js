@@ -41,7 +41,7 @@ export const LoginWindow = ({setIsNeedLogin}) => {
                     Авторизация
                 </div>
                 <div className="login-input-box login-box">
-                    <input className={"login-input login-text-input" + (isErrorLogin ? " error-login" : "")} 
+                    <input className={`login-input login-text-input ${isErrorLogin ? " error-login" : ""}`} 
                         placeholder='Введите логин'
                         type="text"
                         onInput={(event) => setLogin(event.target.value)}
@@ -50,7 +50,7 @@ export const LoginWindow = ({setIsNeedLogin}) => {
                     <div className='login-empty right-icon'/>
                 </div>
                 <div className='password-input-box login-box'>
-                    <input className={"password-input login-text-input" + (isErrorLogin ? " error-login" : "")}
+                    <input className={`password-input login-text-input ${isErrorLogin ? " error-login" : ""}`}
                         placeholder='Введите пароль'
                         type= {isHiddenPassword ? "password" : "text"}
                         onKeyDown={enterButtonForLogin}

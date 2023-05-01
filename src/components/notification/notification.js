@@ -2,36 +2,36 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from 'prop-types';
 import "./notification.css";
 
-export const Notification = ({notificationOptions, setNotificationOptions}) => {
+export const Notification = ({ notificationOptions, setNotificationOptions }) => {
 
   const textOfNotification = notificationOptions.textOfNotification;
   const position = notificationOptions.position;
-  
+
   useEffect(() => {
-    if (position === "right-bottom"){
-    setTimeout(() => setNotificationOptions(null), 3000);
+    if (position === "right-bottom") {
+      setTimeout(() => setNotificationOptions(null), 3000);
     }
   }, [position])
-  
-  const NotificationContent =     
-    <div className={"notification panel" + 
-      (((position === "center-confirm") ? " answer-position" : "")) + 
-      (((position === "center") ? " center" : ""))
-      }
+
+  const NotificationContent =
+    <div className={`notification panel ${
+      (position === "center-confirm") ? " answer-position" : ""} ${
+      (position === "center") ? " center" : ""}`
+    }
     >
       <div className="text-of-notification">
         {textOfNotification}
       </div>
-      { (position !== "center") ?
-          <button className="small-button red-button close-notification-button"
-            onClick={() => {
-              setNotificationOptions(null);
-              notificationOptions.noCallback();
-              }
-            }
-          > 
-            × 
-          </button>
+      {(position !== "center") ?
+        <button className="small-button red-button close-notification-button"
+          onClick={() => {
+            setNotificationOptions(null);
+            notificationOptions.noCallback();
+          }
+          }
+        >
+          ×
+        </button>
         :
         null
       }
@@ -52,33 +52,33 @@ export const Notification = ({notificationOptions, setNotificationOptions}) => {
             }}
           >
             Нет
-          </button> 
-        </div> 
-        : 
+          </button>
+        </div>
+        :
         null
       }
     </div>
-  
-  return(
+
+  return (
     <Fragment>
-      {(position === "right-bottom") ? 
-          <>
-            {NotificationContent}
-          </>
+      {(position === "right-bottom") ?
+        <>
+          {NotificationContent}
+        </>
         :
-          null
+        null
       }
       {(position === "center-confirm") ?
-          <div className="notification-window">
-            {NotificationContent}
-          </div>
+        <div className="notification-window">
+          {NotificationContent}
+        </div>
         :
         null
       }
       {(position === "center") ?
-          <div className="notification-window no-opacity-window">
-            {NotificationContent}
-          </div>
+        <div className="notification-window no-opacity-window">
+          {NotificationContent}
+        </div>
         :
         null
       }
@@ -93,6 +93,6 @@ Notification.propTypes = {
     position: PropTypes.string.isRequired,
     yesCallback: PropTypes.func,
     noCallback: PropTypes.func,
-  }).isRequired, 
+  }).isRequired,
   setNotificationOptions: PropTypes.func.isRequired,
 }

@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./new-task-area.css";
 
-export const NewTaskArea = ({setNewTask, submitTask, setNewTaskArea, isLoadingNewTask}) => {
-
+export const NewTaskArea = ({newTask, setNewTask, submitTaskCallback}) => {
   //Callback для поля ввода на нажатие "Enter"
   const enterButtonForNewTaskAreaCallback = (event) => {
     // Если кнопка не 'Enter' выйти
@@ -11,7 +10,7 @@ export const NewTaskArea = ({setNewTask, submitTask, setNewTaskArea, isLoadingNe
       return;
     }
     event.preventDefault();
-    submitTask(event);
+    submitTaskCallback();
   }
 
   return (
@@ -20,8 +19,7 @@ export const NewTaskArea = ({setNewTask, submitTask, setNewTaskArea, isLoadingNe
         onKeyDown={enterButtonForNewTaskAreaCallback}
         placeholder="Новая задача"
         onChange={(event) => {setNewTask(event.target.value)}}
-        onClick={(event) => {setNewTaskArea(event.target)}}
-        value={isLoadingNewTask? "" : undefined}
+        value={newTask}
       />
     </div>
   );
@@ -29,8 +27,7 @@ export const NewTaskArea = ({setNewTask, submitTask, setNewTaskArea, isLoadingNe
 }
 
 NewTaskArea.propTypes = {
+  newTask: PropTypes.string.isRequired, 
   setNewTask: PropTypes.func.isRequired, 
-  submitTask: PropTypes.func.isRequired, 
-  setNewTaskArea: PropTypes.func.isRequired, 
-  isLoadingNewTask: PropTypes.bool.isRequired,
+  submitTaskCallback: PropTypes.func.isRequired, 
 }

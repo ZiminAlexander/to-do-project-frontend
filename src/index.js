@@ -16,10 +16,7 @@ export const NotificationContext = React.createContext();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-//Собираем страницу
-root.render(<App />)
-
-function App(){
+const App = () => {
 
     const [isNeedLogin, setIsNeedLogin] = useState(false);
     const [notificationOptions, setNotificationOptions] = useState(null);
@@ -69,3 +66,6 @@ function App(){
         </Fragment>
     );
 }
+
+//Собираем страницу
+root.render(<App />)

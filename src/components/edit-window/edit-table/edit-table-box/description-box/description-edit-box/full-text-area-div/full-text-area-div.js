@@ -6,14 +6,14 @@ export const FullTextAreaDiv = ({newDescription, setNewDescription, isEditEnable
 
   return(
     <div className="full-text-area-div">
-      <textarea className={"task-edit-full-text text-input" + (!isEditEnable ? " no-display" : "")}
+      <textarea className={`task-edit-full-text text-input ${!isEditEnable ? " no-display" : ""}`}
         onChange={(event) => {
           setNewDescription(event.target.value);
         }}
         defaultValue={newDescription}
       >
       </textarea>
-      <div className={"task-full-text text-input" + (isEditEnable ? " no-display" : "")}
+      <div className={`task-full-text text-input ${isEditEnable ? " no-display" : ""}`}
         dangerouslySetInnerHTML={{__html: newDescription}}
       >
       </div>

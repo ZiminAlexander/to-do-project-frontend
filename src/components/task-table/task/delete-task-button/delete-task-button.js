@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./delete-task-button.css";
 
-export const DeleteTaskButton = ({currentTaskID, setDeleteTaskID, isLoadingDelete}) => {
+export const DeleteTaskButton = ({deleteTask, isLoadingDelete}) => {
 
   return (
-    <button className={"small-button remove-button delete-task-button" + (isLoadingDelete? " loading-spinner" : "")}
+    <button className={`small-button remove-button delete-task-button ${isLoadingDelete ? " loading-spinner" : ""}`}
       onClick={() => {
-        setDeleteTaskID(currentTaskID);
+          deleteTask();
         }
       }
     />
@@ -16,7 +16,6 @@ export const DeleteTaskButton = ({currentTaskID, setDeleteTaskID, isLoadingDelet
 }
 
 DeleteTaskButton.propTypes = {
-  currentTaskID: PropTypes.string.isRequired, 
-  setDeleteTaskID: PropTypes.func.isRequired, 
+  deleteTask: PropTypes.func.isRequired, 
   isLoadingDelete: PropTypes.bool,
 }

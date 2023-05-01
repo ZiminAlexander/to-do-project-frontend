@@ -5,7 +5,7 @@ import "./save-edit-button.css";
 export const SaveEditButton = ({saveEditButtonCallBack, isLoadingSave}) => {
 
   return(
-    <button className={"save-edit-button big-button" + (isLoadingSave ? " loading-spinner" : "")}
+    <button className={`save-edit-button big-button ${isLoadingSave ? " loading-spinner" : ""}`}
       onClick={saveEditButtonCallBack}
     >
       Сохранить и выйти

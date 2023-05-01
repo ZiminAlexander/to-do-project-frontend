@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./text.css";
 
-export const Text = ({title, currentTaskID, setEditTaskID}) => {
+export const Text = ({title, openEditWindow}) => {
 
   return (
     <div className="text"
       onClick={() => {
-        setEditTaskID(currentTaskID);
+        openEditWindow();
       }}
     >
       {title}
@@ -18,6 +18,5 @@ export const Text = ({title, currentTaskID, setEditTaskID}) => {
 
 Text.propTypes = {
   title: PropTypes.string.isRequired,
-  currentTaskID: PropTypes.string.isRequired,
-  setEditTaskID: PropTypes.func.isRequired,
+  openEditWindow: PropTypes.func.isRequired,
 }
