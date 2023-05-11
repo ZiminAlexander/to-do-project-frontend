@@ -19,6 +19,7 @@ export const TaskPage = () => {
 
   const setNotificationOptions = React.useContext(NotificationContext);
   const [allTasks, setAllTasks] = useState(null);
+  const [tasksError, setTasksError] = useState("ServerOk");
   const [searchFilter, setSearchFilter] = useState("");
   const [editTaskID, setEditTaskID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -109,7 +110,7 @@ export const TaskPage = () => {
       })
       .catch((error) => {
         console.log(error)
-        setAllTasks("ServerError");
+        setTasksError("ServerError");
         setIsLoading(false);
       });
   }
@@ -214,15 +215,14 @@ export const TaskPage = () => {
 
   //Создать отображение всех задач
   useEffect(() => {
-    if (allTasks === null) {
-      return;
-    }
-    if (allTasks === "ServerError") {
+    if (tasksError === "ServerError") {
       const tasksArrayVar =
         <div className="task form panel">
           Нет соединения с сервером, пожалуйста, обратитесь к администратору.
         </div>
       setTaskArray(tasksArrayVar);
+    } else if (allTasks === null) {
+      return;
     } else if (allTasks === "NoTasks") {
       const tasksArrayVar =
         <div className="task form panel">
@@ -233,7 +233,7 @@ export const TaskPage = () => {
       const tasksArrayVar = allTasks.map(createTasksArray);
       setTaskArray(tasksArrayVar);
     }
-  }, [allTasks])
+  }, [allTasks, tasksError])
 
   //Изменилась ли задача в окне редактирования?
   const isChangeTask = () => {
@@ -308,7 +308,7 @@ export const TaskPage = () => {
         <NewTaskForm submitTask={submitTask} />
       </div>
       <div className="task-field">
-        {(allTasks !== null) ?
+        {(tasksArray !== null) ?
           <Tasks tasksArray={tasksArray} />
           : null
         }
