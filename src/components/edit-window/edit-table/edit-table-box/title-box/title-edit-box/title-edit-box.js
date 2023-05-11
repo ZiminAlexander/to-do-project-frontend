@@ -4,25 +4,25 @@ import { TextAreaDiv } from "./text-area-div/text-area-div";
 import { EditTextButton } from "./edit-text-button/edit-text-button";
 import "./title-edit-box.css";
 
-export const TitleEditBox = ({newTitle, setNewTitle}) => {
-  const [isEditEnable, setIsEditEnable] = useState(false);
-  const changeIsEditEnable = () => {
-    setIsEditEnable(!isEditEnable);
+export const TitleEditBox = ({title, setTitle}) => {
+  const [isEditable, setIsEditable] = useState(false);
+  const toogleIsEditable = () => {
+    setIsEditable(!isEditable);
   }
 
   return(
     <div className="title-edit-box">
-      <TextAreaDiv newTitle={newTitle}
-        setNewTitle={setNewTitle}
-        isEditEnable={isEditEnable}
+      <TextAreaDiv title={title}
+        setTitle={setTitle}
+        isEditable={isEditable}
       />
-      <EditTextButton changeIsEditEnable={changeIsEditEnable} />
+      <EditTextButton toogleIsEditable={toogleIsEditable} />
     </div>
   );
 
 }
 
 TitleEditBox.propTypes = {
-  newTitle: PropTypes.string.isRequired,
-  setNewTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  setTitle: PropTypes.func.isRequired,
 }

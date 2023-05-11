@@ -6,9 +6,10 @@ export const NewTaskArea = ({newTask, setNewTask, submitTaskCallback}) => {
   //Callback для поля ввода на нажатие "Enter"
   const enterButtonForNewTaskAreaCallback = (event) => {
     // Если кнопка не 'Enter' выйти
-    if (event.keyCode !== 13) {
+    if (event.code !== "Enter") {
       return;
     }
+    debugger
     event.preventDefault();
     submitTaskCallback();
   }

@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-export const EditTextButton = ({changeIsEditEnable}) => {
+export const EditTextButton = ({toogleIsEditable}) => {
 
   return(
     <button className={`edit-button small-button`}
-      onClick={changeIsEditEnable}
+      onClick={toogleIsEditable}
     />
   );
 
 }
 
 EditTextButton.propTypes = {
-  changeIsEditEnable: PropTypes.func.isRequired,
+  toogleIsEditable: PropTypes.func.isRequired,
 }

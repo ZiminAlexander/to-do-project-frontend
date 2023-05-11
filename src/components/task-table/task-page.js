@@ -283,6 +283,20 @@ export const TaskPage = () => {
     })
   }
 
+  //Создание объектов редактируемой задачи
+  const editedTask = {
+    title: newTitleForEditedTask,
+    description: newDescriptionForEditedTask,
+    isLoadingSave: isLoadingSaveEditedTask
+  }
+
+  const onChangeEditedTask = {
+    setTitle: setNewTitleForEditedTask,
+    setDescription: setNewDescriptionForEditedTask,
+    saveEditTask: saveEditButtonCallBack,
+    onClose: closeEditButtonCallback
+  } 
+
   //Рендеринг Страницы задач
   return (
     <div className="task-page">
@@ -305,13 +319,8 @@ export const TaskPage = () => {
       }
       {(editTaskID !== "") ?
         <EditWindow
-          newTitle={newTitleForEditedTask}
-          setNewTitle={setNewTitleForEditedTask}
-          newDescription={newDescriptionForEditedTask}
-          setNewDescription={setNewDescriptionForEditedTask}
-          saveEditButtonCallBack={saveEditButtonCallBack}
-          isLoadingSave={isLoadingSaveEditedTask}
-          closeEditButtonCallback={closeEditButtonCallback}
+          editedTask={editedTask}
+          onChangeEditedTask={onChangeEditedTask}
         />
         : null
       }

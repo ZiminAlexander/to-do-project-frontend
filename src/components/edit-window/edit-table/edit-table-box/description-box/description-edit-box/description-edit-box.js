@@ -4,26 +4,26 @@ import { FullTextAreaDiv } from "./full-text-area-div/full-text-area-div";
 import { EditFullTextButton } from "./edit-full-text-button/edit-full-text-button";
 import "./description-edit-box.css";
 
-export const DescriptionEditBox = ({newDescription, setNewDescription}) => {
+export const DescriptionEditBox = ({description, setDescription}) => {
 
-  const [isEditEnable, setIsEditEnable] = useState(false);
-  const changeIsEditEnable = () => {
-    setIsEditEnable(!isEditEnable);
+  const [isEditable, setIsEditable] = useState(false);
+  const toogleIsEditable = () => {
+    setIsEditable(!isEditable);
   }
 
   return(
     <div className="description-edit-box">
-      <FullTextAreaDiv newDescription={newDescription}
-         setNewDescription={setNewDescription}
-         isEditEnable={isEditEnable}
+      <FullTextAreaDiv description={description}
+         setDescription={setDescription}
+         isEditable={isEditable}
       />
-      <EditFullTextButton changeIsEditEnable={changeIsEditEnable} />
+      <EditFullTextButton toogleIsEditable={toogleIsEditable} />
     </div>
   );
 
 }
 
 DescriptionEditBox.propTypes = {
-  setNewDescription: PropTypes.func.isRequired,
-  newDescription: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  setDescription: PropTypes.func.isRequired,
 }

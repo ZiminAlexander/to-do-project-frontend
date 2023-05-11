@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./close-edit-button.css";
 
-export const CloseEditButton = ({closeEditButtonCallback}) => {
+export const CloseEditButton = ({onClose}) => {
 
   return(
     <button className="small-button red-button close-edit-button"
-      onClick={closeEditButtonCallback}
+      onClick={onClose}
     >
       ×
     </button>
@@ -14,5 +14,5 @@ export const CloseEditButton = ({closeEditButtonCallback}) => {
 }
 
 CloseEditButton.propTypes = {
-  closeEditButtonCallback: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

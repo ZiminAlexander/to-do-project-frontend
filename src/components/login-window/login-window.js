@@ -27,7 +27,7 @@ export const LoginWindow = ({setIsNeedLogin}) => {
     }
     const enterButtonForLogin = (event) => {
         // Если кнопка не 'Enter' выйти
-        if (event.keyCode !== 13) {
+        if (event.code !== "Enter") {
           return;
         }
         event.preventDefault();

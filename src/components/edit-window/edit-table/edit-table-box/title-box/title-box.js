@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { TaskEditTitle } from "./task-edit-title/task-edit-title";
 import { TitleEditBox } from "./title-edit-box/title-edit-box";
 
-export const TitleBox = ({newTitle, setNewTitle}) => {
+export const TitleBox = ({title, setTitle}) => {
 
   return(
     <div className="title-box">
       <TaskEditTitle />
-      <TitleEditBox newTitle={newTitle}
-        setNewTitle={setNewTitle}
+      <TitleEditBox title={title}
+        setTitle={setTitle}
       />
     </div>
   );
@@ -17,6 +17,6 @@ export const TitleBox = ({newTitle, setNewTitle}) => {
 }
 
 TitleBox.propTypes = {
-  newTitle: PropTypes.string.isRequired,
-  setNewTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  setTitle: PropTypes.func.isRequired,
 }

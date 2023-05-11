@@ -6,33 +6,32 @@ import { SaveEditButton } from "./save-edit-button/save-edit-button";
 import { CloseEditButton } from "./close-edit-button/close-edit-button";
 import "./edit-table-box.css";
 
-export const EditTableBox = ({newTitle, setNewTitle, newDescription, 
-  setNewDescription, saveEditButtonCallBack, isLoadingSave,
-  closeEditButtonCallback}) => {
+export const EditTableBox = ({editedTask, onChangeEditedTask}) => {
   
   return(
     <div className="edit-table-box">
-      <TitleBox newTitle={newTitle}
-        setNewTitle={setNewTitle}
+      <TitleBox title={editedTask.title}
+        setTitle={onChangeEditedTask.setTitle}
       />
-      <DescriptionBox newDescription={newDescription}
-        setNewDescription={setNewDescription}
+      <DescriptionBox description={editedTask.description}
+        setDescription={onChangeEditedTask.setDescription}
       />
-      <SaveEditButton saveEditButtonCallBack={saveEditButtonCallBack}
-        isLoadingSave={isLoadingSave}
+      <SaveEditButton saveEditTask={onChangeEditedTask.saveEditTask}
+        isLoadingSave={editedTask.isLoadingSave}
       />
-      <CloseEditButton closeEditButtonCallback={closeEditButtonCallback} />
+      <CloseEditButton onClose={onChangeEditedTask.onClose} />
     </div>
   );
 
 }
 
 EditTableBox.propTypes = {
-  newTitle: PropTypes.string.isRequired, 
-  setNewTitle: PropTypes.func.isRequired,  
-  newDescription: PropTypes.string.isRequired, 
-  setNewDescription: PropTypes.func.isRequired, 
-  saveEditButtonCallBack: PropTypes.func.isRequired, 
-  isLoadingSave: PropTypes.bool.isRequired, 
-  closeEditButtonCallback: PropTypes.func.isRequired,
+  editedTask: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    isLoadingSave: PropTypes.bool,
+  }).isRequired,
+  onChangeEditedTask: PropTypes.objectOf(
+    PropTypes.func
+  ).isRequired 
 }

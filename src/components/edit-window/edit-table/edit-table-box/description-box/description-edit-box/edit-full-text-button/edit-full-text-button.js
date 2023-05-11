@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-export const EditFullTextButton = ({changeIsEditEnable}) => {
+export const EditFullTextButton = ({toogleIsEditable}) => {
 
   return(
     <button className="edit-button small-button" 
-      onClick={changeIsEditEnable}
+      onClick={toogleIsEditable}
     />
   );
 
 }
 
 EditFullTextButton.propTypes = {
-  changeIsEditEnable: PropTypes.func.isRequired, 
+  toogleIsEditable: PropTypes.func.isRequired, 
 }

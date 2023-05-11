@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "./save-edit-button.css";
 
-export const SaveEditButton = ({saveEditButtonCallBack, isLoadingSave}) => {
+export const SaveEditButton = ({saveEditTask, isLoadingSave}) => {
 
   return(
     <button className={`save-edit-button big-button ${isLoadingSave ? " loading-spinner" : ""}`}
-      onClick={saveEditButtonCallBack}
+      onClick={saveEditTask}
     >
       Сохранить и выйти
     </button>
@@ -14,6 +14,6 @@ export const SaveEditButton = ({saveEditButtonCallBack, isLoadingSave}) => {
 }
 
 SaveEditButton.propTypes = {
-  saveEditButtonCallBack: PropTypes.func.isRequired, 
+  saveEditTask: PropTypes.func.isRequired, 
   isLoadingSave: PropTypes.bool.isRequired,
 }
