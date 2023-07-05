@@ -1,12 +1,29 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createFullTextAreaDiv } from "./full-text-area-div/full-text-area-div";
-import { createEditFullTextButton } from "./edit-full-text-button/edit-full-text-button";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
+import { FullTextAreaDiv } from "./full-text-area-div/full-text-area-div";
+import { EditFullTextButton } from "./edit-full-text-button/edit-full-text-button";
 import "./description-edit-box.css";
 
-export function createDescriptionEditBox() {
-  const descriptionEditBox = createNewElement("div", "description-edit-box");
-  descriptionEditBox.append(createFullTextAreaDiv());
-  descriptionEditBox.append(createEditFullTextButton());
+export const DescriptionEditBox = ({description, setDescription}) => {
 
-  return descriptionEditBox;
+  const [isEditable, setIsEditable] = useState(false);
+  const toogleIsEditable = () => {
+    setIsEditable(!isEditable);
+  }
+
+  return(
+    <div className="description-edit-box">
+      <FullTextAreaDiv description={description}
+         setDescription={setDescription}
+         isEditable={isEditable}
+      />
+      <EditFullTextButton toogleIsEditable={toogleIsEditable} />
+    </div>
+  );
+
+}
+
+DescriptionEditBox.propTypes = {
+  description: PropTypes.string.isRequired,
+  setDescription: PropTypes.func.isRequired,
 }

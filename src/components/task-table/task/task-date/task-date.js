@@ -1,8 +1,17 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
+import PropTypes from 'prop-types';
 import "./task-date.css";
 
-export function createTaskDate() {
-  const newTaskDate = createNewElement("div", "task-date");
+export const TaskDate = ({createdDate}) => {
+  
+  return(
+    <div className="task-date">
+      {createdDate}
+    </div>
+  );
 
-  return newTaskDate;
+}
+
+TaskDate.propTypes = {
+  createdDate: PropTypes.string.isRequired,
 }

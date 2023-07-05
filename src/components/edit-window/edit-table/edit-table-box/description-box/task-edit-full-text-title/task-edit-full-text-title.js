@@ -1,11 +1,11 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
 import "./task-edit-full-text-title.css";
-export function createTaskEditFullTextTitle() {
-  const taskEditFullTextTitle = createNewElement(
-    "div",
-    "task-edit-full-text-title"
-  );
-  taskEditFullTextTitle.innerHTML = "Описание";
+export const TaskEditFullTextTitle = () => {
 
-  return taskEditFullTextTitle;
+  return(
+    <div className="task-edit-full-text-title">
+      Описание
+    </div>
+  );
+
 }

@@ -1,35 +1,34 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { submitTask } from "../submit-new-task-button/submit-new-task-button";
+import React from "react";
+import PropTypes from 'prop-types';
 import "./new-task-area.css";
 
-export function createNewTaskArea() {
-  const inputTextDiv = createNewElement("div", "input-text-div");
-  const newTaskArea = createNewElement("textarea", [
-    "new-task-area",
-    "text-input",
-  ]);
-  newTaskArea.placeholder = "Новая задача";
-  newTaskArea.addEventListener("keydown", enterButtonForNewTaskAreaCallback);
-  newTaskArea.addEventListener("input", autoSizeNewTaskAreaCallback);
-  inputTextDiv.append(newTaskArea);
-  return inputTextDiv;
+export const NewTaskArea = ({newTask, setNewTask, submitTaskCallback}) => {
+  //Callback для поля ввода на нажатие "Enter"
+  const enterButtonForNewTaskAreaCallback = (event) => {
+    // Если кнопка не 'Enter' выйти
+    if (event.code !== "Enter") {
+      return;
+    }
+    debugger
+    event.preventDefault();
+    submitTaskCallback();
+  }
+
+  return (
+    <div className="input-text-div">
+      <textarea className="textarea new-task-area text-input" 
+        onKeyDown={enterButtonForNewTaskAreaCallback}
+        placeholder="Новая задача"
+        onChange={(event) => {setNewTask(event.target.value)}}
+        value={newTask}
+      />
+    </div>
+  );
+
 }
 
-//Callback для поля ввода на нажатие "Enter"
-function enterButtonForNewTaskAreaCallback(event) {
-  // Если кнопка не 'Enter' выйти
-  if (event.keyCode !== 13) {
-    return;
-  }
-  event.preventDefault();
-  submitTask();
-}
-
-//Callback для автоизменения размера для submit-text textarea
-function autoSizeNewTaskAreaCallback() {
-  if (this.clientHeight < this.scrollHeight) {
-    this.style.height = this.scrollHeight + "px";
-  } else if (this.clientHeight > this.scrollHeight) {
-    this.style.height = this.scrollHeight + "px";
-  }
+NewTaskArea.propTypes = {
+  newTask: PropTypes.string.isRequired, 
+  setNewTask: PropTypes.func.isRequired, 
+  submitTaskCallback: PropTypes.func.isRequired, 
 }

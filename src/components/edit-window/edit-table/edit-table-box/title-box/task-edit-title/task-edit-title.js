@@ -1,9 +1,12 @@
+import React from "react";
 import "./task-edit-title.css";
-import { createNewElement } from "Project/helpers/createNewElement";
 
-export function createTaskEditTitle() {
-  const taskEditTitle = createNewElement("div", "task-edit-title");
-  taskEditTitle.innerHTML = "Краткое содержание";
+export const TaskEditTitle = () => {
 
-  return taskEditTitle;
+  return(
+    <div className="task-edit-title">
+      Краткое содержание
+    </div>
+  );
+
 }

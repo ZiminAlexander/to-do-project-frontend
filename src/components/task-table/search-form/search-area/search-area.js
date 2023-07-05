@@ -1,11 +1,29 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React, { useEffect, useRef } from "react";
+import PropTypes from 'prop-types';
 import "./search-area.css";
 
-export function createSearchArea(searchCallback) {
-  const searchArea = createNewElement("input", ["search-area", "text-input"]);
-  searchArea.type = "text";
-  searchArea.placeholder = "Поиск задачи";
-  searchArea.addEventListener("input", searchCallback);
+export const SearchArea = ({searchAreaInputChange, setSearchAreaElement}) => {
 
-  return searchArea;
+  const searchAreaElement = useRef(null);
+  
+  useEffect(
+    () => {setSearchAreaElement(searchAreaElement)}, 
+    [searchAreaElement]
+  )
+  
+  return(
+    <input className="search-area text-input" 
+      type="text"
+      placeholder="Поиск задачи"
+      onChange={searchAreaInputChange}
+      ref={searchAreaElement}
+    />
+
+  );
+
+}
+
+SearchArea.propTypes = {
+  searchAreaInputChange: PropTypes.func.isRequired,  
+  setSearchAreaElement: PropTypes.func.isRequired, 
 }

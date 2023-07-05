@@ -1,16 +1,37 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createTitleBox } from "./title-box/title-box";
-import { createDescriptionBox } from "./description-box/description-box";
-import { createSaveEditButton } from "./save-edit-button/save-edit-button";
-import { createCloseEditButton } from "./close-edit-button/close-edit-button";
+import React from "react";
+import PropTypes from 'prop-types';
+import { TitleBox } from "./title-box/title-box";
+import { DescriptionBox } from "./description-box/description-box";
+import { SaveEditButton } from "./save-edit-button/save-edit-button";
+import { CloseEditButton } from "./close-edit-button/close-edit-button";
 import "./edit-table-box.css";
 
-export function createEditTableBox() {
-  const editTableBox = createNewElement("div", "edit-table-box");
-  editTableBox.append(createTitleBox());
-  editTableBox.append(createDescriptionBox());
-  editTableBox.append(createSaveEditButton());
-  editTableBox.append(createCloseEditButton());
+export const EditTableBox = ({editedTask, onChangeEditedTask}) => {
+  
+  return(
+    <div className="edit-table-box">
+      <TitleBox title={editedTask.title}
+        setTitle={onChangeEditedTask.setTitle}
+      />
+      <DescriptionBox description={editedTask.description}
+        setDescription={onChangeEditedTask.setDescription}
+      />
+      <SaveEditButton saveEditTask={onChangeEditedTask.saveEditTask}
+        isLoadingSave={editedTask.isLoadingSave}
+      />
+      <CloseEditButton onClose={onChangeEditedTask.onClose} />
+    </div>
+  );
 
-  return editTableBox;
+}
+
+EditTableBox.propTypes = {
+  editedTask: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    isLoadingSave: PropTypes.bool,
+  }).isRequired,
+  onChangeEditedTask: PropTypes.objectOf(
+    PropTypes.func
+  ).isRequired 
 }

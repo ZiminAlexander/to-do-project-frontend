@@ -1,16 +1,16 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
+import PropTypes from 'prop-types';
 
-export function createEditTextButton() {
-  const editTextButton = createNewElement("button", [
-    "edit-button",
-    "small-button",
-  ]);
-  editTextButton.addEventListener("click", editButtonCallback);
+export const EditTextButton = ({toogleIsEditable}) => {
 
-  return editTextButton;
+  return(
+    <button className={`edit-button small-button`}
+      onClick={toogleIsEditable}
+    />
+  );
+
 }
 
-function editButtonCallback() {
-  const editText = this.parentElement.querySelector("textarea");
-  editText.disabled = !editText.disabled;
+EditTextButton.propTypes = {
+  toogleIsEditable: PropTypes.func.isRequired,
 }

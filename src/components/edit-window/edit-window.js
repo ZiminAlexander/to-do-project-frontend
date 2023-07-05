@@ -1,17 +1,26 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createEditTable } from "./edit-table/edit-table";
-import { closeEditWindow } from "./edit-table/edit-table-box/close-edit-button/close-edit-button";
+import React from "react";
+import PropTypes from 'prop-types';
+import { EditTable } from "./edit-table/edit-table";
 import "./edit-window.css";
 
-export function addEditWindow() {
+export const EditWindow = ({editedTask, onChangeEditedTask}) => {
+  return(
+    <div className="edit-window window">
+      <EditTable           
+        editedTask={editedTask}
+        onChangeEditedTask={onChangeEditedTask}
+      />
+    </div>
+  );
+}
 
-  const existedEditWindow = document.querySelector(".edit-window");
-  if (existedEditWindow) {
-    closeEditWindow();
-  }
-
-  const editWindow = createNewElement("div", ["edit-window", "window"]);
-  editWindow.append(createEditTable());
-
-  document.body.append(editWindow);
+EditWindow.propTypes = {
+  editedTask: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    isLoadingSave: PropTypes.bool,
+  }).isRequired,
+  onChangeEditedTask: PropTypes.objectOf(
+    PropTypes.func
+  ).isRequired 
 }

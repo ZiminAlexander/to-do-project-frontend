@@ -1,24 +1,22 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { addEditWindow } from "../../../edit-window/edit-window";
+import React from "react";
+import PropTypes from 'prop-types';
 import "./text.css";
 
-export function createText() {
-  const newTextElement = createNewElement("div", "text");
-  newTextElement.addEventListener("click", textOnclickCallback);
+export const Text = ({title, openEditWindow}) => {
 
-  return newTextElement;
+  return (
+    <div className="text"
+      onClick={() => {
+        openEditWindow();
+      }}
+    >
+      {title}
+    </div>
+  );
+
 }
 
-//Callback для text на нажатие
-function textOnclickCallback() {
-  const taskElement = this.parentElement;
-  const taskTextElement = taskElement.querySelector(".text");
-  addEditWindow();
-  const taskEditText = document.querySelector(".task-edit-text");
-  const taskFullText = document.querySelector(".task-full-text");
-  const taskEditFullText = document.querySelector(".task-edit-full-text");
-  taskEditText.value = taskTextElement.textContent;
-  taskFullText.innerHTML = taskElement.dataset.description;
-  taskEditFullText.value = taskElement.dataset.description;
-  taskElement.classList.add("edited");
+Text.propTypes = {
+  title: PropTypes.string.isRequired,
+  openEditWindow: PropTypes.func.isRequired,
 }

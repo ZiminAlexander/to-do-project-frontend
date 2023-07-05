@@ -1,20 +1,16 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
+import PropTypes from 'prop-types';
 
-export function createEditFullTextButton() {
-  const editFullTextButton = createNewElement("button", [
-    "edit-button",
-    "small-button",
-  ]);
-  editFullTextButton.addEventListener("click", editButtonCallback);
+export const EditFullTextButton = ({toogleIsEditable}) => {
 
-  return editFullTextButton;
+  return(
+    <button className="edit-button small-button" 
+      onClick={toogleIsEditable}
+    />
+  );
+
 }
 
-//Callback для edit кнопки
-function editButtonCallback() {
-  const editText = this.parentElement.querySelector(".task-edit-full-text");
-  const fullText = this.parentElement.querySelector(".task-full-text");
-  fullText.innerHTML = editText.value;
-  editText.classList.toggle("no-display");
-  fullText.classList.toggle("no-display");
+EditFullTextButton.propTypes = {
+  toogleIsEditable: PropTypes.func.isRequired, 
 }

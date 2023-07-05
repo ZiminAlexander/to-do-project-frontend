@@ -1,20 +1,29 @@
-import { createNewElement } from "Project/helpers/createNewElement";
+import React from "react";
+import PropTypes from "prop-types";
 import "./full-text-area-div.css";
 
-export function createFullTextAreaDiv() {
-  const fullTextAreaDiv = createNewElement("div", "full-text-area-div");
-  const taskEditFullText = createNewElement("textarea", [
-    "task-edit-full-text",
-    "text-input",
-  ]);
-  const taskFullText = createNewElement("div", [
-    "task-full-text",
-    "text-input",
-  ]);
-  taskEditFullText.classList.add("no-display");
+export const FullTextAreaDiv = ({description, setDescription, isEditable}) => {
 
-  fullTextAreaDiv.append(taskEditFullText);
-  fullTextAreaDiv.append(taskFullText);
+  return(
+    <div className="full-text-area-div">
+      <textarea className={`task-edit-full-text text-input ${!isEditable ? " no-display" : ""}`}
+        onChange={(event) => {
+          setDescription(event.target.value);
+        }}
+        defaultValue={description}
+      >
+      </textarea>
+      <div className={`task-full-text text-input ${isEditable ? " no-display" : ""}`}
+        dangerouslySetInnerHTML={{__html: description}}
+      >
+      </div>
+    </div>
+  );
 
-  return fullTextAreaDiv;
+}
+
+FullTextAreaDiv.propTypes = {
+  description: PropTypes.string.isRequired,  
+  setDescription: PropTypes.func.isRequired,
+  isEditable: PropTypes.bool.isRequired,
 }

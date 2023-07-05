@@ -1,12 +1,28 @@
-import { createNewElement } from "Project/helpers/createNewElement";
-import { createTextAreaDiv } from "./text-area-div/text-area-div";
-import { createEditTextButton } from "./edit-text-button/edit-text-button";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
+import { TextAreaDiv } from "./text-area-div/text-area-div";
+import { EditTextButton } from "./edit-text-button/edit-text-button";
 import "./title-edit-box.css";
 
-export function createTitleEditBox() {
-  const titleEditBox = createNewElement("div", "title-edit-box");
-  titleEditBox.append(createTextAreaDiv());
-  titleEditBox.append(createEditTextButton());
+export const TitleEditBox = ({title, setTitle}) => {
+  const [isEditable, setIsEditable] = useState(false);
+  const toogleIsEditable = () => {
+    setIsEditable(!isEditable);
+  }
 
-  return titleEditBox;
+  return(
+    <div className="title-edit-box">
+      <TextAreaDiv title={title}
+        setTitle={setTitle}
+        isEditable={isEditable}
+      />
+      <EditTextButton toogleIsEditable={toogleIsEditable} />
+    </div>
+  );
+
+}
+
+TitleEditBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  setTitle: PropTypes.func.isRequired,
 }
