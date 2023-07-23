@@ -44,6 +44,8 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Build and push
         uses: docker/build-push-action@v4
+        env: 
+          START_URL: ${{ secrets.START_URL }}
         with:
           context: .
           file: ./Dockerfile
