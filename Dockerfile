@@ -4,8 +4,6 @@ RUN --mount=type=secret,id=START_URL \
 
 FROM node AS builder
 
-ARG START_URL
-
 WORKDIR /docker-app
 
 COPY . .
